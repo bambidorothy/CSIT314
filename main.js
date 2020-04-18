@@ -1,9 +1,9 @@
-//Constructor function example
-function Circle(radius) {//creates a circle obj
-    this.radius = radius; //creates a radius property
-    this.draw = function () { //creates a draw method
-        console.log('draw');
+class Person {
+    constructor(fullName, userid, password, role) {
+        this.fullName = fullName;
+        this.userid = userid;
+        this.password = password;
+        this.role = role;
     }
 }
-
-const circ = new Circle(1); //creates an instantiation of circle obj
+const user = new Person(Dorothy,s001,123456,student);
