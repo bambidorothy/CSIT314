@@ -23,7 +23,7 @@
         crossorigin="anonymous"></script>
     <!--link main.js-->
     <script src="main.js"></script>
-    <title>Home</title>
+    <title>Register Page</title>
 </head>
 
 <body>
@@ -53,18 +53,31 @@
                     <button class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3" type="submit">Search</button>
                 </form>
                 <li class="nav-item">
-                    <a class="nav-link btn btn-outline-light" href="login.html">Log In</a>
+                    <a class="nav-link btn btn-outline-light" href="#">Log In</a>
                 </li>
                 <li>
-                    <a class="nav-link btn btn-outline-light ml-3" href="register.html">Sign Up</a>
+                    <a class="nav-link btn btn-outline-light ml-3" href="#">Sign Up</a>
                 </li>
             </ul>
         </div>
     </nav>
+
     <div class="container">
         <div class="row">
             <div class="col">
-
+                <form>
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                            else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create My Account</button>
+                </form>
             </div>
         </div>
     </div>
