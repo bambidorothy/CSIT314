@@ -1,4 +1,4 @@
-class Person { //create Person class
+class UserAccount { //create Person class
     constructor(fullName, userid, password, role) { //create constructor fields
         this.fullName = fullName;
         this.userid = userid;
@@ -9,7 +9,7 @@ class Person { //create Person class
         return "Welcome " + this.fullName + "!" + "<br>" + "Your userid is " + this.userid + "!"+ "<br>" + "Your role is " + this.role + "!";
     }
 }
-let user = new Person('Dorothy', 's001', 123456, 'student'); //create user object of person class
+let user = new UserAccount('Dorothy', 's001', 123456, 'student'); //create user object of person class
 
 document.getElementById("demo").innerHTML = user.display();
 console.log("Welcome " + this.fullName + "!" + "Your userid is " + this.userid + "!"+ "Your role is " + this.role + "!");
