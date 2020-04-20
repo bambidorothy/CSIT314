@@ -1,9 +1,7 @@
 <?php
 include 'classes.php'; //import classes.php
 include 'db_connection.php'; //import db_connection.php
-$conn = OpenCon(); //open connection
-echo "Connected Successfully";
-CloseCon($conn);
+
 ?>
 
 <!DOCTYPE html>

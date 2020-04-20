@@ -2,7 +2,7 @@
 
 class UserAccount {
     //properties
-    public $fname;
+    public $fname; //public enables properties access to all classes and outside
     public $userid;
     public $pwd;
     public $role;
@@ -14,5 +14,9 @@ class UserAccount {
         $this->pwd = $pwd; //set password
         $this->role = $role; //set role
     }
+}
+
+class StudentAccount extends UserAccount {
+        
 }
 ?>
