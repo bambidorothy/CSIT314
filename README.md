@@ -10,8 +10,7 @@ parties involved:
 functionalities required:
 1. manage users
 2. manage qns
-3. searching for ans/qns
-generating reports
+3. searching for ans/qns generating reports
 
 to install XAMPP server:
 1. go to "https://www.apachefriends.org/download.html" and download latest PHP 7.2.29
@@ -21,5 +20,6 @@ to install XAMPP server:
 5. clone github repository to C:\xampp\htdocs
 6. click on MySQL "Admin" button from XAMPP Control Panel
 7. click "New" to create database.
-8. enter "testdb" as database name then click "Create".
-9. paste "http://localhost/CSIT314/index.php" into your browser and check if database is connected
+8. enter "csit314" as database name then click "Create".
+9. click "New" to create table, import USERS.sql and click "Go" button at the bottom right of screen
+10. paste "http://localhost/CSIT314/index.php" into your browser and check if database is connected
