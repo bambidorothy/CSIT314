@@ -23,3 +23,4 @@ to install XAMPP server:
 8. enter "csit314" as database name then click "Create".
 9. click "New" to create table, import USERS.sql and click "Go" button at the bottom right of screen
 10. paste "http://localhost/CSIT314/index.php" into your browser and check if database is connected
+abcd
