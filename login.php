@@ -3,10 +3,10 @@ include 'db_config.php'; //import db_config.php
 include_once 'classes/user.class.php'; //import /classes/user.class.php
 session_start();
 $user = new User(); //create a User object (instantiation)
-if (isset($_REQUEST['submit'])) {
+if (isset($_REQUEST['submit'])) {//get form values on form submission
     extract($_REQUEST);
     $login = $user->check_login($email, $password); //runs check_login function from /classes/user.class.php
-    if ($login) {
+    if ($login) {//if login is valid
         // Login Success
        header("location:index.php"); //redirect to index.php on successful login
     } else {
@@ -85,7 +85,7 @@ if (isset($_REQUEST['submit'])) {
                 <li class="nav-item">
                     <a class="nav-link btn btn-outline-light" href="login.php">Log In</a>
                 </li>
-                <li>
+                <li class="nav-item">
                     <a class="nav-link btn btn-outline-light ml-3" href="register.php">Sign Up</a>
                 </li>
             </ul>

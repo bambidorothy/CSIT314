@@ -31,4 +31,25 @@ class User //create User class
             return false;
         }
     }
+
+    /*get user information*/
+    public function get_fullname($id)
+    {
+        $sql="SELECT fullname FROM users WHERE id = $id";
+        $result = mysqli_query($this->db, $sql);
+        $user_data = mysqli_fetch_array($result);
+        echo $user_data['fullname'];
+    }
+
+    /*** starting the session ***/
+    public function get_session()
+    {
+        return $_SESSION['login'];
+    }
+    /*destroying the session */
+    public function user_logout()
+    {
+        $_SESSION['login'] = false;
+        session_destroy();
+    }
 }

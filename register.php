@@ -1,6 +1,6 @@
 <?php
 //include '/classes/user.class.php'; //import user class.php
-include 'db_connection.php'; //import db_connection.php
+include 'db_config.php'; //import db_config.php
 
 ?>
 

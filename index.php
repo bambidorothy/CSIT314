@@ -1,7 +1,17 @@
 <?php
-//include '/classes/user.class.php'; //import user class.php
-include 'db_connection.php'; //import db_connection.php
+include 'db_config.php'; //import db_config.php
+include_once 'classes/user.class.php'; //import /classes/user.class.php
+session_start();
+$user = new User(); 
+$id = $_SESSION['id']; //store session id into $id
+if (!$user->get_session()){ //if user is not logged in
+ header("location:login.php"); //redirect to login.php
+}
 
+if (isset($_GET['q'])){ //get q variable to logout
+ $user->user_logout(); //log user out with session destroy
+ header("location:login.php");//redirect to login.php after logout
+ }
 ?>
 
 <!DOCTYPE html>
@@ -58,7 +68,7 @@ include 'db_connection.php'; //import db_connection.php
                     <button class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3" type="submit">Search</button>
                 </form>
                 <li class="nav-item">
-                    <a class="nav-link btn btn-outline-light" href="login.php">Log In</a>
+                    <a class="nav-link btn btn-outline-light" href="index.php?q=logout">Log Out</a>
                 </li>
                 <li>
                     <a class="nav-link btn btn-outline-light ml-3" href="register.php">Sign Up</a>
@@ -72,12 +82,7 @@ include 'db_connection.php'; //import db_connection.php
         <div class="row">
             <div class="col">
                 <p id="demo">
-                    <?php
-                        $usr1 = new UserAccount();
-                        $usr1-> setProperties("Dorothy","001","123456","Student");
-                        echo $usr1->fname;
-                    ?>
-
+                <h1>Hello <?php $user->get_fullname($id); ?></h1>
                 </p>
             </div>
         </div>
