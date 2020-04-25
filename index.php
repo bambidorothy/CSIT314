@@ -58,8 +58,8 @@ if (isset($_GET['q'])){ //get q variable to logout
                 <li class="nav-item">
                     <a class="nav-link" href="#">Forums</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link here</a>
+                <li class="nav-item mx-3" style="width: 200px;">
+                <a class="nav-link">Welcome, <?php $user->get_fullname($id); ?>!</a> <!--display's user fullname-->
                 </li>
             </ul>
             <ul class="navbar-nav">
@@ -70,9 +70,6 @@ if (isset($_GET['q'])){ //get q variable to logout
                 <li class="nav-item">
                     <a class="nav-link btn btn-outline-light" href="index.php?q=logout">Log Out</a>
                 </li>
-                <li>
-                    <a class="nav-link btn btn-outline-light ml-3" href="register.php">Sign Up</a>
-                </li>
             </ul>
         </div>
     </nav>
@@ -82,7 +79,6 @@ if (isset($_GET['q'])){ //get q variable to logout
         <div class="row">
             <div class="col">
                 <p id="demo">
-                <h1>Hello <?php $user->get_fullname($id); ?></h1>
                 </p>
             </div>
         </div>

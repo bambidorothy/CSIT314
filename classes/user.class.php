@@ -12,7 +12,7 @@ class User //create User class
         }
     }
 
-    /*** for login process ***/
+    /* for login process */
     public function validate_login($email, $password) //get email & password input from login.php form
     {
         $sql="SELECT id from users WHERE email='$email' and password='$password'"; //sql statement which retrieves id from users table where email and password match
