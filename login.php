@@ -1,5 +1,5 @@
 <?php
-include 'classes.php'; //import classes.php
+//include '/classes/user.class.php'; //import user class.php
 include 'db_connection.php'; //import db_connection.php
 
 ?>
@@ -39,7 +39,7 @@ include 'db_connection.php'; //import db_connection.php
         <div class="collapse navbar-collapse" id="navbarToggler">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Topics</a>
@@ -57,10 +57,10 @@ include 'db_connection.php'; //import db_connection.php
                     <button class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3" type="submit">Search</button>
                 </form>
                 <li class="nav-item">
-                    <a class="nav-link btn btn-outline-light" href="login.html">Log In</a>
+                    <a class="nav-link btn btn-outline-light" href="login.php">Log In</a>
                 </li>
                 <li>
-                    <a class="nav-link btn btn-outline-light ml-3" href="register.html">Sign Up</a>
+                    <a class="nav-link btn btn-outline-light ml-3" href="register.php">Sign Up</a>
                 </li>
             </ul>
         </div>
