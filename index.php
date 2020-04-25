@@ -95,7 +95,7 @@ if (isset($_GET['q'])){ //get q variable to logout
     <script src="main.js"></script>
     <footer class="fixed-bottom">
         <div class="copyright">
-            &copy 2020 -Team Radivz
+            &copy 2020 -Team Bambi
         </div>
     </footer>
 </body>

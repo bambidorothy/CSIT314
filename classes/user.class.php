@@ -46,7 +46,7 @@ class User //create User class
     {
         return $_SESSION['login'];
     }
-    /*destroying the session */
+    /*logging user out and destroying the session */
     public function user_logout()
     {
         $_SESSION['login'] = false;

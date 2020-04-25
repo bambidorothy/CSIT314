@@ -113,7 +113,7 @@ if (isset($_REQUEST['submit'])) {//get form values on form submission
     <script src="main.js"></script>
     <footer class="fixed-bottom">
         <div class="copyright">
-            &copy 2020 -Team Radivz
+            &copy 2020 -Team Bambi
         </div>
     </footer>
 </body>

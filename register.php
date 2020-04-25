@@ -6,7 +6,6 @@ include 'db_config.php'; //import db_config.php
 
 <!DOCTYPE html>
 <html>
-3etsdg
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
