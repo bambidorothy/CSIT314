@@ -1,3 +1,9 @@
+<?php
+include 'classes.php'; //import classes.php
+include 'db_connection.php'; //import db_connection.php
+
+?>
+
 <!DOCTYPE html>
 <html>
 3etsdg
