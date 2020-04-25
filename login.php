@@ -1,9 +1,35 @@
 <?php
-//include '/classes/user.class.php'; //import user class.php
-include 'db_connection.php'; //import db_connection.php
-
+include 'db_config.php'; //import db_config.php
+include_once 'classes/user.class.php'; //import /classes/user.class.php
+session_start();
+$user = new User(); //create a User object (instantiation)
+if (isset($_REQUEST['submit'])) {
+    extract($_REQUEST);
+    $login = $user->check_login($email, $password); //runs check_login function from /classes/user.class.php
+    if ($login) {
+        // Login Success
+       header("location:index.php"); //redirect to index.php on successful login
+    } else {
+        // Login Failed
+        echo 'Wrong username or password'; //echo failed login
+    }
+}
 ?>
+<script type="text/javascript" language="javascript">
 
+            function submitlogin() {
+                var form = document.login;
+				if(form.email.value == ""){
+					alert( "Enter email or username." );
+					return false;
+				}
+				else if(form.password.value == ""){
+					alert( "Enter password." );
+					return false;
+				}
+			}
+
+</script>
 <!DOCTYPE html>
 <html>
 
@@ -69,16 +95,16 @@ include 'db_connection.php'; //import db_connection.php
     <div class="container">
         <div class="row">
             <div class="col-md-6 mx-auto">
-                <form id="loginForm" action="main.js">
+                <form action="" method="post" name="login">
                     <div class="form-group">
                         <label for="email">Email address</label>
-                        <input type="email" class="form-control" id="email">
+                        <input type="email" name="email" class="form-control" id="email">
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password">
+                        <input type="password" name="password" class="form-control" id="password">
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button onclick="return(submitlogin());" type="submit" name="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
         </div>
