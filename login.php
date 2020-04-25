@@ -5,7 +5,7 @@ session_start();
 $user = new User(); //create a User object (instantiation)
 if (isset($_REQUEST['submit'])) {//get form values on form submission
     extract($_REQUEST);
-    $login = $user->check_login($email, $password); //runs check_login function from /classes/user.class.php
+    $login = $user->validate_login($email, $password); //runs validate_login function from /classes/user.class.php
     if ($login) {//if login is valid
         // Login Success
        header("location:index.php"); //redirect to index.php on successful login
