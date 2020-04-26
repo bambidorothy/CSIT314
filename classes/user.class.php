@@ -1,8 +1,7 @@
 <?php
 class User //create User class
 {
-    private $db;
-    public function __construct() //create db constructor
+    public function __construct() // constructor runs when object is created
     {
         $this->db = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 
