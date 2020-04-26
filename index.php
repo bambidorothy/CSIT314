@@ -58,8 +58,11 @@ if (isset($_GET['q'])){ //get q variable to logout
                 <li class="nav-item">
                     <a class="nav-link" href="#">Forums</a>
                 </li>
-                <li class="nav-item mx-3" style="width: 200px;">
+                <li class="nav-item mx-3">
                 <a class="nav-link">Welcome, <?php $user->get_fullname($id); ?>!</a> <!--display's user fullname-->
+                </li>
+                <li class="nav-item mx-3">
+                <a class="nav-link"> Your role is a <?php $user->get_role($id)?>!</a> <!--display's user role-->
                 </li>
             </ul>
             <ul class="navbar-nav">

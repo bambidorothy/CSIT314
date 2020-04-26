@@ -1,8 +1,8 @@
 <?php
 class User //create User class
 {
-    public $db;
-    public function __construct() //create db contructor
+    private $db;
+    public function __construct() //create db constructor
     {
         $this->db = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 
@@ -32,7 +32,7 @@ class User //create User class
         }
     }
 
-    /*get user information*/
+    /*get user fullname*/
     public function get_fullname($id)
     {
         $sql="SELECT fullname FROM users WHERE id = $id";
@@ -41,6 +41,14 @@ class User //create User class
         echo $user_data['fullname'];
     }
 
+    /*get user role */
+    public function get_role($id)
+    {
+        $sql="SELECT role FROM users WHERE id = $id";
+        $result = mysqli_query($this->db, $sql);
+        $user_data = mysqli_fetch_array($result);
+        echo $user_data['role'];
+    }
     /*** starting the session ***/
     public function get_session()
     {
