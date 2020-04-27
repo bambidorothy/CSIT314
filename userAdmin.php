@@ -12,6 +12,8 @@ if (isset($_GET['q'])){ //get q variable to logout
  $user->user_logout(); //log user out with session destroy
  header("location:login.php");//redirect to login.php after logout
  }
+
+ 
 ?>
 
 <!DOCTYPE html>
@@ -81,13 +83,17 @@ if (isset($_GET['q'])){ //get q variable to logout
     </nav>
     <!--end of navbar-->
     <!--start of container-->
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <p id="demo">
-                </p>
-            </div>
-        </div>
+    <div class="button">
+    <button class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3" type="add">Add</button>
+    </div>
+    <div class="table">
+    <table style="width:100%">
+  <tr>
+    <th>Username</th>
+    <th>Password</th>
+    <th></th>
+  </tr>
+</table>
     </div>
     <!--end of container-->
     <!--start of page footer-->
@@ -103,3 +109,5 @@ if (isset($_GET['q'])){ //get q variable to logout
 </body>
 
 </html>
+
+echo "<tr><td>". $row["username"] ."</td><td>". $row["password"] ."</td></tr>";
