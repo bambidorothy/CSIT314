@@ -3,6 +3,7 @@ include 'db_config.php'; //import db_config.php
 include_once 'classes/user.class.php'; //import /classes/user.class.php
 session_start();
 $user = new User(); //create a User object (instantiation)
+$id = $_SESSION['id'];
 if (isset($_REQUEST['submit'])) {//get form values on form submission
     extract($_REQUEST);
     $login = $user->validate_login($email, $password); //runs validate_login function from /classes/user.class.php
