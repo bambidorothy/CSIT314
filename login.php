@@ -6,9 +6,23 @@ $user = new User(); //create a User object (instantiation)
 if (isset($_REQUEST['submit'])) {//get form values on form submission
     extract($_REQUEST);
     $login = $user->validate_login($email, $password); //runs validate_login function from /classes/user.class.php
+    
+    
     if ($login) {//if login is valid
         // Login Success
-       header("location:index.php"); //redirect to index.php on successful login
+        $role = $user->get_role($id);
+        if($role == "student"){
+            header("location:student.php");
+
+        }else if ($role == "moderator"){
+            header("location:moderator.php");
+
+        }else {
+            header("location:userAdmin.php");
+
+        }
+    
+       //header("location:index.php"); //redirect to index.php on successful login
     } else {
         // Login Failed
         echo 'Wrong username or password'; //echo failed login

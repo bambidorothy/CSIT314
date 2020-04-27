@@ -47,10 +47,12 @@ class User //create User class
         $result = mysqli_query($this->db, $sql);
         $user_data = mysqli_fetch_array($result);
         echo $user_data['role'];
+        return $user_data['role'];
     }
     /*** starting the session ***/
-    public function get_session()
+    public function get_session($id)
     {
+      
         return $_SESSION['login'];
     }
     /*logging user out and destroying the session */
