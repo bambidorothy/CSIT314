@@ -5,7 +5,7 @@ session_start();
 $user = new User(); 
 $id = $_SESSION['id']; //store session id into $id
 if (!$user->get_session()){ //if user is not logged in
- header("location:login.php"); //redirect to login.php *this also disables access to index.php from browser url*
+ header("location:login.php"); //redirect to login.php *this also disables access to profile.php from browser url*
 }
 
 if (isset($_GET['q'])){ //get q variable to logout
@@ -81,8 +81,8 @@ if (isset($_GET['q'])){ //get q variable to logout
     <div class="container">
         <div class="row">
             <div class="col">
-                <p id="demo">
-                </p>
+                <table>
+                </table>
             </div>
         </div>
     </div>
