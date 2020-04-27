@@ -6,7 +6,7 @@ $user = new User(); //create a User object (instantiation)
 if (isset($_REQUEST['submit'])) {//get form values on form submission
     extract($_REQUEST);
     $login = $user->validate_login($email, $password); //runs validate_login function from /classes/user.class.php
-    
+    $id = $_SESSION['id'];
     
     if ($login) {//if login is valid
         // Login Success
@@ -18,7 +18,8 @@ if (isset($_REQUEST['submit'])) {//get form values on form submission
             header("location:moderator.php");
 
         }else {
-            header("location:userAdmin.php");
+             header("location:userAdmin.php");
+           return false;
 
         }
     
