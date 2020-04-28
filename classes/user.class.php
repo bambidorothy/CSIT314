@@ -1,6 +1,6 @@
 <?php
 class User //create User class
-{
+{   
     public function __construct() // constructor runs when object is created
     {
         $this->db = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
@@ -48,6 +48,7 @@ class User //create User class
         $user_data = mysqli_fetch_array($result);
         echo $user_data['role'];
         return $user_data['role'];
+        
     }
     /*** starting the session ***/
     public function get_session($id)
