@@ -33,10 +33,14 @@ class UserAdmin extends User
 }
     //create User Account
     public function createUser() {
-
+        
     }
     //delete User Account
-    public function deleteUser() {
+    public function deleteUser($id) {
+$sql = "DELETE from purchase WHERE id= $id";
+$result=mysqli_query($this->db, $sql);
+$user_data = mysqli_fetch_array($result);
+echo 'deleted successfully';
 
     }
 }

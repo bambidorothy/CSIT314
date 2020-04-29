@@ -97,12 +97,37 @@ if (isset($_GET['q'])){ //get q variable to logout
   <div class="tab-pane fade show active" id="nav-manage" role="tabpanel" aria-labelledby="nav-manage-tab">
     <table style="width:100%">
         <tr>
+            <th>ID</th>
             <th>Fullname</th>
             <th>Username</th>
             <th>Email</th>
             <th>Role</th>
+            <th></th>
         </tr>
-        <?php $useradmin->getAccount(); ?>
+        <?php 
+        include("db_connection.php");
+        $sql=("SELECT id, fullname, username, email, role from users");
+        $result = mysqli_query($conn, $sql);
+        if ($result-> num_rows > 0) {
+            while ($row = $result-> fetch_assoc()) { 
+        ?>
+        <tr>
+        <td><?php echo $row['id'];?></td>
+        <td><?php echo $row['fullname'];?></td>
+        <td><?php echo $row['username'];?></td>
+        <td><?php echo $row['email'];?></td>
+        <td><?php echo $row['role'];?></td>
+        <td><a href="delete.php?id=<?php echo $row['id'];?>"><button type="submit" name="deletesubmit"  style="margin- 
+        left:250px;"  class="btn btn-primary">Delete</button></a></td>
+        </tr>
+<?php 
+}
+echo "</table>";
+}
+else {
+echo "0 result"; 
+}
+?>
     </table>
   </div>
   
