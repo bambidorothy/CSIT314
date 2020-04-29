@@ -59,10 +59,8 @@ if (isset($_GET['q'])){ //get q variable to logout
                     <a class="nav-link" href="#">Forums</a>
                 </li>
                 <li class="nav-item mx-3">
-                <a class="nav-link">Welcome, <?php $user->get_fullname($id); ?>!</a> <!--display's user fullname-->
-                </li>
-                <li class="nav-item mx-3">
-                <a class="nav-link"> Your role is a <?php $user->get_role($id)?>!</a> <!--display's user role-->
+                    <a class="nav-link">Welcome, <?php $user->get_fullname($id); ?>!</a>
+                    <!--display's user fullname-->
                 </li>
             </ul>
             <ul class="navbar-nav">
@@ -70,9 +68,6 @@ if (isset($_GET['q'])){ //get q variable to logout
                     <input class="form-control" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3" type="submit">Search</button>
                 </form>
-                <li class="nav-item">
-                    <a class="nav-link btn btn-outline-light" href="profile.php">My Profile</a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link btn btn-outline-light" href="index.php?q=logout">Log Out</a>
                 </li>
@@ -84,22 +79,70 @@ if (isset($_GET['q'])){ //get q variable to logout
     <div class="container">
         <div class="row">
             <div class="col">
-                <p id="demo">
-                </p>
+                <!--start of nav tablist-->
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
+                            role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
+                        <a class="nav-item nav-link active" id="nav-createpost-tab" data-toggle="tab"
+                            href="#nav-createpost" role="tab" aria-controls="nav-createpost" aria-selected="true">View
+                            Report1</a>
+                        <a class="nav-item nav-link" id="nav-manage-post" data-toggle="tab" href="#nav-managepost"
+                            role="tab" aria-controls="nav-managepost" aria-selected="false">View</a>
+                    </div>
+                </nav>
+                <!--start of tab div contents-->
+                <div class="tab-content" id="nav-tabContent">
+                    <!--start of profile tab-->
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <form id="" action="">
+                            <div class="form-group">
+                                <label for="email">Full Name</label>
+                                <input type="text" class="form-control" disabled id="fullname"
+                                    value="<?php $user->get_fullname($id); ?>">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" disabled id="email"
+                                    value="<?php $user->get_email($id); ?>">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Account Role</label>
+                                <input type="email" class="form-control" disabled id="role"
+                                    value="<?php $user->get_role($id); ?>">
+                            </div>
+                        </form>
+
+                        <form id="changePwd" action="">
+                            <legend>Update my Password</legend>
+                            <div class="form-group">
+                                <label for="currentpassword">Current Password</label>
+                                <input type="currentpassword" class="form-control" id="currentpassword">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">New Password</label>
+                                <input type="password" class="form-control" id="password">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmpassword">Confirm Password</label>
+                                <input type="confirmpassword" class="form-control" id="confirmpassword">
+                            </div>
+                            <button type="submit" class="btn btn-danger">Update Password</button>
+                        </form>
+                    </div>
+                </div>
+                <!--end of col-->
             </div>
+            <!--end of row-->
         </div>
-    </div>
-    <!--end of container-->
-    <!--start of page footer-->
-    <div class="card footer">
-    </div>
-    <!--link main.js-->
-    <script src="main.js"></script>
-    <footer class="fixed-bottom">
-        <div class="copyright">
-            &copy 2020 -Team Bambi
-        </div>
-    </footer>
+        <!--end of container-->
+        <!--link main.js-->
+        <script src="main.js"></script>
+        <footer class="fixed-bottom">
+            <div class="copyright">
+                &copy 2020 -Team Bambi
+            </div>
+        </footer>
 </body>
 
 </html>

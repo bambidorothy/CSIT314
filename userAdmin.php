@@ -172,4 +172,4 @@ if (isset($_GET['q'])){ //get q variable to logout
     </footer>
 </body>
 
-</html>some edit
+</html>
