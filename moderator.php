@@ -8,7 +8,7 @@ if (!$user->get_session($id)){ //if user is not logged in
  header("location:login.php"); //redirect to login.php *this also disables access to index.php from browser url*
 }
 
-if ($role !== "moderator") {
+if ($user->get_role($id) !== "moderator") {
     header("location:error.php");
     }
 

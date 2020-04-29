@@ -10,10 +10,9 @@ if (!$user->get_session($id)){ //if user is not logged in
  header("location:login.php"); //redirect to login.php *this also disables access to index.php from browser url*
 }
 
-if ($role !== "useradmin") {
+if ($user->get_role($id) !== "useradmin") {
     header("location:error.php");
     }
-
 if (isset($_GET['q'])){ //get q variable to logout
  $user->user_logout(); //log user out with session destroy
  header("location:login.php");//redirect to login.php after logout
