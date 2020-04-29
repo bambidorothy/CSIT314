@@ -17,7 +17,20 @@ class UserAdmin extends User
             
                 }
     }
-
+    //get user fullname, username, email and role
+    public function getAccount() {
+        $sql="SELECT fullname, username, email, role from users";
+        $result = mysqli_query($this->db, $sql);
+        if ($result-> num_rows > 0) {
+            while ($row = $result-> fetch_assoc()) {
+                echo "<tr><td>". $row["fullname"] ."</td><td>". $row["username"] ."</td><td>". $row["email"] ."</td><td>". $row["role"] ."</td></tr>";
+            }
+            echo "</table>";
+        }
+        else {
+            echo "0 result"; 
+    }
+}
     //create User Account
     public function createUser() {
 

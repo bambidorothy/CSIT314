@@ -1,8 +1,10 @@
 <?php
 include 'db_config.php'; //import db_config.php
-include_once 'classes/user.class.php'; //import /classes/user.class.php
+include_once 'classes/user.class.php';
+include_once 'classes/useradmin.class.php'; //import /classes/user.class.php
 session_start();
 $user = new User(); 
+$useradmin = new UserAdmin();
 $id = $_SESSION['id']; //store session id into $id
 if (!$user->get_session($id)){ //if user is not logged in
  header("location:login.php"); //redirect to login.php *this also disables access to index.php from browser url*
@@ -97,7 +99,7 @@ if (isset($_GET['q'])){ //get q variable to logout
             <th>Email</th>
             <th>Role</th>
         </tr>
-        <?php $user->getAccount(); ?>
+        <?php $useradmin->getAccount(); ?>
     </table>
   </div>
   
