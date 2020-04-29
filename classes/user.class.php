@@ -55,7 +55,7 @@ class User //create User class
         $sql="SELECT role FROM users WHERE id = $id";
         $result = mysqli_query($this->db, $sql);
         $user_data = mysqli_fetch_array($result);
-        echo $user_data['role'];
+        //echo $user_data['role'];
         return $user_data['role'];
         
     }
