@@ -1,6 +1,7 @@
 <?php
 include 'db_config.php'; //import db_config.php
 include_once 'classes/user.class.php'; //import /classes/user.class.php
+include_once 'classes/useradmin.class.php';
 session_start();
 $user = new User(); 
 $id = $_SESSION['id']; //store session id into $id
@@ -90,8 +91,26 @@ if (isset($_GET['q'])){ //get q variable to logout
 <div class="tab-content" id="nav-tabContent">
 <!--start of users manage tab--> 
   <div class="tab-pane fade show active" id="nav-manage" role="tabpanel" aria-labelledby="nav-manage-tab">
-  
+    <table style="width:100%">
+        <tr>
+            <th>Fullname</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Role</th>
+        </tr>
+    </table>
   </div>
+  <?php 
+        if ($results-> num_rows > 0) {
+            while ($row = $result-> fetch_assoc()) {
+                echo "<tr><td>". $row["fullname"] ."</td><td>". $row["username"] ."</td><td>". $row["email"] ."</td><td>". $row["username"] ."</td><td>". $row["role"] ."</td></tr>";
+            }
+            echo "</table>";
+        }
+        else {
+            echo "0 result"; 
+        }
+  ?>
   <!--start of profile tab--> 
   <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
   <form id="" action="">
