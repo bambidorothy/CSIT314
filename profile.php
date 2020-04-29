@@ -4,7 +4,7 @@ include_once 'classes/user.class.php'; //import /classes/user.class.php
 session_start();
 $user = new User(); 
 $id = $_SESSION['id']; //store session id into $id
-if (!$user->get_session()){ //if user is not logged in
+if (!$user->get_session($id)){ //if user is not logged in
  header("location:login.php"); //redirect to login.php *this also disables access to profile.php from browser url*
 }
 

@@ -40,6 +40,15 @@ class User //create User class
         echo $user_data['fullname'];
     }
 
+    /*get user email*/
+    public function get_email($id)
+    {
+        $sql="SELECT email FROM users WHERE id = $id";
+        $result = mysqli_query($this->db, $sql);
+        $user_data = mysqli_fetch_array($result);
+        echo $user_data['email'];
+    }
+
     /*get user role */
     public function get_role($id)
     {
