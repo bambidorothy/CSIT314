@@ -52,8 +52,17 @@ if (isset($_GET['q'])){ //get q variable to logout
                 <li class="nav-item active">
                     <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Topics</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Forums</a>
+                </li>
                 <li class="nav-item mx-3">
                 <a class="nav-link">Welcome, <?php $user->get_fullname($id); ?>!</a> <!--display's user fullname-->
+                </li>
+                <li class="nav-item mx-3">
+                <a class="nav-link"> Your role is a <?php $user->get_role($id)?>!</a> <!--display's user role-->
                 </li>
             </ul>
             <ul class="navbar-nav">
@@ -61,6 +70,9 @@ if (isset($_GET['q'])){ //get q variable to logout
                     <input class="form-control" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3" type="submit">Search</button>
                 </form>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-outline-light" href="profile.php">My Profile</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link btn btn-outline-light" href="index.php?q=logout">Log Out</a>
                 </li>
@@ -156,3 +168,5 @@ if (isset($_GET['q'])){ //get q variable to logout
 </body>
 
 </html>
+
+echo "<tr><td>". $row["username"] ."</td><td>". $row["password"] ."</td></tr>";

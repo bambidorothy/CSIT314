@@ -14,7 +14,8 @@ class UserAdmin extends User
         while($row = mysql_fetch_array($result)) {
             echo $row['fullname']; // Print a single column data
             echo print_r($row);       // Print the entire row data
-        }
+            
+                }
     }
     //create User Account
     private function createUser() {
