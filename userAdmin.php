@@ -168,5 +168,3 @@ if (isset($_GET['q'])){ //get q variable to logout
 </body>
 
 </html>
-
-echo "<tr><td>". $row["username"] ."</td><td>". $row["password"] ."</td></tr>";
