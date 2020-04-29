@@ -90,8 +90,17 @@ if (isset($_GET['q'])){ //get q variable to logout
 <div class="tab-content" id="nav-tabContent">
 <!--start of users manage tab--> 
   <div class="tab-pane fade show active" id="nav-manage" role="tabpanel" aria-labelledby="nav-manage-tab">
-  
+    <table style="width:100%">
+        <tr>
+            <th>Fullname</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Role</th>
+        </tr>
+        <?php $user->getAccount(); ?>
+    </table>
   </div>
+  
   <!--start of profile tab--> 
   <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
   <form id="" action="">
