@@ -23,7 +23,7 @@ class UserAdmin extends User
     }
     //delete User Account
     private function deleteUser() {
-
+        
     }
 }
 ?>
