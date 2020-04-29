@@ -78,7 +78,7 @@ include 'db_config.php'; //import db_config.php
                         <input type="password" class="form-control" id="password">
                     </div>
                     <div class="form-group">
-                        <label for="userRole">Example select</label>
+                        <label for="userRole">Account Role</label>
                         <select class="form-control" id="userRole">
                             <option>Student</option>
                             <option>Moderator</option>
