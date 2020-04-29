@@ -7,7 +7,7 @@ class UserAdmin extends User
     //get useradmin profile
 
     //get list of users
-    private function getUsers()
+    public function getUsers()
     {
         $sql="SELECT * from users";
         $result = mysqli_query($this->db, $sql);
@@ -17,17 +17,13 @@ class UserAdmin extends User
             
                 }
     }
-    //get user fullname, username, email and role
-    private function getAccount($id) {
-        $sql="SELECT fullname, username, email, role from users WHERE id = $id";
-        $result = $conn-> query($sql);
-    }
+
     //create User Account
-    private function createUser() {
+    public function createUser() {
 
     }
     //delete User Account
-    private function deleteUser() {
+    public function deleteUser() {
 
     }
 }
