@@ -187,25 +187,25 @@ echo "0 result";
   </div>
 <!--start of suspend/restore user account tab form-->
   <div class="tab-pane fade" id="nav-suspend" role="tabpanel" aria-labelledby="nav-suspend-tab">
-    <form action="formaction.php" method="post">
+    <form action="suspendUser.php" method="post">
     <legend>
     Suspend User Account
     </legend>
         <div class="form group">
         <label for="username">Enter username of user account to suspend</label>
-        <input type="username" name="username" class="form-control" id="username" >
+        <input type="text" name="username" class="form-control" id="username" >
         </div>
         <br>
         <button type="submit" class="btn btn-danger">Suspend User Account</button>
     </form>
 
-    <form action="classes/useradmin.class.php" method="post">
+    <form action="restoreUser.php" method="post">
     <legend>
     Restore User Account
     </legend>
         <div class="form group">
         <label for="username">Enter username of user account to restore</label>
-        <input type="username" class="form-control" id="username" >
+        <input type="text" name="username" class="form-control" id="username" >
         </div>
         <br>
         <button type="submit" class="btn btn-success">Restore User Account</button>
