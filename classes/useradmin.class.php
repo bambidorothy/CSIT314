@@ -61,4 +61,24 @@ class UserAdmin extends User
             return false;
         }
     }
+
+    public function restoreUser()
+    {
+        if (isset($_POST['username'])) {
+            $username = $_POST['username'];
+            echo $username;
+            $sql="UPDATE USERS SET status= 1  WHERE username= '$username'";
+            //echo $sql;
+            $result=mysqli_query($this->db, $sql);
+            if ($result === true) {
+               // echo "Record updated successfully";
+               header("location:userAdmin.php");
+            } else {
+                echo "Error updating record: " . $this->db->error;
+            }
+        } else {
+            return false;
+        }
+    }
 }
+?>
