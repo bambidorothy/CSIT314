@@ -1,11 +1,12 @@
 create table USERS (
-	id INT,
+	id INT NOT NULL AUTO_INCREMENT,
 	fullname VARCHAR(50),
 	username VARCHAR(50),
 	email VARCHAR(50),
 	password VARCHAR(50),
 	role VARCHAR(9),
-	status BIT(1)
+	status BIT(1),
+    PRIMARY KEY (id)
 );
 insert into USERS (id, fullname, username, email, password, role, status) values (1, 'Raimondo Vasilevich', 'rvasilevich0', 'rvasilevich0@nsw.gov.au', '0IOVWm3I0Y', 'moderator', 1);
 insert into USERS (id, fullname, username, email, password, role, status) values (2, 'Sheffy Paal', 'spaal1', 'spaal1@google.co.uk', 'wUjfjZ', 'student', 1);
