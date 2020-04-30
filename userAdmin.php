@@ -102,11 +102,12 @@ if (isset($_GET['q'])){ //get q variable to logout
             <th>Username</th>
             <th>Email</th>
             <th>Role</th>
+            <th>Status</th>
             <th></th>
         </tr>
         <?php 
         include("db_connection.php");
-        $sql=("SELECT id, fullname, username, email, role from users");
+        $sql=("SELECT id, fullname, username, email, role, status from users");
         $result = mysqli_query($conn, $sql);
         if ($result-> num_rows > 0) {
             while ($row = $result-> fetch_assoc()) { 
@@ -116,6 +117,7 @@ if (isset($_GET['q'])){ //get q variable to logout
         <td><?php echo $row['username'];?></td>
         <td><?php echo $row['email'];?></td>
         <td><?php echo $row['role'];?></td>
+        <td><?php echo $row['status'];?></td>
         <td><a href="delete.php?id=<?php echo $row['id'];?>"><button type="submit" name="deletesubmit"  style="margin- 
         left:250px;"  class="btn btn-primary">Delete</button></a></td>
         </tr>
@@ -192,8 +194,8 @@ echo "0 result";
     Suspend User Account
     </legend>
         <div class="form group">
-        <label for="username">Enter username of user account to suspend</label>
-        <input type="text" name="username" class="form-control" id="username" >
+        <label for="fullname">Enter full name of user account to suspend</label>
+        <input type="text" name="fullname" class="form-control" id="fullname" >
         </div>
         <br>
         <button type="submit" class="btn btn-danger">Suspend User Account</button>
@@ -204,8 +206,8 @@ echo "0 result";
     Restore User Account
     </legend>
         <div class="form group">
-        <label for="username">Enter username of user account to restore</label>
-        <input type="text" name="username" class="form-control" id="username" >
+        <label for="fullname">Enter full name of user account to restore</label>
+        <input type="text" name="fullname" class="form-control" id="fullname" >
         </div>
         <br>
         <button type="submit" class="btn btn-success">Restore User Account</button>
