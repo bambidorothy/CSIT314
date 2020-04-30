@@ -16,7 +16,11 @@ if (isset($_REQUEST['submit'])) {//get form values on form submission
         $status = $user->get_status($id);
         $id = $_SESSION['id'];
 
-        if($role == "student"){
+        if ($status == 0) {//check if user account status is set to 0
+            $message = "Your account has been suspended, contact your user admin!";
+            echo "<script type='text/javascript'>alert('$message');</script>";
+        }else {
+             if($role == "student"){
             header("location:student.php");
 
         }else if ($role == "moderator"){
@@ -25,8 +29,8 @@ if (isset($_REQUEST['submit'])) {//get form values on form submission
         }else {
              header("location:userAdmin.php");
            return false;
-
         }
+    }
     
        //header("location:index.php"); //redirect to index.php on successful login
     } else {
