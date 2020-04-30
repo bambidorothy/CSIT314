@@ -13,6 +13,7 @@ if (isset($_REQUEST['submit'])) {//get form values on form submission
     if ($login) {//if login is valid
         // Login Success
         $role = $user->get_role($id);
+        $status = $user->get_status($id);
         $id = $_SESSION['id'];
 
         if($role == "student"){

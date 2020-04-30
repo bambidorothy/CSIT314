@@ -30,6 +30,14 @@ class User //create User class
             return false;
         }
     }
+    /*get user account status */
+    public function get_status($id){
+         $sql="SELECT status FROM users WHERE id = $id";
+        $result = mysqli_query($this->db, $sql);
+        $user_data = mysqli_fetch_array($result);
+        //echo $user_data['status'];
+        return $user_data['status'];
+    }
 
     /*get user fullname*/
     public function get_fullname($id)
