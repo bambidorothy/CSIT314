@@ -45,15 +45,16 @@ class UserAdmin extends User
 
     public function suspendUser()
     {
-        if (isset($_POST['username'])) {
-            $username = $_POST['username'];
-            //echo $username;
-            $sql="UPDATE USERS SET status= 0  WHERE username= '$username'";
+        if (isset($_POST['fullname'])) {
+            $fullname = $_POST['fullname'];
+            //echo $fullname;
+            $sql="UPDATE USERS SET status= 0  WHERE fullname= '$fullname'";
             //echo $sql;
             $result=mysqli_query($this->db, $sql);
             if ($result === true) {
-               // echo "Record updated successfully";
-               header("location:userAdmin.php");
+                $message = "User account suspended successfully!";
+                echo "<script type='text/javascript'>alert('$message');</script>"; //do javascript alert upon successful suspension
+                echo "<script>window.open('userAdmin.php', '_self');</script>"; //redirect back to useradmin.php
             } else {
                 echo "Error updating record: " . $this->db->error;
             }
@@ -64,15 +65,16 @@ class UserAdmin extends User
 
     public function restoreUser()
     {
-        if (isset($_POST['username'])) {
-            $username = $_POST['username'];
-            echo $username;
-            $sql="UPDATE USERS SET status= 1  WHERE username= '$username'";
+        if (isset($_POST['fullname'])) {
+            $fullname = $_POST['fullname'];
+            echo $fullname;
+            $sql="UPDATE USERS SET status= 1  WHERE fullname= '$fullname'";
             //echo $sql;
             $result=mysqli_query($this->db, $sql);
             if ($result === true) {
-               // echo "Record updated successfully";
-               header("location:userAdmin.php");
+                $message = "User account restored successfully!";
+                echo "<script type='text/javascript'>alert('$message');</script>"; //do javascript alert upon successful restoration
+                echo "<script>window.open('userAdmin.php', '_self');</script>";    //redirect back to useradmin.php
             } else {
                 echo "Error updating record: " . $this->db->error;
             }
@@ -81,4 +83,3 @@ class UserAdmin extends User
         }
     }
 }
-?>
