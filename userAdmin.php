@@ -89,6 +89,7 @@ if (isset($_GET['q'])){ //get q variable to logout
                 <a class="nav-item nav-link active" id="nav-manage-tab" data-toggle="tab" href="#nav-manage" role="tab" aria-controls="nav-manage" aria-selected="true">Manage Users</a>
                 <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
                 <a class="nav-item nav-link" id="nav-create-tab" data-toggle="tab" href="#nav-create" role="tab" aria-controls="nav-create" aria-selected="false">Create Users</a>
+                <a class="nav-item nav-link" id="nav-suspend-tab" data-toggle="tab" href="#nav-suspend" role="tab" aria-controls="nav-suspend" aria-selected="false">Suspend/Restore Users</a>
             </div>
             </nav>
 <!--start of tab div contents-->          
@@ -184,6 +185,33 @@ echo "0 result";
                     <button type="submit" class="btn btn-primary">Create User</button>
         </form>
   </div>
+<!--start of suspend/restore user account tab form-->
+  <div class="tab-pane fade" id="nav-suspend" role="tabpanel" aria-labelledby="nav-suspend-tab">
+    <form action="formaction.php" method="post">
+    <legend>
+    Suspend User Account
+    </legend>
+        <div class="form group">
+        <label for="username">Enter username of user account to suspend</label>
+        <input type="username" name="username" class="form-control" id="username" >
+        </div>
+        <br>
+        <button type="submit" class="btn btn-danger">Suspend User Account</button>
+    </form>
+
+    <form action="classes/useradmin.class.php" method="post">
+    <legend>
+    Restore User Account
+    </legend>
+        <div class="form group">
+        <label for="username">Enter username of user account to restore</label>
+        <input type="username" class="form-control" id="username" >
+        </div>
+        <br>
+        <button type="submit" class="btn btn-success">Restore User Account</button>
+    </form>
+
+   </div> 
 </div>
             </div>
         </div>
