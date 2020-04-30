@@ -113,7 +113,7 @@ if (isset($_GET['q'])){ //get q variable to logout
                             <div class="form-group">
                                 <label for="email">Account Role</label>
                                 <input type="email" class="form-control" disabled id="role"
-                                    value="<?php $user->get_role($id); ?>">
+                                    value="<?php $user->display_role($id); ?>">
                             </div>
                         </form>
 

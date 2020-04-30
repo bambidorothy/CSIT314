@@ -17,6 +17,7 @@ if (isset($_GET['q'])){ //get q variable to logout
  $user->user_logout(); //log user out with session destroy
  header("location:login.php");//redirect to login.php after logout
  }
+ 
 ?>
 
 <!DOCTYPE html>
@@ -101,8 +102,31 @@ if (isset($_GET['q'])){ //get q variable to logout
             <th>Username</th>
             <th>Email</th>
             <th>Role</th>
+            <th></th>
         </tr>
-        <?php $useradmin->getAccount(); ?>
+        <?php 
+        include("db_connection.php");
+        $sql=("SELECT id, fullname, username, email, role from users");
+        $result = mysqli_query($conn, $sql);
+        if ($result-> num_rows > 0) {
+            while ($row = $result-> fetch_assoc()) { 
+        ?>
+        <tr>
+        <td><?php echo $row['fullname'];?></td>
+        <td><?php echo $row['username'];?></td>
+        <td><?php echo $row['email'];?></td>
+        <td><?php echo $row['role'];?></td>
+        <td><a href="delete.php?id=<?php echo $row['id'];?>"><button type="submit" name="deletesubmit"  style="margin- 
+        left:250px;"  class="btn btn-primary">Delete</button></a></td>
+        </tr>
+<?php 
+}
+echo "</table>";
+}
+else {
+echo "0 result"; 
+}
+?>
     </table>
   </div>
   
@@ -119,7 +143,7 @@ if (isset($_GET['q'])){ //get q variable to logout
                     </div>
                     <div class="form-group">
                         <label for="email">Account Role</label>
-                        <input type="email" class="form-control" disabled id="role" value="<?php $user->get_role($id); ?>">
+                        <input type="email" class="form-control" disabled id="role" value="<?php $user->display_role($id); ?>">
                     </div>
         </form>
         <form id="changePwd" action="">
@@ -168,11 +192,11 @@ if (isset($_GET['q'])){ //get q variable to logout
     <!--end of container-->
     <!--link main.js-->
     <script src="main.js"></script>
-    <footer class="fixed-bottom">
+    <!--<footer class="fixed-bottom">
         <div class="copyright">
             &copy 2020 -Team Bambi
         </div>
-    </footer>
+    </footer> -->
 </body>
 
 </html>

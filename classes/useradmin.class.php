@@ -1,7 +1,7 @@
 <?php
-include_once 'user.class.php'; //import /classes/user.class.php
-include_once 'db_config.php';
-include_once 'db_connection.php';
+include 'db_config.php'; //import db_config.php
+include_once 'useradmin.class.php'; //import /classes/user.class.php
+
 
 class UserAdmin extends User
 { //create UserAdmin class
@@ -88,3 +88,5 @@ class UserAdmin extends User
     {
     }
 }
+
+?>
