@@ -98,6 +98,7 @@ if (isset($_GET['q'])){ //get q variable to logout
   <div class="tab-pane fade show active" id="nav-manage" role="tabpanel" aria-labelledby="nav-manage-tab">
     <table style="width:100%">
         <tr>
+            <th>ID</th>
             <th>Fullname</th>
             <th>Username</th>
             <th>Email</th>
@@ -113,6 +114,7 @@ if (isset($_GET['q'])){ //get q variable to logout
             while ($row = $result-> fetch_assoc()) { 
         ?>
         <tr>
+        <td><?php echo $row['id'];?></td>
         <td><?php echo $row['fullname'];?></td>
         <td><?php echo $row['username'];?></td>
         <td><?php echo $row['email'];?></td>
