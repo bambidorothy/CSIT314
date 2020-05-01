@@ -21,20 +21,6 @@ class UserAdmin extends User
     //create User Account
     public function createUser($registerfullname,$registerusername,$registeremail,$registerpassword,$registerrole)
     {
-        /* $sql="SELECT * FROM users WHERE username='$username' OR email='$email'";
-
-         //checking if the user exists in db
-         $check =  $this->db->query($sql) ;
-         $count_row = $check->num_rows;
-
-         //if user does not exist then insert to the db user table
-         if ($count_row == 0) {
-             $sql1="INSERT INTO `users`(`id`, `fullname`, `username`, `email`, `password`, `role`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6])";
-             $result = mysqli_query($this->db, $sql1) or die(mysqli_connect_errno()."Data cannot be inserted");
-             return $result;
-         } else {
-             return false;
-         }*/
         $error = array();
       
         $user_check_query = "SELECT * FROM users WHERE username='$registerusername' OR email='$registeremail' LIMIT 1";
@@ -61,12 +47,12 @@ class UserAdmin extends User
         }
         //resgister user if there are no errors in the registration form
         if (count($error) == 0) {
-            $registerpassword = md5($registerpassword);
+           // $registerpassword = md5($registerpassword);
         
             $sql="SELECT * FROM users WHERE username='$registerusername' OR email='$registeremail'";
             
             $sql="INSERT INTO users(fullname,username,email,password,role,status) 
-                                        VALUES('$registerfullname','$registerusername','$registeremail','$registerpassword',' $registerrole',1 )";
+                                        VALUES('$registerfullname','$registerusername','$registeremail','$registerpassword','$registerrole',1 )";
             mysqli_query($conn, $sql);
 
             echo "<script type='text/javascript'>alert('Registration successful');</script>;";

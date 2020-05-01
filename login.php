@@ -19,24 +19,22 @@ if (isset($_REQUEST['submit'])) {//get form values on form submission
         if ($status == 0) {//check if user account status is set to 0
             $message = "Your account has been suspended, contact your user admin!";
             echo "<script type='text/javascript'>alert('$message');</script>";
-        }else {
-             if($role == "student"){
-            header("location:student.php");
-
-        }else if ($role == "moderator"){
-            header("location:moderator.php");
-
-        }else {
-             header("location:userAdmin.php");
-           return false;
+        } else {
+            if ($role == "student") {
+                header("location:student.php");
+            } elseif ($role == "moderator") {
+                header("location:moderator.php");
+            } else {
+                header("location:userAdmin.php");
+                return false; 
+            }
         }
-    }
     
        //header("location:index.php"); //redirect to index.php on successful login
-    } else {
-        // Login Failed
-        echo 'Wrong username or password'; //echo failed login
     }
+} else {
+    // Login Failed
+        echo 'Wrong username or password'; //echo failed login
 }
 ?>
 <script type="text/javascript" language="javascript">
