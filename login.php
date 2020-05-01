@@ -26,15 +26,13 @@ if (isset($_REQUEST['submit'])) {//get form values on form submission
                 header("location:moderator.php");
             } else {
                 header("location:userAdmin.php");
-                return false; 
+                return false;
             }
         }
-    
-       //header("location:index.php"); //redirect to index.php on successful login
-    }
-} else {
-    // Login Failed
+    } else {
+        // Login Failed
         echo 'Wrong username or password'; //echo failed login
+    }
 }
 ?>
 <script type="text/javascript" language="javascript">
