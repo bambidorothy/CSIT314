@@ -1,8 +1,6 @@
 <?php
-class User //create User class
-{   
-    
-    
+
+class User {//create User class
 
     public function __construct() // constructor runs when object is created
     {
