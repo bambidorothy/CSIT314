@@ -2,9 +2,10 @@
 include 'db_config.php'; //import db_config.php
 include_once 'classes/user.class.php';
 include_once 'classes/useradmin.class.php'; //import /classes/user.class.php
+
 session_start();
 $user = new User(); 
-$useradmin = new UserAdmin();
+$useradmin = new useradmin();
 $id = $_SESSION['id']; //store session id into $id
 if (!$user->get_session($id)){ //if user is not logged in
  header("location:login.php"); //redirect to login.php *this also disables access to index.php from browser url*
@@ -17,6 +18,41 @@ if (isset($_GET['q'])){ //get q variable to logout
  $user->user_logout(); //log user out with session destroy
  header("location:login.php");//redirect to login.php after logout
  }
+
+//=================================================================
+  
+
+if (isset($_REQUEST['registerbtn'])){
+    $registerfullname = " ";
+    $registerusername = " ";
+    $registeremail = " ";
+    $registerpassword = " ";
+    $registerrole = " ";
+    require 'db_connection.php';
+
+
+    $registerfullname = mysqli_real_escape_string($conn,$_REQUEST['registerfullname']);
+    $registerusername= mysqli_real_escape_string($conn,$_REQUEST['registerusername']);
+    $registeremail = mysqli_real_escape_string($conn,$_REQUEST['registeremail']);
+    $registerpassword= mysqli_real_escape_string($conn,$_REQUEST['registerpassword']);
+    $registerrole = mysqli_real_escape_string($conn,$_REQUEST['registerrole']);
+    
+
+    $created = $useradmin->createUser($registerfullname,$registerusername,$registeremail,$registerpassword,$registerrole);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -169,24 +205,34 @@ echo "0 result";
   </div>
   <!--start of create user tab--> 
   <div class="tab-pane fade" id="nav-create" role="tabpanel" aria-labelledby="nav-create-tab">
-    <form id="registerUser" action="">
+    <form id="registerUser"  method="post">
                     <div class="form-group">
-                        <label for="email">Email address</label>
-                        <input type="email" class="form-control" id="email" >
+                        <label >Full name</label>
+                        <input type="text" class="form-control" name="registerfullname" required>
                     </div>
                     <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password">
+                        <label >Username</label>
+                        <input type="text" class="form-control" name="registerusername"required >
+                    </div>
+                    <div class="form-group">
+                        <label >Email</label>
+                        <input type="email" class="form-control" name="registeremail" required>
+                    </div>
+                    <div class="form-group">
+                        <label >Password</label>
+                        <input type="text" class="form-control" name="registerpassword" required>
                     </div>
                     <div class="form-group">
                         <label for="userRole">Example select</label>
-                        <select class="form-control" id="userRole">
-                            <option>Student</option>
-                            <option>Moderator</option>
-                            <option>User Administrator</option>
+                        <select class="form-control" name="registerrole" required>
+                            <option >Select role</option>
+                            <option value="student">Student</option>
+
+                            <option value="moderator">Moderator</option>
+                            <option value="useradmin">User Administrator</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Create User</button>
+                    <button type="submit" class="btn btn-primary" name="registerbtn">Create User</button>
         </form>
   </div>
 <!--start of suspend/restore user account tab form-->
@@ -212,7 +258,7 @@ echo "0 result";
         <input type="text" name="fullname" class="form-control" id="fullname" >
         </div>
         <br>
-        <button type="submit" class="btn btn-success">Restore User Account</button>
+        <input type="btn" class="btn btn-success">Restore User Account</button>
     </form>
 
    </div> 

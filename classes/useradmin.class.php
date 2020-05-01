@@ -1,13 +1,15 @@
 <?php
+include_once 'db_config.php'; //import db_config.php
 include_once 'user.class.php'; //import /classes/user.class.php
-include_once 'db_config.php';
+
+
 
 class UserAdmin extends User
 { //create UserAdmin class
     //get useradmin profile
-
+   
     //get list of users
-    public function getUsers()
+    private function getUsers()
     {
         $sql="SELECT * from users";
         $result = mysqli_query($this->db, $sql);
@@ -16,32 +18,64 @@ class UserAdmin extends User
             echo print_r($row);       // Print the entire row data
         }
     }
-    //get user fullname, username, email and role
-    public function getAccount()
+    //create User Account
+    public function createUser($registerfullname,$registerusername,$registeremail,$registerpassword,$registerrole)
     {
-        $sql="SELECT fullname, username, email, role from users";
-        $result = mysqli_query($this->db, $sql);
-        if ($result-> num_rows > 0) {
-            while ($row = $result-> fetch_assoc()) {
-                echo "<tr><td>". $row["fullname"] ."</td><td>". $row["username"] ."</td><td>". $row["email"] ."</td><td>". $row["role"] ."</td></tr>";
+        /* $sql="SELECT * FROM users WHERE username='$username' OR email='$email'";
+
+         //checking if the user exists in db
+         $check =  $this->db->query($sql) ;
+         $count_row = $check->num_rows;
+
+         //if user does not exist then insert to the db user table
+         if ($count_row == 0) {
+             $sql1="INSERT INTO `users`(`id`, `fullname`, `username`, `email`, `password`, `role`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6])";
+             $result = mysqli_query($this->db, $sql1) or die(mysqli_connect_errno()."Data cannot be inserted");
+             return $result;
+         } else {
+             return false;
+         }*/
+        $error = array();
+      
+        $user_check_query = "SELECT * FROM users WHERE username='$registerusername' OR email='$registeremail' LIMIT 1";
+        require 'db_connection.php';
+        $result = mysqli_query($conn, $user_check_query);
+        $user = mysqli_fetch_assoc($result);
+
+        $usernameErrorMessage="Registration Unsuccessful Username already exists";
+        $emailErrorMessage="Registration Unsuccessfu Email already exists";
+
+        if ($user) { // if user exists
+            if ($user['username'] === $registerusername) {
+                array_push($error, "Username already exists");
+                echo "<script type='text/javascript'>alert('$usernameErrorMessage');</script>;";
+                return false;
+
             }
-            echo "</table>";
-        } else {
-            echo "0 result";
+        
+            if ($user['email'] === $registeremail) {
+                array_push($error, "email already exists");
+                echo "<script type='text/javascript'>alert('$emailErrorMessage');</script>;";
+                return false;
+            }
+        }
+        //resgister user if there are no errors in the registration form
+        if (count($error) == 0) {
+            $registerpassword = md5($registerpassword);
+        
+            $sql="SELECT * FROM users WHERE username='$registerusername' OR email='$registeremail'";
+            
+            $sql="INSERT INTO users(fullname,username,email,password,role,status) 
+                                        VALUES('$registerfullname','$registerusername','$registeremail','$registerpassword',' $registerrole',1 )";
+            mysqli_query($conn, $sql);
+
+            echo "<script type='text/javascript'>alert('Registration successful');</script>;";
+            
         }
     }
-    //create User Account
-    public function createUser()
-    {
-    }
-    //delete User Account
-    public function deleteUser($id)
-    {
-        $sql = "DELETE from purchase WHERE id= $id";
-        $result=mysqli_query($this->db, $sql);
-        $user_data = mysqli_fetch_array($result);
-        echo 'deleted successfully';
-    }
+
+    
+    
 
     public function suspendUser()
     {
@@ -82,4 +116,10 @@ class UserAdmin extends User
             return false;
         }
     }
+   
+    private function deleteUser()
+    {
+    }
 }
+
+?>
