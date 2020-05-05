@@ -102,10 +102,6 @@ class UserAdmin extends User
             return false;
         }
     }
-   
-    private function deleteUser()
-    {
-    }
 }
 
 ?>
