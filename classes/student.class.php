@@ -69,14 +69,11 @@ class Student extends User
                   <td>'.$date.'</td> 
                   <td>'.$time.'</td>
                   <td>'.$status.'</td>
-<<<<<<< HEAD
                   <td><a onclick="closePost();" class="btn btn-danger" style="width:10em;">Mark as Closed</a></td>
                   <td><a type="submit" class="btn btn-success" style="width:7em;">View Post</a></td>
                   <td><a onclick="popUp();" class="btn btn-danger" style="width:7em;">Edit</a></td>
-=======
                   <td><a href="closePost.php?post_id=<?php echo $row["id"];?>" class="btn btn-danger" style="width:10em;">Mark as Closed</a></td>
                   <td><a href="detailPost.php" class="btn btn-success" style="width:7em;">View Post</a></td>
->>>>>>> d5e0cbd92bf1a037cc612b1479a945a1cd04d881
               </tr>';
             }
             //$result->free();
@@ -85,8 +82,6 @@ class Student extends User
     //public function markPostOpen() {
     }
     //mark post as closed
-=======
->>>>>>> 75c5bcdda873fb3883a453a79d5c1cf134c9efa1
     public function markPostClose($post_id)
     {   $post_id = $post_id;
         $sql="UPDATE POST SET status= 0  WHERE id= '$post_id'";
@@ -100,12 +95,9 @@ class Student extends User
             echo "Error updating record: " . $this->db->error;
         } */
     }
-<<<<<<< HEAD
     public function popUp()
     {
         
     }
-=======
 
->>>>>>> 75c5bcdda873fb3883a453a79d5c1cf134c9efa1
 }
