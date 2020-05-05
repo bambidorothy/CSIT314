@@ -47,7 +47,6 @@ class Student extends User
         //public function markPostOpen() {
     }
 
-<<<<<<< HEAD
     //display list of Posts by Student
     public function displayPosts($id)
     {
