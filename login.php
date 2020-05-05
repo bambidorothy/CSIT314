@@ -15,6 +15,7 @@ if (isset($_REQUEST['submit'])) {//get form values on form submission
         $role = $user->get_role($id);
         $status = $user->get_status($id);
         $id = $_SESSION['id'];
+        
 
         if ($status == 0) {//check if user account status is set to 0
             $message = "Your account has been suspended, contact your user admin!";

@@ -22,20 +22,21 @@ if (isset($_GET['q'])){ //get q variable to logout
 //=================================================================
   
 
-if (isset($_REQUEST['registerbtn'])){
-    $registerfullname = " ";
-    $registerusername = " ";
-    $registeremail = " ";
-    $registerpassword = " ";
-    $registerrole = " ";
+if (isset($_POST['registerbtn'])){
+    $registerfullname;
+    $registerusername;
+    $registeremail;
+    $registerpassword;
+    $registerrole;
     require 'db_connection.php';
 
 
-    $registerfullname = mysqli_real_escape_string($conn,$_REQUEST['registerfullname']);
-    $registerusername= mysqli_real_escape_string($conn,$_REQUEST['registerusername']);
-    $registeremail = mysqli_real_escape_string($conn,$_REQUEST['registeremail']);
-    $registerpassword= mysqli_real_escape_string($conn,$_REQUEST['registerpassword']);
-    $registerrole = mysqli_real_escape_string($conn,$_REQUEST['registerrole']);
+    $registerfullname = mysqli_real_escape_string($conn,$_POST['registerfullname']);
+    $registerusername= mysqli_real_escape_string($conn,$_POST['registerusername']);
+    $registeremail = mysqli_real_escape_string($conn,$_POST['registeremail']);
+    $registerpassword= mysqli_real_escape_string($conn,$_POST['registerpassword']);
+    $registerrole = mysqli_real_escape_string($conn,$_POST['registerrole']);
+    
     
 
     $created = $useradmin->createUser($registerfullname,$registerusername,$registeremail,$registerpassword,$registerrole);
@@ -227,7 +228,6 @@ echo "0 result";
                         <select class="form-control" name="registerrole" required>
                             <option >Select role</option>
                             <option value="student">Student</option>
-
                             <option value="moderator">Moderator</option>
                             <option value="useradmin">User Administrator</option>
                         </select>
