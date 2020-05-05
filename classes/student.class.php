@@ -6,6 +6,16 @@ class Student extends User
     public $post_id;
 
     //display a list of all Posts
+    public function createPost($id,$question,$postDate,$postTime)
+    {
+        $sql="INSERT INTO post(users_id,content,upvote,date,time) 
+                                    VALUES('$id','$question',0,'$postDate','$postTime')";
+
+        mysqli_query($this->db, $sql);
+
+        echo "<script type='text/javascript'>alert('Question has been posted successfully');</script>;";
+
+    }
     public function displayAllPosts($id)
     {
         $sql="SELECT content, upvote, date, time, status FROM POST WHERE users_id != $id";
