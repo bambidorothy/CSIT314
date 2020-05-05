@@ -66,10 +66,8 @@ class Student extends User
                   <td>'.$date.'</td> 
                   <td>'.$time.'</td>
                   <td>'.$status.'</td>
-                  <td><a type="submit" href="closePost.php?id='.$post_id.'" class="btn btn-danger" style="width:10em;">Mark as Closed</a></td>
-                  <td><a href="detailPost.php" class="btn btn-success" style="width:7em;">View Post</a></td>
-                  <td><button class = "btn btn-primary btn-lg" data-toggle = "modal" data-target = "#myModal">Edit</button></td>
-                  <td><a onclick="closePost();" class="btn btn-danger" style="width:10em;">Mark as Closed</a></td>
+                  <td><a type="submit" href="closePost.php?id='.$post_id.'" class="btn btn-danger" style="width:8em;">Mark Closed</a></td>
+                  <td><button class = "btn btn-primary" data-toggle = "modal" data-target = "#myModal">Edit</button></td>
                   <td><a type="submit" class="btn btn-success" style="width:7em;">View Post</a></td>
               </tr>';
             }
