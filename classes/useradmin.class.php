@@ -29,7 +29,7 @@ class UserAdmin extends User
         $user = mysqli_fetch_assoc($result);
 
         $usernameErrorMessage="Registration Unsuccessful Username already exists";
-        $emailErrorMessage="Registration Unsuccessfu Email already exists";
+        $emailErrorMessage="Registration Unsuccessful Email already exists";
 
         if ($user) { // if user exists
             if ($user['username'] === $registerusername) {
@@ -45,10 +45,11 @@ class UserAdmin extends User
                 return false;
             }
         }
+        $newregisterrole ;
         //resgister user if there are no errors in the registration form
         if (count($error) == 0) {
-           // $registerpassword = md5($registerpassword);
-        
+            //$registerpassword = md5($registerpassword);
+
             $sql="SELECT * FROM users WHERE username='$registerusername' OR email='$registeremail'";
             
             $sql="INSERT INTO users(fullname,username,email,password,role,status) 
