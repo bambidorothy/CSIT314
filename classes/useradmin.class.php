@@ -6,18 +6,7 @@ include_once 'user.class.php'; //import /classes/user.class.php
 
 class UserAdmin extends User
 { //create UserAdmin class
-    //get useradmin profile
-   
-    //get list of users
-    private function getUsers()
-    {
-        $sql="SELECT * from users";
-        $result = mysqli_query($this->db, $sql);
-        while ($row = mysql_fetch_array($result)) {
-            echo $row['fullname']; // Print a single column data
-            echo print_r($row);       // Print the entire row data
-        }
-    }
+
     //create User Account
     public function createUser($registerfullname,$registerusername,$registeremail,$registerpassword,$registerrole)
     {
@@ -63,7 +52,7 @@ class UserAdmin extends User
 
     
     
-
+    //suspend user func upon posting full name of user account to be suspended
     public function suspendUser()
     {
         if (isset($_POST['fullname'])) {
@@ -83,7 +72,7 @@ class UserAdmin extends User
             return false;
         }
     }
-
+    //Restore user func upon posting full name of user account to be restored
     public function restoreUser()
     {
         if (isset($_POST['fullname'])) {
