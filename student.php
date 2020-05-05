@@ -1,7 +1,7 @@
 <?php
 include 'db_config.php'; //import db_config.php
-include_once 'classes\user.class.php'; //import /classes/user.class.php
-include_once 'classes\student.class.php'; //import /classes/student.class.php
+include_once 'classes/user.class.php'; //import /classes/user.class.php
+include_once 'classes/student.class.php'; //import /classes/student.class.php
 
 session_start();
 $user = new User(); 
@@ -61,6 +61,16 @@ if(isset($_POST["createPostbtn"]))
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+    
+        <script type="text/javascript"> //script for closePost() function 
+function closePost(){
+
+     $.ajax({url: "closePost.php", success: function(result){
+        alert(result);
+    }});
+}
+</script>
+        
     <title>Home</title>
 </head>
 
@@ -107,7 +117,7 @@ if(isset($_POST["createPostbtn"]))
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <a class="nav-item nav-link active" id="nav-createpost-tab" data-toggle="tab" href="#nav-createpost" role="tab" aria-controls="nav-createpost" aria-selected="true">Create Post</a>
                 <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
-                <a class="nav-item nav-link" id="nav-manage-post" data-toggle="tab" href="#nav-managepost" role="tab" aria-controls="nav-managepost" aria-selected="false">Manage Post</a>
+                <a class="nav-item nav-link" id="nav-manage-post" data-toggle="tab" href="#nav-managepost" role="tab" aria-controls="nav-managepost" aria-selected="false">View/Manage Posts</a>
             </div>
             </nav>
 <!--start of tab div contents-->          
@@ -161,6 +171,28 @@ if(isset($_POST["createPostbtn"]))
   </div>
   <!--start of manage post tab--> 
   <div class="tab-pane fade" id="nav-managepost" role="tabpanel" aria-labelledby="nav-manage-post">
+  <h1>Your Posts</h1>
+  <table>
+  <tr>
+    <th>Content</th>
+    <th>Upvotes</th>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Status</th>
+  </tr>
+  <?php $student->displayPosts($id);?> <!--calls the displayPosts function in student.class.php-->
+  </table>
+  <hr>
+  <h1>Public Posts</h1>
+  <table>
+  <tr>
+    <th>Content</th>
+    <th>Upvotes</th>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Status</th>
+    <?php $student->displayAllPosts($id);?>
+  </tr>
   </div>
 </div>
             </div> <!--end of col-->
