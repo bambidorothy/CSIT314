@@ -29,7 +29,7 @@ class UserAdmin extends User
         $user = mysqli_fetch_assoc($result);
 
         $usernameErrorMessage="Registration Unsuccessful Username already exists";
-        $emailErrorMessage="Registration Unsuccessfu Email already exists";
+        $emailErrorMessage="Registration Unsuccessful Email already exists";
 
         if ($user) { // if user exists
             if ($user['username'] === $registerusername) {
