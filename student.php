@@ -1,11 +1,13 @@
 <?php
-//include_once 'db_config.php'; //import db_config.php
+include 'db_config.php'; //import db_config.php
 include_once 'classes/user.class.php'; //import /classes/user.class.php
 include_once 'classes/student.class.php'; //import /classes/student.class.php
+
 session_start();
-$user = new User();
+$user = new User(); 
 $student = new Student();
 $id = $_SESSION['id']; //store session id into $id
+
 if (!$user->get_session($id)){ //if user is not logged in
  header("location:login.php"); //redirect to login.php *this also disables access to index.php from browser url*
 }
@@ -18,6 +20,22 @@ if (isset($_GET['q'])){ //get q variable to logout
  $user->user_logout(); //log user out with session destroy
  header("location:login.php");//redirect to login.php after logout
  }
+
+//create post
+//=======================================================================================
+if(isset($_POST["createPostbtn"]))
+{
+    $question;
+    require "db_connection.php";
+    $question = mysqli_real_escape_string($conn,$_POST["postQuestion"]);
+    $postDate = date("Y-m-d");
+    $postTime = date("h:i a");
+    require_once "classes\student.class.php";
+    $student->createPost($id,$question,$postDate,$postTime);
+
+
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -106,6 +124,16 @@ function closePost(){
 <div class="tab-content" id="nav-tabContent">
 <!--start of post create tab--> 
   <div class="tab-pane fade show active" id="nav-createpost" role="tabpanel" aria-labelledby="nav-createpost-tab">
+        <form id="post" method="post">
+                    <div class="form-group">
+                        <label >My question:</label>
+                        <textarea rows="10"  cols="50" type="text" class="form-control" name="postQuestion"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" name="createPostbtn">Post</button>
+                    </div>
+                   
+        </form>
   
   </div>
   <!--start of profile tab--> 

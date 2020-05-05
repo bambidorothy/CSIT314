@@ -1,6 +1,8 @@
 <?php
 include_once 'user.class.php'; //import /classes/user.class.php
 include_once 'db_config.php';
+include_once 'db_connection.php';
+
 class Student extends User
 { //create Student class
     public $post_id;
@@ -45,6 +47,7 @@ class Student extends User
         //public function markPostOpen() {
     }
 
+<<<<<<< HEAD
     //display list of Posts by Student
     public function displayPosts($id)
     {
@@ -83,6 +86,8 @@ class Student extends User
     //public function markPostOpen() {
     }
     //mark post as closed
+=======
+>>>>>>> 75c5bcdda873fb3883a453a79d5c1cf134c9efa1
     public function markPostClose($post_id)
     {   $post_id = $post_id;
         $sql="UPDATE POST SET status= 0  WHERE id= '$post_id'";
@@ -96,8 +101,12 @@ class Student extends User
             echo "Error updating record: " . $this->db->error;
         } */
     }
+<<<<<<< HEAD
     public function popUp()
     {
         
     }
+=======
+
+>>>>>>> 75c5bcdda873fb3883a453a79d5c1cf134c9efa1
 }
