@@ -18,6 +18,7 @@ class Student extends User
         echo "<script type='text/javascript'>alert('Question has been posted successfully');</script>;";
 
     }
+    //display all posts not relevant to current user (public)
     public function displayAllPosts($id)
     {
         $sql="SELECT content, upvote, date, time, status FROM POST WHERE users_id != $id";
@@ -47,13 +48,13 @@ class Student extends User
         //public function markPostOpen() {
     }
 
-    //display list of Posts by Student
+     //display list of Posts by Student
     public function displayPosts($id)
     {
         $sql="SELECT id, content, upvote, date, time, status FROM POST WHERE users_id = $id";
         $result=mysqli_query($this->db, $sql);
 
-         
+
         if ($result) {
             while ($row = $result->fetch_assoc()) {
                 $post_id = $row["id"];
@@ -62,7 +63,7 @@ class Student extends User
                 $date = $row["date"];
                 $time = $row["time"];
                 $status = $row["status"];
- 
+
                 echo '<tr> 
                   <td>'.$content.'</td> 
                   <td>'.$upvote.'</td> 
@@ -72,14 +73,12 @@ class Student extends User
                   <td><a href="closePost.php?post_id=<?php echo $row["id"];?>" class="btn btn-danger" style="width:10em;">Mark as Closed</a></td>
                   <td><a href="detailPost.php" class="btn btn-success" style="width:7em;">View Post</a></td>
                   <td><button class = "btn btn-primary btn-lg" data-toggle = "modal" data-target = "#myModal">Edit</button></td>
+                  <td><a onclick="closePost();" class="btn btn-danger" style="width:10em;">Mark as Closed</a></td>
+                  <td><a type="submit" class="btn btn-success" style="width:7em;">View Post</a></td>
               </tr>';
             }
-            //$result->free();
         }
-        //mark post as open
-    //public function markPostOpen() {
     }
-    //mark post as closed
     public function markPostClose($post_id)
     {   $post_id = $post_id;
         $sql="UPDATE POST SET status= 0  WHERE id= '$post_id'";
@@ -108,4 +107,5 @@ class Student extends User
         $user_data = mysqli_fetch_array($result);
         echo $user_data['id'];
     }
+
 }
