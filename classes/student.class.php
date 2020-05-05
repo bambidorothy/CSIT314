@@ -10,8 +10,8 @@ class Student extends User
     //display a list of all Posts
     public function createPost($id,$question,$postDate,$postTime)
     {
-        $sql="INSERT INTO post(users_id,content,upvote,date,time) 
-                                    VALUES('$id','$question',0,'$postDate','$postTime')";
+        $sql="INSERT INTO post(users_id,content,upvote,date,time,status) 
+                                    VALUES('$id','$question',0,'$postDate','$postTime',1)";
 
         mysqli_query($this->db, $sql);
 
@@ -69,11 +69,9 @@ class Student extends User
                   <td>'.$date.'</td> 
                   <td>'.$time.'</td>
                   <td>'.$status.'</td>
-                  <td><a onclick="closePost();" class="btn btn-danger" style="width:10em;">Mark as Closed</a></td>
-                  <td><a type="submit" class="btn btn-success" style="width:7em;">View Post</a></td>
-                  <td><a onclick="popUp();" class="btn btn-danger" style="width:7em;">Edit</a></td>
                   <td><a href="closePost.php?post_id=<?php echo $row["id"];?>" class="btn btn-danger" style="width:10em;">Mark as Closed</a></td>
                   <td><a href="detailPost.php" class="btn btn-success" style="width:7em;">View Post</a></td>
+                  <td><button class = "btn btn-primary btn-lg" data-toggle = "modal" data-target = "#myModal">Edit</button></td>
               </tr>';
             }
             //$result->free();
@@ -95,9 +93,19 @@ class Student extends User
             echo "Error updating record: " . $this->db->error;
         } */
     }
-    public function popUp()
+    public function getContent($id)
     {
-        
+        //$userid = $_POST['userid'];
+        $sql="SELECT content FROM POST WHERE users_id = $id";
+        $result = mysqli_query($this->db, $sql);
+        $user_data = mysqli_fetch_array($result);
+        echo $user_data['content'];
     }
-
+    public function getId($id)
+    {
+        $sql="SELECT id FROM POST WHERE users_id=$id";
+        $result = mysqli_query($this->db, $sql);
+        $user_data = mysqli_fetch_array($result);
+        echo $user_data['id'];
+    }
 }
