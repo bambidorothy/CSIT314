@@ -226,7 +226,7 @@ echo "0 result";
                     <div class="form-group">
                         <label for="userRole">Example select</label>
                         <select class="form-control" name="registerrole" required>
-                            <option >Select role</option>
+                            <option>Select role</option>
                             <option value="student">Student</option>
                             <option value="moderator">Moderator</option>
                             <option value="useradmin">User Administrator</option>
@@ -258,7 +258,7 @@ echo "0 result";
         <input type="text" name="fullname" class="form-control" id="fullname" >
         </div>
         <br>
-        <input type="btn" class="btn btn-success">Restore User Account</button>
+        <button type="submit" class="btn btn-success">Restore User Account</button>
     </form>
 
    </div> 
