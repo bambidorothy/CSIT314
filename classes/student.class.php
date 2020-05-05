@@ -58,6 +58,7 @@ class Student extends User
                   <td>'.$status.'</td>
                   <td><a onclick="closePost();" class="btn btn-danger" style="width:10em;">Mark as Closed</a></td>
                   <td><a type="submit" class="btn btn-success" style="width:7em;">View Post</a></td>
+                  <td><
               </tr>';
             }
             //$result->free();
