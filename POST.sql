@@ -1,5 +1,5 @@
 create table POST (
-	id INT,
+	id INT NOT NULL AUTO_INCREMENT,
 	users_id INT,
 	content TEXT,
 	upvote INT,
