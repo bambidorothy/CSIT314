@@ -3,8 +3,19 @@ include_once 'user.class.php'; //import /classes/user.class.php
 include_once 'db_config.php';
 class Student extends User
 { //create Student class
+    public $post_id;
 
     //display a list of all Posts
+    public function createPost($id,$question,$postDate,$postTime)
+    {
+        $sql="INSERT INTO post(users_id,content,upvote,date,time) 
+                                    VALUES('$id','$question',0,'$postDate','$postTime')";
+
+        mysqli_query($this->db, $sql);
+
+        echo "<script type='text/javascript'>alert('Question has been posted successfully');</script>;";
+
+    }
     public function displayAllPosts($id)
     {
         $sql="SELECT content, upvote, date, time, status FROM POST WHERE users_id != $id";
@@ -56,9 +67,14 @@ class Student extends User
                   <td>'.$date.'</td> 
                   <td>'.$time.'</td>
                   <td>'.$status.'</td>
+<<<<<<< HEAD
                   <td><a onclick="closePost();" class="btn btn-danger" style="width:10em;">Mark as Closed</a></td>
                   <td><a type="submit" class="btn btn-success" style="width:7em;">View Post</a></td>
                   <td><a onclick="popUp();" class="btn btn-danger" style="width:7em;">Edit</a></td>
+=======
+                  <td><a href="closePost.php?post_id=<?php echo $row["id"];?>" class="btn btn-danger" style="width:10em;">Mark as Closed</a></td>
+                  <td><a href="detailPost.php" class="btn btn-success" style="width:7em;">View Post</a></td>
+>>>>>>> d5e0cbd92bf1a037cc612b1479a945a1cd04d881
               </tr>';
             }
             //$result->free();
@@ -68,17 +84,17 @@ class Student extends User
     }
     //mark post as closed
     public function markPostClose($post_id)
-    {
+    {   $post_id = $post_id;
         $sql="UPDATE POST SET status= 0  WHERE id= '$post_id'";
-        //echo $sql;
+        echo $sql;
         $result=mysqli_query($this->db, $sql);
-        if ($result === true) {
+/*         if ($result === true) {
             $message = "Post closed successfully!";
             echo "<script type='text/javascript'>alert('$message');</script>"; //do javascript alert upon successful suspension
             echo "<script>window.open('student.php', '_self');</script>"; //redirect back to student.php
         } else {
             echo "Error updating record: " . $this->db->error;
-        }
+        } */
     }
     public function popUp()
     {
