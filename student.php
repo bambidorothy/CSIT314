@@ -173,7 +173,7 @@ function closePost(){
   <!--start of manage post tab--> 
   <div class="tab-pane fade" id="nav-managepost" role="tabpanel" aria-labelledby="nav-manage-post">
   <h1>Your Posts</h1>
-  <table>
+  <table class="table table-responsive">
   <tr>
     <th>Content</th>
     <th>Upvotes</th>
@@ -185,7 +185,7 @@ function closePost(){
   </table>
   <hr>
   <h1>Public Posts</h1>
-  <table>
+  <table class="table table-responsive">
   <tr>
     <th>Content</th>
     <th>Upvotes</th>

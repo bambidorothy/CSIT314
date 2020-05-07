@@ -71,11 +71,9 @@ class Student extends User
                   <td>'.$date.'</td> 
                   <td>'.$time.'</td>
                   <td>'.$status.'</td>
-                  <td><a href="closePost.php?post_id=<?php echo $row["id"];?>" class="btn btn-danger" style="width:10em;">Mark as Closed</a></td>
+                  <td><a href="closePost.php?post_id='.$post_id.'" class="btn btn-danger" style="width:10em;">Mark as Closed</a></td>
                   <td><a href="detailPost.php" class="btn btn-success" style="width:7em;">View Post</a></td>
-                  <td><button class = "btn btn-primary btn-lg" data-toggle = "modal" data-target = "#myModal">Edit</button></td>
-                  <td><a onclick="closePost();" class="btn btn-danger" style="width:10em;">Mark as Closed</a></td>
-                  <td><a type="submit" class="btn btn-success" style="width:7em;">View Post</a></td>
+                  <td><button class = "btn btn-primary" data-toggle = "modal" data-target = "#myModal">Edit</button></td>
               </tr>';
             }
         }
@@ -85,13 +83,13 @@ class Student extends User
         $sql="UPDATE POST SET status= 0  WHERE id= '$post_id'";
         echo $sql;
         $result=mysqli_query($this->db, $sql);
-/*         if ($result === true) {
+        if ($result === true) {
             $message = "Post closed successfully!";
             echo "<script type='text/javascript'>alert('$message');</script>"; //do javascript alert upon successful suspension
             echo "<script>window.open('student.php', '_self');</script>"; //redirect back to student.php
         } else {
             echo "Error updating record: " . $this->db->error;
-        } */
+        }
     }
     public function getContent($id)
     {
