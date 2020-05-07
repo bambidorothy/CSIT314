@@ -8,7 +8,7 @@ class UserAdmin extends User
 { //create UserAdmin class
 
     //create User Account
-    public function createUser($registerfullname,$registerusername,$registeremail,$registerpassword,$registerrole)
+    public function createUser($registerfullname, $registerusername, $registeremail, $registerpassword, $registerrole)
     {
         $error = array();
       
@@ -25,7 +25,6 @@ class UserAdmin extends User
                 array_push($error, "Username already exists");
                 echo "<script type='text/javascript'>alert('$usernameErrorMessage');</script>;";
                 return false;
-
             }
         
             if ($user['email'] === $registeremail) {
@@ -46,7 +45,6 @@ class UserAdmin extends User
             mysqli_query($conn, $sql);
 
             echo "<script type='text/javascript'>alert('Registration successful');</script>;";
-            
         }
     }
 
@@ -58,18 +56,25 @@ class UserAdmin extends User
         if (isset($_POST['fullname'])) {
             $fullname = $_POST['fullname'];
             //echo $fullname;
-            $sql="UPDATE USERS SET status= 0  WHERE fullname= '$fullname'";
-            //echo $sql;
-            $result=mysqli_query($this->db, $sql);
-            if ($result === true) {
-                $message = "User account suspended successfully!";
-                echo "<script type='text/javascript'>alert('$message');</script>"; //do javascript alert upon successful suspension
-                echo "<script>window.open('userAdmin.php', '_self');</script>"; //redirect back to useradmin.php
-            } else {
-                echo "Error updating record: " . $this->db->error;
+            $checkuser="SELECT * FROM USERS where fullname= '$fullname'";
+            $result=mysqli_query($this->db, $checkuser);
+            $row = $result->num_rows;
+            if ($row == 1) { //check if user exists in db
+                $sql="UPDATE USERS SET status= 0  WHERE fullname= '$fullname'";
+                //echo $sql;
+                $result=mysqli_query($this->db, $sql);
+                if ($result === true) {
+                    $message = "User account restored successfully!";
+                    echo "<script type='text/javascript'>alert('$message');</script>"; //do javascript alert upon successful restoration
+                    echo "<script>window.open('userAdmin.php', '_self');</script>";    //redirect back to useradmin.php
+                } else {
+                    echo "Error updating record: " . $this->db->error;
+                }
+            } else {// if user doesn't exist, echo error msg and redirect back to userAdmin.php
+                $message = "Such user account does not exist!";
+                echo "<script type='text/javascript'>alert('$message');</script>";
+                echo "<script>window.open('userAdmin.php', '_self');</script>";
             }
-        } else {
-            return false;
         }
     }
     //Restore user func upon posting full name of user account to be restored
@@ -77,21 +82,26 @@ class UserAdmin extends User
     {
         if (isset($_POST['fullname'])) {
             $fullname = $_POST['fullname'];
-            echo $fullname;
-            $sql="UPDATE USERS SET status= 1  WHERE fullname= '$fullname'";
-            //echo $sql;
-            $result=mysqli_query($this->db, $sql);
-            if ($result === true) {
-                $message = "User account restored successfully!";
-                echo "<script type='text/javascript'>alert('$message');</script>"; //do javascript alert upon successful restoration
-                echo "<script>window.open('userAdmin.php', '_self');</script>";    //redirect back to useradmin.php
-            } else {
-                echo "Error updating record: " . $this->db->error;
+            //echo $fullname;
+            $checkuser="SELECT * FROM USERS where fullname= '$fullname'";
+            $result=mysqli_query($this->db, $checkuser);
+            $row = $result->num_rows;
+            if ($row == 1) { //check if user exists in db
+                $sql="UPDATE USERS SET status= 1  WHERE fullname= '$fullname'";
+                //echo $sql;
+                $result=mysqli_query($this->db, $sql);
+                if ($result === true) {
+                    $message = "User account restored successfully!";
+                    echo "<script type='text/javascript'>alert('$message');</script>"; //do javascript alert upon successful restoration
+                    echo "<script>window.open('userAdmin.php', '_self');</script>";    //redirect back to useradmin.php
+                } else {
+                    echo "Error updating record: " . $this->db->error;
+                }
+            } else {// if user doesn't exist, echo error msg and redirect back to userAdmin.php
+                $message = "Such user account does not exist!";
+                echo "<script type='text/javascript'>alert('$message');</script>";
+                echo "<script>window.open('userAdmin.php', '_self');</script>";
             }
-        } else {
-            return false;
         }
     }
 }
-
-?>
