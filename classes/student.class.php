@@ -65,6 +65,7 @@ class Student extends User
                 $status = $row["status"];
 
                 echo '<tr> 
+                  <td>'.$post_id.'</td>
                   <td>'.$content.'</td> 
                   <td>'.$upvote.'</td> 
                   <td>'.$date.'</td> 
@@ -94,18 +95,22 @@ class Student extends User
     }
     public function getContent($id)
     {
-        $userid = $_POST['postid'];
-        $sql="SELECT content FROM POST WHERE users_id = '$id' AND id = '$userid'";
+        
+        //$name = mysqli_real_escape_string($this->db,$_POST["postid"]);;
+        $sql="SELECT content FROM POST WHERE users_id = '$id'";
         $result = mysqli_query($this->db, $sql);
         $user_data = mysqli_fetch_array($result);
         echo $user_data['content'];
+        
     }
     public function getId($id)
     {
-        $sql="SELECT id FROM POST WHERE users_id=$id";
+        if($_POST["post_id"] != ''){
+        $sql="SELECT id FROM POST WHERE id = '".$_POST["post_id"]."'";
         $result = mysqli_query($this->db, $sql);
         $user_data = mysqli_fetch_array($result);
         echo $user_data['id'];
     }
+}
 
 }

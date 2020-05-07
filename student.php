@@ -215,7 +215,7 @@ function closePost(){
          <div class = "modal-body">
          <form method="post" id="insert_form">  
                           <label>Question:</label>
-                          <input type="text" id="postid" name="postid" value="<?php $student->getId($id); ?>">
+                          <input type="text" id="post_id" name="post_id" value="<?php $student->getId($id); ?>" />
                           <textarea rows="10"  cols="50" type="text" class="form-control"><?php $student->getContent($id); ?></textarea> 
                      </form>
          </div>
