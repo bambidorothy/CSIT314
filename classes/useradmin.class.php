@@ -64,7 +64,7 @@ class UserAdmin extends User
                 //echo $sql;
                 $result=mysqli_query($this->db, $sql);
                 if ($result === true) {
-                    $message = "User account restored successfully!";
+                    $message = "User account suspended successfully!";
                     echo "<script type='text/javascript'>alert('$message');</script>"; //do javascript alert upon successful restoration
                     echo "<script>window.open('userAdmin.php', '_self');</script>";    //redirect back to useradmin.php
                 } else {
