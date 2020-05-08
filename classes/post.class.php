@@ -10,11 +10,7 @@ class Post {
             exit;
         }
     }
-
-    //create a Post
-    //display Post info
-    //cast upvotes
-
-
+ //create answer for post
+ //cast upvotes for question
 }
 ?>

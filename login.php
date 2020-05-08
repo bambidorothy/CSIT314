@@ -4,17 +4,16 @@ include_once 'classes/user.class.php'; //import /classes/user.class.php
 session_start();
 
 $user = new User(); //create a User object (instantiation)
-
 if (isset($_REQUEST['submit'])) {//get form values on form submission
     extract($_REQUEST);
     $login = $user->validate_login($email, $password); //runs validate_login function from /classes/user.class.php
-    $id = $_SESSION['id'];
     
     if ($login) {//if login is valid
         // Login Success
+        $id = $_SESSION['id'];
         $role = $user->get_role($id);
         $status = $user->get_status($id);
-        $id = $_SESSION['id'];
+        
         
 
         if ($status == 0) {//check if user account status is set to 0
@@ -32,7 +31,8 @@ if (isset($_REQUEST['submit'])) {//get form values on form submission
         }
     } else {
         // Login Failed
-        echo 'Wrong username or password'; //echo failed login
+        $message = "Wrong email or password!";
+        echo "<script type='text/javascript'>alert('$message');</script>"; //echo failed login
     }
 }
 ?>

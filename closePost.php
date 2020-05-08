@@ -1,6 +1,7 @@
 <?php
-include 'classes/student.class.php';
+require_once 'db_config.php';
+require_once 'classes/student.class.php';
 $post_id = $_GET['post_id'];
-$student = new Student();
-$student->markPostClose($post_id);
+$studentuser = new Student();
+$studentuser->markPostClose($post_id);
 ?>

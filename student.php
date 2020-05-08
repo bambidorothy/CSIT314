@@ -62,6 +62,15 @@ if(isset($_POST["createPostbtn"]))
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+    
+        <script type="text/javascript"> //script for closePost() function 
+function closePost(){
+
+     $.ajax({url: "closePost.php", success: function(result){
+        alert(result);
+    }});
+}
+</script>
         
     <title>Home</title>
 </head>
@@ -76,7 +85,7 @@ if(isset($_POST["createPostbtn"]))
         <div class="collapse navbar-collapse" id="navbarToggler">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
-                    <a class="nav-link" href="student.php">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Topics</a>
@@ -119,6 +128,7 @@ if(isset($_POST["createPostbtn"]))
         <form id="post" method="post">
                     <div class="form-group">
                         <label >My question:</label>
+                        <p id="userid" hidden><?php $student->getId($id)?></p>
                         <textarea rows="10"  cols="50" type="text" class="form-control" name="postQuestion"></textarea>
                     </div>
                     <div class="form-group">
@@ -164,7 +174,7 @@ if(isset($_POST["createPostbtn"]))
   <!--start of manage post tab--> 
   <div class="tab-pane fade" id="nav-managepost" role="tabpanel" aria-labelledby="nav-manage-post">
   <h1>Your Posts</h1>
-  <table>
+  <table class="table table-responsive">
   <tr>
     <th>Content</th>
     <th>Upvotes</th>
@@ -176,7 +186,7 @@ if(isset($_POST["createPostbtn"]))
   </table>
   <hr>
   <h1>Public Posts</h1>
-  <table>
+  <table class="table table-responsive">
   <tr>
     <th>Content</th>
     <th>Upvotes</th>
@@ -187,6 +197,48 @@ if(isset($_POST["createPostbtn"]))
   </tr>
   </div>
 </div>
+<div class = "modal fade" id = "myModal" tabindex = "-1" role = "dialog" 
+   aria-labelledby = "myModalLabel" aria-hidden = "true">
+   
+   <div class = "modal-dialog">
+      <div class = "modal-content">
+         
+         <div class = "modal-header">
+
+            
+            <h4 class = "modal-title" id = "myModalLabel">
+               Edit Question
+            </h4>
+            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true">
+                  &times;
+            </button>
+         </div>
+         <div class = "modal-body">
+         <form method="post" id="insert_form">  
+                          <label>Question:</label>
+                          <input type="text" id="post_id" name="post_id" value="<?php $student->getId($id); ?>" />
+                          <textarea rows="10"  cols="50" type="text" class="form-control"><?php $student->getContent($id); ?></textarea> 
+                     </form>
+         </div>
+         
+         <div class = "modal-footer">
+            <button type = "button" class = "btn btn-danger" data-dismiss = "modal">
+               Close
+            </button>
+            
+            <button type = "button" class = "btn btn-primary">
+               Update
+            </button>
+         </div>
+         
+      </div><!-- /.modal-content -->
+   </div><!-- /.modal-dialog -->
+  
+</div>
+
+                    </div>
+                </div>    
+            </div>'
             </div> <!--end of col-->
         </div> <!--end of row-->
     </div>
