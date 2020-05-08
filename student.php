@@ -153,21 +153,35 @@ function closePost(){
                         <input type="email" class="form-control" disabled id="role" value="<?php $user->display_role($id); ?>">
                     </div>
         </form>
-        <form id="changePwd" action="">
+        <form id="changeProfile" action="changeProfile.php">
+        <legend>Update my Profile</legend>
+        <div class="form-group">
+                        <label for="newfullname">New Full Name</label>
+                        <input type="text" required class="form-control"  id="newfullname" >
+            </div>
+            <div class="form-group">
+                        <label for="newemail">New Email</label>
+                        <input type="email" required class="form-control"  id="newemail" >
+            </div>
+            <button type="submit" class="btn btn-danger">Update Profile Details</button>
+        </form>
+        <hr>
+        <!--START OF CHANGE PASSWORD FORM-->
+        <form id="changePwd" name="changePwd" onSubmit="return validatePassword()" method="post" action="changePwd.php">
         <legend>Update my Password</legend>
         <div class="form-group">
                         <label for="currentpassword">Current Password</label>
-                        <input type="currentpassword" class="form-control"  id="currentpassword" >
+                        <input type="password" name="currentpassword" class="form-control"  id="currentpassword" >
             </div>
             <div class="form-group">
                         <label for="password">New Password</label>
-                        <input type="password" class="form-control"  id="password" >
+                        <input type="password" name="password" class="form-control"  id="password" >
             </div>
             <div class="form-group">
                         <label for="confirmpassword">Confirm Password</label>
-                        <input type="confirmpassword" class="form-control"  id="confirmpassword" >
+                        <input type="password" name="confirmpassword" class="form-control"  id="confirmpassword" >
             </div>
-            <button type="submit" class="btn btn-danger">Update Password</button>
+            <button type="submit" name="SubmitPwd" class="btn btn-danger">Update Password</button>
         </form>
   </div>
   <!--start of manage post tab--> 
@@ -242,8 +256,40 @@ function closePost(){
         </div> <!--end of row-->
     </div>
     <!--end of container-->
-    <!--link main.js-->
-    <script src="main.js"></script>
+    <!--validatePassword() script-->
+    <script>
+    function validatePassword() {
+    currentpassword,password,confirmpassword,output = true;
+
+    currentpassword = document.changePwd.currentpassword;
+    password = document.changePwd.password;
+    confirmpassword = document.changePwd.confirmpassword;
+
+    if(!currentpassword.value) {
+    alert("Please enter your current password");
+    currentpassword.focus();
+    output = false;
+    }
+    else if(!password.value) {
+    alert("Please enter your new password");
+    password.focus();
+    output = false;
+    }
+    else if(!confirmpassword.value) {
+    alert("Please confirm your new password");
+    confirmpassword.focus();
+    output = false;
+    }
+    if(password.value != confirmpassword.value) {
+    password.value = "";
+    confirmpassword.value="";
+    alert("Field input in new password and confirm password do not match!");
+    password.focus();
+    output = false;
+    }
+    return output;
+    }
+</script>
     <footer class="fixed-bottom">
         <div class="copyright">
             &copy 2020 -Team Bambi

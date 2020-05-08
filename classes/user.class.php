@@ -1,6 +1,7 @@
 <?php
 
-class User {//create User class
+class User
+{//create User class
 
     public function __construct() // constructor runs when object is created
     {
@@ -32,8 +33,9 @@ class User {//create User class
         }
     }
     /*get user account status */
-    public function get_status($id){
-         $sql="SELECT status FROM users WHERE id = $id";
+    public function get_status($id)
+    {
+        $sql="SELECT status FROM users WHERE id = $id";
         $result = mysqli_query($this->db, $sql);
         $user_data = mysqli_fetch_array($result);
         //echo $user_data['status'];
@@ -66,9 +68,8 @@ class User {//create User class
         $result = mysqli_query($this->db, $sql);
         
         $user_data = mysqli_fetch_array($result);
-       // echo $user_data['role'];
+        // echo $user_data['role'];
         return $user_data['role'];
-        
     }
     /*display user role */
     public function display_role($id)
@@ -78,12 +79,35 @@ class User {//create User class
         $user_data = mysqli_fetch_array($result);
         echo $user_data['role'];
         return $user_data['role'];
-        
     }
+
+    public function changePwd($id)
+    {
+        if (isset($_POST['SubmitPwd'])) {
+            $userid=$id;
+            $oldpass=$_POST['currentpassword'];
+            $newpassword=$_POST['password'];
+            //echo $oldpass;
+            //echo $newpassword;
+            $sql=mysqli_query($this->db, "SELECT password FROM USERS where password='$oldpass' && id='$userid'");
+            $num=mysqli_fetch_array($sql);
+            if ($num>0) {//if query executed has returned with row results
+                $newsql="UPDATE USERS set password='$newpassword' where id='$userid'";
+                $result=mysqli_query($this->db,$newsql);
+                header('Location: ' . $_SERVER['HTTP_REFERER']); //redirect respective user to their profile page (go back to previous page)
+                $message = "User password has been updated successfully!";
+                echo "<script type='text/javascript'>alert('$message');</script>";
+
+            } else {// if user input password does not match password in db record
+                $message = "Current User password does not match record in database!";
+                echo "<script type='text/javascript'>alert('$message');</script>";
+            }
+        } 
+    }
+
     /*** starting the session ***/
     public function get_session($id)
     {
-      
         return $_SESSION['login'];
     }
     /*logging user out and destroying the session */
@@ -92,6 +116,4 @@ class User {//create User class
         $_SESSION['login'] = false;
         session_destroy();
     }
-
 }
-?>
