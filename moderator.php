@@ -129,17 +129,17 @@ if (isset($_GET['q'])) { //get q variable to logout
                             </div>
                         </form>
                         <!--START OF UPDATE PROFILE FORM-->
-                        <form id="changeProfile" action="changeProfile.php">
+                        <form id="changeProfile" action="changeProfile.php" method="post">
                             <legend>Update my Profile</legend>
                             <div class="form-group">
                                 <label for="newfullname">New Full Name</label>
-                                <input type="text" required class="form-control" id="newfullname">
+                                <input type="text" required class="form-control" name="newfullname" id="newfullname">
                             </div>
                             <div class="form-group">
                                 <label for="newemail">New Email</label>
-                                <input type="email" required class="form-control" id="newemail">
+                                <input type="email" required class="form-control" name="newemail" id="newemail">
                             </div>
-                            <button type="submit" class="btn btn-danger">Update Profile Details</button>
+                            <button type="submit" name="SubmitProfile" class="btn btn-danger">Update Profile Details</button>
                         </form>
                         <hr>
                         <!--START OF CHANGE PASSWORD FORM-->
