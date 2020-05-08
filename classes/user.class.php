@@ -80,7 +80,24 @@ class User
         echo $user_data['role'];
         return $user_data['role'];
     }
-
+    /*change user profile */
+    public function changeProfile($id)
+    {
+        if (isset($_POST['SubmitProfile'])) {
+            $userid=$id;
+            $fullname =$_POST['newfullname'];
+            $email =$_POST['newemail'];
+            $sql="UPDATE USERS set fullname='$fullname', email='$email' WHERE id='$id'";
+            $result=mysqli_query($this->db, $sql);
+            if ($result === true) {
+                $message = "Updated user profile successfully!";
+                echo "<script type='text/javascript'>alert('$message'); javascript:history.go(-1);</script>";
+            } else {
+                echo "Error updating record: " . $this->db->error;
+            }
+        }
+    }
+    /*change user password */
     public function changePwd($id)
     {
         if (isset($_POST['SubmitPwd'])) {
@@ -93,14 +110,14 @@ class User
             $num=mysqli_fetch_array($sql);
             if ($num>0) {//if query executed has returned with row results
                 $newsql="UPDATE USERS set password='$newpassword' where id='$userid'";
-                $result=mysqli_query($this->db,$newsql);
+                $result=mysqli_query($this->db, $newsql);
                 $message = "User password has been updated successfully!";
                 echo "<script type='text/javascript'>alert('$message'); javascript:history.go(-1);</script>"; //echo success message and redirect to previous page
             } else {// if user input password does not match password in db record
                 $message = "Old password does not match current database record!";
                 echo "<script type='text/javascript'>alert('$message'); javascript:history.go(-1);</script>"; //echo error message and redirect to previous page
             }
-        } 
+        }
     }
 
     /*** starting the session ***/
