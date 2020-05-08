@@ -94,13 +94,11 @@ class User
             if ($num>0) {//if query executed has returned with row results
                 $newsql="UPDATE USERS set password='$newpassword' where id='$userid'";
                 $result=mysqli_query($this->db,$newsql);
-                header('Location: ' . $_SERVER['HTTP_REFERER']); //redirect respective user to their profile page (go back to previous page)
                 $message = "User password has been updated successfully!";
-                echo "<script type='text/javascript'>alert('$message');</script>";
-
+                echo "<script type='text/javascript'>alert('$message'); javascript:history.go(-1);</script>"; //echo success message and redirect to previous page
             } else {// if user input password does not match password in db record
-                $message = "Current User password does not match record in database!";
-                echo "<script type='text/javascript'>alert('$message');</script>";
+                $message = "Old password does not match current database record!";
+                echo "<script type='text/javascript'>alert('$message'); javascript:history.go(-1);</script>"; //echo error message and redirect to previous page
             }
         } 
     }
