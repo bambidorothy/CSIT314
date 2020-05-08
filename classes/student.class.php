@@ -10,8 +10,8 @@ class Student extends User
     //display a list of all Posts
     public function createPost($id,$question,$postDate,$postTime)
     {
-        $sql="INSERT INTO post(users_id,content,upvote,date,time) 
-                                    VALUES('$id','$question',0,'$postDate','$postTime')";
+        $sql="INSERT INTO post(users_id,content,upvote,date,time,status) 
+                                    VALUES('$id','$question',0,'$postDate','$postTime',1)";
 
         mysqli_query($this->db, $sql);
 

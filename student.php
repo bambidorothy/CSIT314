@@ -23,6 +23,7 @@ if (isset($_GET['q'])){ //get q variable to logout
 
 //create post
 //=======================================================================================
+date_default_timezone_set("Asia/Singapore");
 if(isset($_POST["createPostbtn"]))
 {
     $question;
