@@ -4,37 +4,34 @@ include_once 'classes/user.class.php'; //import /classes/user.class.php
 include_once 'classes/student.class.php'; //import /classes/student.class.php
 
 session_start();
-$user = new User(); 
+$user = new User();
 $student = new Student();
 $id = $_SESSION['id']; //store session id into $id
 
-if (!$user->get_session($id)){ //if user is not logged in
+if (!$user->get_session($id)) { //if user is not logged in
  header("location:login.php"); //redirect to login.php *this also disables access to index.php from browser url*
 }
 
 if ($user->get_role($id) !== "student") {
-header("location:error.php");
+    header("location:error.php");
 }
 
-if (isset($_GET['q'])){ //get q variable to logout
+if (isset($_GET['q'])) { //get q variable to logout
  $user->user_logout(); //log user out with session destroy
  header("location:login.php");//redirect to login.php after logout
- }
+}
 
 //create post
 //=======================================================================================
 date_default_timezone_set("Asia/Singapore");
-if(isset($_POST["createPostbtn"]))
-{
+if (isset($_POST["createPostbtn"])) {
     $question;
     require "db_connection.php";
-    $question = mysqli_real_escape_string($conn,$_POST["postQuestion"]);
+    $question = mysqli_real_escape_string($conn, $_POST["postQuestion"]);
     $postDate = date("Y-m-d");
     $postTime = date("h:i a");
     require_once "classes\student.class.php";
-    $student->createPost($id,$question,$postDate,$postTime);
-
-
+    $student->createPost($id, $question, $postDate, $postTime);
 }
 
 ?>
@@ -62,16 +59,6 @@ if(isset($_POST["createPostbtn"]))
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-    
-        <script type="text/javascript"> //script for closePost() function 
-function closePost(){
-
-     $.ajax({url: "closePost.php", success: function(result){
-        alert(result);
-    }});
-}
-</script>
-        
     <title>Home</title>
 </head>
 
@@ -154,6 +141,7 @@ function closePost(){
                         <input type="email" class="form-control" disabled id="role" value="<?php $user->display_role($id); ?>">
                     </div>
         </form>
+        <!--START OF UPDATE PROFILE FORM-->
         <form id="changeProfile" action="changeProfile.php">
         <legend>Update my Profile</legend>
         <div class="form-group">
@@ -291,6 +279,18 @@ function closePost(){
     return output;
     }
 </script>
+<script>
+        // Javascript to enable link to tab
+    var url = document.location.toString();
+    if (url.match('#')) {
+        $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
+    } 
+
+    // Change hash for page-reload
+    $('.nav-tabs a').on('shown.bs.tab', function (e) {
+        window.location.hash = e.target.hash;
+    })
+    </script>
     <footer class="fixed-bottom">
         <div class="copyright">
             &copy 2020 -Team Bambi

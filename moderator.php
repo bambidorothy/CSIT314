@@ -2,20 +2,20 @@
 include 'db_config.php'; //import db_config.php
 include_once 'classes/user.class.php'; //import /classes/user.class.php
 session_start();
-$user = new User(); 
+$user = new User();
 $id = $_SESSION['id']; //store session id into $id
-if (!$user->get_session($id)){ //if user is not logged in
+if (!$user->get_session($id)) { //if user is not logged in
  header("location:login.php"); //redirect to login.php *this also disables access to index.php from browser url*
 }
 
 if ($user->get_role($id) !== "moderator") {
     header("location:error.php");
-    }
+}
 
-if (isset($_GET['q'])){ //get q variable to logout
+if (isset($_GET['q'])) { //get q variable to logout
  $user->user_logout(); //log user out with session destroy
  header("location:login.php");//redirect to login.php after logout
- }
+}
 ?>
 
 <!DOCTYPE html>
@@ -33,14 +33,26 @@ if (isset($_GET['q'])){ //get q variable to logout
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+    <script>
+        // Javascript to enable link to tab
+    var url = document.location.toString();
+    if (url.match('#')) {
+        $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
+    } 
+
+    // Change hash for page-reload
+    $('.nav-tabs a').on('shown.bs.tab', function (e) {
+        window.location.hash = e.target.hash;
+    })
+    </script>
     <title>Home</title>
 </head>
 
@@ -116,22 +128,37 @@ if (isset($_GET['q'])){ //get q variable to logout
                                     value="<?php $user->display_role($id); ?>">
                             </div>
                         </form>
-
-                        <form id="changePwd" action="">
+                        <!--START OF UPDATE PROFILE FORM-->
+                        <form id="changeProfile" action="changeProfile.php">
+                            <legend>Update my Profile</legend>
+                            <div class="form-group">
+                                <label for="newfullname">New Full Name</label>
+                                <input type="text" required class="form-control" id="newfullname">
+                            </div>
+                            <div class="form-group">
+                                <label for="newemail">New Email</label>
+                                <input type="email" required class="form-control" id="newemail">
+                            </div>
+                            <button type="submit" class="btn btn-danger">Update Profile Details</button>
+                        </form>
+                        <hr>
+                        <!--START OF CHANGE PASSWORD FORM-->
+                        <form id="changePwd" name="changePwd" onSubmit="return validatePassword()" method="post"
+                            action="changePwd.php">
                             <legend>Update my Password</legend>
                             <div class="form-group">
                                 <label for="currentpassword">Current Password</label>
-                                <input type="currentpassword" class="form-control" id="currentpassword">
+                                <input type="password" name="currentpassword" class="form-control" id="currentpassword">
                             </div>
                             <div class="form-group">
                                 <label for="password">New Password</label>
-                                <input type="password" class="form-control" id="password">
+                                <input type="password" name="password" class="form-control" id="password">
                             </div>
                             <div class="form-group">
                                 <label for="confirmpassword">Confirm Password</label>
-                                <input type="confirmpassword" class="form-control" id="confirmpassword">
+                                <input type="password" name="confirmpassword" class="form-control" id="confirmpassword">
                             </div>
-                            <button type="submit" class="btn btn-danger">Update Password</button>
+                            <button type="submit" name="SubmitPwd" class="btn btn-danger">Update Password</button>
                         </form>
                     </div>
                 </div>
@@ -140,12 +167,56 @@ if (isset($_GET['q'])){ //get q variable to logout
             <!--end of row-->
         </div>
         <!--end of container-->
-        <!--link main.js-->
-        <script src="main.js"></script>
-        <footer class="fixed-bottom">
+    <!--validatePassword() script-->
+    <script>
+    function validatePassword() {
+    currentpassword,password,confirmpassword,output = true;
+
+    currentpassword = document.changePwd.currentpassword;
+    password = document.changePwd.password;
+    confirmpassword = document.changePwd.confirmpassword;
+
+    if(!currentpassword.value) {
+    alert("Please enter your current password");
+    currentpassword.focus();
+    output = false;
+    }
+    else if(!password.value) {
+    alert("Please enter your new password");
+    password.focus();
+    output = false;
+    }
+    else if(!confirmpassword.value) {
+    alert("Please confirm your new password");
+    confirmpassword.focus();
+    output = false;
+    }
+    if(password.value != confirmpassword.value) {
+    password.value = "";
+    confirmpassword.value="";
+    alert("Field input in new password and confirm password do not match!");
+    password.focus();
+    output = false;
+    }
+    return output;
+    }
+</script>
+<script>
+        // Javascript to enable link to tab
+    var url = document.location.toString();
+    if (url.match('#')) {
+        $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
+    } 
+
+    // Change hash for page-reload
+    $('.nav-tabs a').on('shown.bs.tab', function (e) {
+        window.location.hash = e.target.hash;
+    })
+    </script>
+<!--         <footer class="fixed-bottom">
             <div class="copyright">
                 &copy 2020 -Team Bambi
-            </div>
+            </div> -->
         </footer>
 </body>
 
