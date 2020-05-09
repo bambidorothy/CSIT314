@@ -83,7 +83,30 @@ if (isset($_GET['q'])){ //get q variable to logout
     <div class="container">
         <div class="row">
             <div class="col">
-            <button class = "btn btn-primary" data-toggle = "modal" data-target = "#myModal">Edit</button>
+            <table class="table table-responsive">
+                <tr>
+                    <th><h1>Question:</h1></th>
+                </tr>
+                <tr>
+            <td><h3><?php $student->getContent($id); ?></h3></td>
+            <td><button class = "btn btn-primary" data-toggle = "modal" style="width:7em;" data-target = "#myModal">Edit</button></td>
+            <table>
+            <table class="table table-responsive">
+                <tr>
+                    <th><h2>Answers:</h2></th>
+                </tr>
+                <?php $student->getAnswer(); ?>
+            <table>
+            <form id="answer" method="post">
+                    <div class="form-group">
+                        <label >Answer:</label>
+                        <textarea rows="10"  cols="50" type="text" class="form-control" name="ansQuestion"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" name="ansPostbtn">Submit</button>
+                    </div>
+                   
+        </form>
             <div class = "modal fade" id = "myModal" tabindex = "-1" role = "dialog" 
    aria-labelledby = "myModalLabel" aria-hidden = "true">
    

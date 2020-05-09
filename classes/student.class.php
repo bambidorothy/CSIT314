@@ -100,4 +100,30 @@ class Student extends User
         echo $user_data['content'];
         
     }
+    public function getAnswer()
+    {
+        $postid = $_GET['post_id'];
+        $sql="SELECT content FROM ANSWER WHERE id='$postid'";
+        $result = mysqli_query($this->db, $sql);
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $answer = $row["content"];
+
+                echo '<tr>
+                <td><h5>'.$answer.'<h5></td>
+                </tr>';
+            }
+        }
+        
+    }
+    public function ansPost($id,$question,$postDate,$postTime)
+    {
+        $sql="INSERT INTO post(users_id,content,upvote,date,time,status) 
+                                    VALUES('$id','$question',0,'$postDate','$postTime',1)";
+
+        mysqli_query($this->db, $sql);
+
+        echo "<script type='text/javascript'>alert('Question has been posted successfully');</script>;";
+
+    }
 }
