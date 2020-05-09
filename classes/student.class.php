@@ -103,15 +103,28 @@ class Student extends User
     public function getAnswer()
     {
         $postid = $_GET['post_id'];
-        $sql="SELECT content FROM ANSWER WHERE id='$postid'";
+        $sql="SELECT id, post_id, content, upvote, date, time FROM ANSWERS WHERE post_id='$postid'";
         $result = mysqli_query($this->db, $sql);
+        $row=$result->num_rows;
+/*         echo $sql;
+        echo '<br>';
+        echo $row; */
         if ($result) {
             while ($row = $result->fetch_assoc()) {
-                $answer = $row["content"];
+                $id = $row["id"];
+                $post_id = $row["post_id"];
+                $content = $row["content"];
+                $upvote = $row["upvote"];
+                $date = $row["date"];
+                $time = $row["time"];
 
-                echo '<tr>
-                <td><h5>'.$answer.'<h5></td>
-                </tr>';
+                echo '<tr> 
+                  <td>'.$id.'</td>
+                  <td>'.$content.'</td> 
+                  <td>'.$upvote.'</td> 
+                  <td>'.$date.'</td> 
+                  <td>'.$time.'</td>
+              </tr>';
             }
         }
         
