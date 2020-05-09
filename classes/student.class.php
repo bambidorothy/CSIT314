@@ -51,13 +51,14 @@ class Student extends User
      //display list of Posts by Student
     public function displayPosts($id)
     {
-        $sql="SELECT id, content, upvote, date, time, status FROM POST WHERE users_id = $id";
+        $sql="SELECT id, users_id, content, upvote, date, time, status FROM POST WHERE users_id = $id";
         $result=mysqli_query($this->db, $sql);
 
 
         if ($result) {
             while ($row = $result->fetch_assoc()) {
                 $post_id = $row["id"];
+                $user_id = $row["users_id"];
                 $content = $row["content"];
                 $upvote = $row["upvote"];
                 $date = $row["date"];
@@ -72,8 +73,7 @@ class Student extends User
                   <td>'.$time.'</td>
                   <td>'.$status.'</td>
                   <td><a href="closePost.php?post_id='.$post_id.'" class="btn btn-danger" style="width:10em;">Mark as Closed</a></td>
-                  <td><a href="detailPost.php" class="btn btn-success" style="width:7em;">View Post</a></td>
-                  <td><button class = "btn btn-primary" data-toggle = "modal" data-target = "#myModal">Edit</button></td>
+                  <td><a href="detailPost.php?post_id='.$post_id.'" class="btn btn-success" style="width:7em;">View Post</a></td>
               </tr>';
             }
         }
@@ -93,22 +93,11 @@ class Student extends User
     }
     public function getContent($id)
     {
-        
-        //$name = mysqli_real_escape_string($this->db,$_POST["postid"]);;
-        $sql="SELECT content FROM POST WHERE users_id = '$id'";
+        $postid = $_GET['post_id'];
+        $sql="SELECT content FROM POST WHERE users_id = '$id' AND id='$postid'";
         $result = mysqli_query($this->db, $sql);
         $user_data = mysqli_fetch_array($result);
         echo $user_data['content'];
         
     }
-    public function getId($id)
-    {
-        if($_POST["post_id"] != ''){
-        $sql="SELECT id FROM POST WHERE id = '".$_POST["post_id"]."'";
-        $result = mysqli_query($this->db, $sql);
-        $user_data = mysqli_fetch_array($result);
-        echo $user_data['id'];
-    }
-}
-
 }

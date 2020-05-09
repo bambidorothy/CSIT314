@@ -115,7 +115,6 @@ if (isset($_POST["createPostbtn"])) {
         <form id="post" method="post">
                     <div class="form-group">
                         <label >My question:</label>
-                        <p id="userid" hidden><?php $student->getId($id)?></p>
                         <textarea rows="10"  cols="50" type="text" class="form-control" name="postQuestion"></textarea>
                     </div>
                     <div class="form-group">
@@ -199,48 +198,10 @@ if (isset($_POST["createPostbtn"])) {
   </tr>
   </div>
 </div>
-<div class = "modal fade" id = "myModal" tabindex = "-1" role = "dialog" 
-   aria-labelledby = "myModalLabel" aria-hidden = "true">
-   
-   <div class = "modal-dialog">
-      <div class = "modal-content">
-         
-         <div class = "modal-header">
-
-            
-            <h4 class = "modal-title" id = "myModalLabel">
-               Edit Question
-            </h4>
-            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true">
-                  &times;
-            </button>
-         </div>
-         <div class = "modal-body">
-         <form method="post" id="insert_form">  
-                          <label>Question:</label>
-                          <input type="text" id="post_id" name="post_id" value="<?php $student->getId($id); ?>" />
-                          <textarea rows="10"  cols="50" type="text" class="form-control"><?php $student->getContent($id); ?></textarea> 
-                     </form>
-         </div>
-         
-         <div class = "modal-footer">
-            <button type = "button" class = "btn btn-danger" data-dismiss = "modal">
-               Close
-            </button>
-            
-            <button type = "button" class = "btn btn-primary">
-               Update
-            </button>
-         </div>
-         
-      </div><!-- /.modal-content -->
-   </div><!-- /.modal-dialog -->
-  
-</div>
 
                     </div>
                 </div>    
-            </div>'
+            </div>
             </div> <!--end of col-->
         </div> <!--end of row-->
     </div>
