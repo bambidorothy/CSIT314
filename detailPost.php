@@ -18,6 +18,16 @@ if (isset($_GET['q'])){ //get q variable to logout
  $user->user_logout(); //log user out with session destroy
  header("location:login.php");//redirect to login.php after logout
  }
+ date_default_timezone_set("Asia/Singapore");
+ if (isset($_POST["updatebtn"])) {
+    $newcontent;
+    require "db_connection.php";
+    $newcontent = mysqli_real_escape_string($conn, $_POST["updateQ"]);
+    //$postDate = date("Y-m-d");
+    //$postTime = date("h:i a");
+    require_once "classes\student.class.php";
+    $student->updatePost($id,$newcontent);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -124,9 +134,12 @@ if (isset($_GET['q'])){ //get q variable to logout
             </button>
          </div>
          <div class = "modal-body">
-         <form method="post" id="insert_form">  
+         <form id="updateQuestion" action="updateQuestion.php" method="post">
+         <div class="form-group">
                           <label>Question:</label>
-                          <textarea rows="10"  cols="50" type="text" class="form-control"><?php $student->getContent($id); ?></textarea> 
+                          <textarea rows="10"  cols="50" type="text" class="form-control" name="update"><?php $student->getContent($id); ?></textarea> 
+                          <button type = "button" class = "btn btn-primary" name="updatebtn">Update</button>
+                    </div>
                      </form>
          </div>
          
@@ -135,9 +148,7 @@ if (isset($_GET['q'])){ //get q variable to logout
                Close
             </button>
             
-            <button type = "button" class = "btn btn-primary">
-               Update
-            </button>
+            
          </div>
          
       </div><!-- /.modal-content -->
