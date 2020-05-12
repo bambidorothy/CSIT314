@@ -7,7 +7,7 @@ class Student extends User
 { //create Student class
     public $post_id;
 
-    //display a list of all Posts
+    //create post
     public function createPost($id,$question,$postDate,$postTime)
     {
         $sql="INSERT INTO post(users_id,content,upvote,date,time,status) 
@@ -100,6 +100,7 @@ class Student extends User
         echo $user_data['content'];
         
     }
+    /*display a table of ans related by post_id */
     public function getAnswer()
     {
         $postid = $_GET['post_id'];
@@ -131,7 +132,7 @@ class Student extends User
     }
     public function ansPost($id,$question,$postDate,$postTime)
     {
-        $sql="INSERT INTO post(users_id,content,upvote,date,time,status) 
+        $sql="INSERT INTO ANSWERS(users_id,content,upvote,date,time,status) 
                                     VALUES('$id','$question',0,'$postDate','$postTime',1)";
 
         mysqli_query($this->db, $sql);
