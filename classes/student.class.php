@@ -130,6 +130,21 @@ class Student extends User
         }
         
     }
+    public function updatePost($id){
+        if (isset($_POST['updatebtn'])) {
+        $post_id = $_GET['post_id'];
+        $newcontent = $_POST['update'];
+        $newsql= "UPDATE POST SET content='$newcontent' WHERE users_id='$id' AND id='$post_id'";
+        $result=mysqli_query($this->db, $newsql);
+        if ($result === true) {
+            $message = "Updated successfully!";
+            echo "<script type='text/javascript'>alert('$message');</script>";
+        } else {
+            $message = "Nothing Happened";
+            echo "<script type='text/javascript'>alert('$message');</script>";
+        }
+    }
+    }
     public function ansPost($id,$question,$postDate,$postTime)
     {
         $sql="INSERT INTO ANSWERS(users_id,content,upvote,date,time,status) 
