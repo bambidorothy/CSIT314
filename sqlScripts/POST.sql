@@ -6,6 +6,7 @@ create table POST (
 	date DATE,
 	time VARCHAR(50),
 	status BIT(1),
+	comment VARCHAR(100),
 	PRIMARY KEY (id),
 	FOREIGN KEY (users_id) REFERENCES USERS(id)
 );
