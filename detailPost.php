@@ -19,14 +19,14 @@ if (isset($_GET['q'])){ //get q variable to logout
  header("location:login.php");//redirect to login.php after logout
  }
  date_default_timezone_set("Asia/Singapore");
- if (isset($_POST["updatebtn"])) {
-    $newcontent;
+ if (isset($_POST["ansPostbtn"])) {
+    $answer;
     require "db_connection.php";
-    $newcontent = mysqli_real_escape_string($conn, $_POST["updateQ"]);
-    //$postDate = date("Y-m-d");
-    //$postTime = date("h:i a");
+    $answer = mysqli_real_escape_string($conn, $_POST["ansQuestion"]);
+    $postDate = date("Y-m-d");
+    $postTime = date("h:i a");
     require_once "classes\student.class.php";
-    $student->updatePost($id,$newcontent);
+    $student->ansPost($answer,$postDate,$postTime);
 }
 ?>
 <!DOCTYPE html>

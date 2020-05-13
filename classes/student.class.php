@@ -144,14 +144,15 @@ class Student extends User
         }
     }
     }
-    public function ansPost($id,$question,$postDate,$postTime)
+    public function ansPost($answer,$postDate,$postTime)
     {
-        $sql="INSERT INTO post(users_id,content,upvote,date,time,status) 
-                                    VALUES('$id','$question',0,'$postDate','$postTime',1)";
+        $post_id = $_GET['post_id'];
+        $sql="INSERT INTO ANSWERS(post_id,content,upvote,date,time) 
+                                    VALUES('$post_id','$answer',0,'$postDate','$postTime')";
 
         mysqli_query($this->db, $sql);
 
-        echo "<script type='text/javascript'>alert('Question has been posted successfully');</script>;";
+        echo "<script type='text/javascript'>alert('Answer has been posted successfully');</script>;";
 
     }
 }
