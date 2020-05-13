@@ -247,7 +247,7 @@ echo "0 result";
                             </div>
                             <div class="form-group">
                                 <label>Password</label>
-                                <input type="text" class="form-control" name="registerpassword" required>
+                                <input type="password" class="form-control" name="registerpassword" required>
                             </div>
                             <div class="form-group">
                                 <label for="userRole">Example select</label>
