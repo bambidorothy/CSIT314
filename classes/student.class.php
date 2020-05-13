@@ -147,14 +147,9 @@ class Student extends User
     }
     public function ansPost($answer,$postDate,$postTime)
     {
-<<<<<<< HEAD
         $post_id = $_GET['post_id'];
         $sql="INSERT INTO ANSWERS(post_id,content,upvote,date,time) 
                                     VALUES('$post_id','$answer',0,'$postDate','$postTime')";
-=======
-        $sql="INSERT INTO ANSWERS(users_id,content,upvote,date,time,status) 
-                                    VALUES('$id','$question',0,'$postDate','$postTime',1)";
->>>>>>> 56982e5ffe56d2a57459184dfa660526b8e6714a
 
         mysqli_query($this->db, $sql);
 
