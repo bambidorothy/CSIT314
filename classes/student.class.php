@@ -92,7 +92,6 @@ class Student extends User
         if ($result === true) {
             $message = "Post closed successfully!";
             echo "<script type='text/javascript'>alert('$message');</script>"; //do javascript alert upon successful suspension
-            //echo "<div id="closepost" style="display:none;"></div>";
             echo "<script>window.open('student.php', '_self');</script>"; //redirect back to student.php
         } else {
             echo "Error updating record: " . $this->db->error;
