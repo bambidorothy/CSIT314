@@ -73,7 +73,7 @@ class Student extends User
                   <td>'.$date.'</td> 
                   <td>'.$time.'</td>
                   <td>'.$status.'</td>
-                  <td><a href="closePost.php?post_id='.$post_id.'" class="btn btn-danger" style="width:10em;">Mark as Closed</a></td>
+                  <td><div id="closepost"><a href="closePost.php?post_id='.$post_id.'" class="btn btn-danger" style="width:10em;">Mark as Closed</a></div></td>
                   <td><a href="detailPost.php?post_id='.$post_id.'" class="btn btn-success" style="width:7em;">View Post</a></td>
               </tr>';
             }
@@ -88,6 +88,7 @@ class Student extends User
         if ($result === true) {
             $message = "Post closed successfully!";
             echo "<script type='text/javascript'>alert('$message');</script>"; //do javascript alert upon successful suspension
+            echo "<div id="closepost" style="display:none;"></div>";
             echo "<script>window.open('student.php', '_self');</script>"; //redirect back to student.php
         } else {
             echo "Error updating record: " . $this->db->error;
