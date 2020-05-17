@@ -33,6 +33,27 @@ if (isset($_POST["createPostbtn"])) {
     require_once "classes\student.class.php";
     $student->createPost($id, $question, $postDate, $postTime);
 }
+//search 
+//=======================================================================================
+include_once 'db_connection.php';
+if(isset($_POST["searchButton"])){
+    $searchValue = $_POST["searchValue"];
+    $query = "SELECT * FROM 'post' WHERE CONCAT('content') LIKE '%".$searchValue."%'";
+    $serach_result = search($query);
+
+}else{
+    $query = "SELECT * FROM `post`";
+    $search_result = search($query);
+
+
+}
+
+function search($query)
+{
+    $connect = mysqli_connect("localhost","root","","csit314");
+    $filter_result = mysqli_query($connect, $query);
+    return $filter_result;
+}
 
 ?>
 
@@ -85,9 +106,9 @@ if (isset($_POST["createPostbtn"])) {
                 </li>
             </ul>
             <ul class="navbar-nav">
-                <form class="form-inline my-2 my-lg-0 ml-auto">
-                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3" type="submit">Search</button>
+                <form class="form-inline my-2 my-lg-0 ml-auto" method="post">
+                    <input class="form-control" type="text" name="searchValue" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3" name="searchButton" type="submit">Search</button>
                 </form>
                 <li class="nav-item">
                     <a class="nav-link btn btn-outline-light" href="index.php?q=logout">Log Out</a>
