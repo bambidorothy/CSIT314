@@ -40,8 +40,8 @@ class UserAdmin extends User
 
             $sql="SELECT * FROM users WHERE username='$registerusername' OR email='$registeremail'";
             
-            $sql="INSERT INTO users(fullname,username,email,password,role,status) 
-                                        VALUES('$registerfullname','$registerusername','$registeremail','$registerpassword','$registerrole',1 )";
+            $sql="INSERT INTO users(fullname,username,email,password,role,status,participation) 
+                                        VALUES('$registerfullname','$registerusername','$registeremail','$registerpassword','$registerrole',1 ,0)";
             mysqli_query($conn, $sql);
 
             echo "<script type='text/javascript'>alert('Registration successful');</script>;";
