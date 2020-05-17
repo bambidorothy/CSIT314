@@ -6,28 +6,38 @@ session_start();
 $user = new User();
 $student = new Student();
 $id = $_SESSION['id']; //store session id into $id
-if (!$user->get_session($id)){ //if user is not logged in
+if (!$user->get_session($id)) { //if user is not logged in
  header("location:login.php"); //redirect to login.php *this also disables access to index.php from browser url*
 }
 
 if ($user->get_role($id) !== "student") {
-header("location:error.php");
+    header("location:error.php");
 }
 
-if (isset($_GET['q'])){ //get q variable to logout
+if (isset($_GET['q'])) { //get q variable to logout
  $user->user_logout(); //log user out with session destroy
  header("location:login.php");//redirect to login.php after logout
- }
+}
  date_default_timezone_set("Asia/Singapore");
  if (isset($_POST["ansPostbtn"])) {
-    $answer;
-    require "db_connection.php";
-    $answer = mysqli_real_escape_string($conn, $_POST["ansQuestion"]);
-    $postDate = date("Y-m-d");
-    $postTime = date("h:i a");
-    require_once "classes\student.class.php";
-    $student->ansPost($answer,$postDate,$postTime);
-}
+     $answer;
+     require "db_connection.php";
+     $answer = mysqli_real_escape_string($conn, $_POST["ansQuestion"]);
+     $postDate = date("Y-m-d");
+     $postTime = date("h:i a");
+     require_once "classes\student.class.php";
+     $student->ansPost($answer, $postDate, $postTime);
+ }
+ date_default_timezone_set("Asia/Singapore");
+ if (isset($_POST["comPostbtn"])) {
+     $comment;
+     require "db_connection.php";
+     $comment = mysqli_real_escape_string($conn, $_POST["comPost"]);
+     $postDate = date("Y-m-d");
+     $postTime = date("h:i a");
+     require_once "classes\student.class.php";
+     $student->commPost($comment, $postDate, $postTime);
+ }
 ?>
 <!DOCTYPE html>
 <html>
@@ -44,19 +54,20 @@ if (isset($_GET['q'])){ //get q variable to logout
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-        
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+
     <title>View Post</title>
 </head>
+
 <body>
- <!--start of navbar-->
+    <!--start of navbar-->
     <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
             aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,7 +85,8 @@ if (isset($_GET['q'])){ //get q variable to logout
                     <a class="nav-link" href="#">Forums</a>
                 </li>
                 <li class="nav-item mx-3">
-                <a class="nav-link">Welcome, <?php $user->get_fullname($id); ?>!</a> <!--display's user fullname-->
+                    <a class="nav-link">Welcome, <?php $user->get_fullname($id); ?>!</a>
+                    <!--display's user fullname-->
                 </li>
             </ul>
             <ul class="navbar-nav">
@@ -93,68 +105,142 @@ if (isset($_GET['q'])){ //get q variable to logout
     <div class="container">
         <div class="row">
             <div class="col">
-            <table class="table table-responsive">
-                <tr>
-                    <th><h1>Question:</h1></th>
-                </tr>
-                <tr>
-            <td><h3><?php $student->getContent($id); ?></h3></td>
-            <td><button class = "btn btn-primary" data-toggle = "modal" style="width:7em;" data-target = "#myModal">Edit</button></td>
-            <table>
-            <table class="table table-responsive">
-                <tr>
-                    <th><h2>Answers:</h2></th>
-                </tr>
-                <?php $student->getAnswer(); ?>
-            <table>
-            <form id="answer" method="post">
-                    <div class="form-group">
-                        <label >Answer:</label>
-                        <textarea rows="10"  cols="50" type="text" class="form-control" name="ansQuestion"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary" name="ansPostbtn">Submit</button>
-                    </div>
-                   
-        </form>
-            <div class = "modal fade" id = "myModal" tabindex = "-1" role = "dialog" 
-   aria-labelledby = "myModalLabel" aria-hidden = "true">
-   
-   <div class = "modal-dialog">
-      <div class = "modal-content">
-         
-         <div class = "modal-header">
 
-            
-            <h4 class = "modal-title" id = "myModalLabel">
-               Edit Question
-            </h4>
-            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true">
-                  &times;
-            </button>
-         </div>
-         <div class = "modal-body">
-         <form id="updateQuestion" action="updateQuestion.php" method="post">
-         <div class="form-group">
-                          <label>Question:</label>
-                          <textarea rows="10"  cols="50" type="text" class="form-control" name="update"><?php $student->getContent($id); ?></textarea> 
-                          <button type = "button" class = "btn btn-primary" name="updatebtn">Update</button>
+                <div class="accordion" id="accordionExample">
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#postAns"
+                                    aria-expanded="true" aria-controls="postAns">
+                                    List of question answers
+                                </button>
+                            </h2>
+                        </div>
+
+                        <div id="postAns" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <table class="table table-responsive">
+                                    <tr>
+                                        <th>id</th>
+                                        <th>content</th>
+                                        <th>upvote</th>
+                                        <th>date</th>
+                                        <th>time</th>
+                                    </tr>
+                                    <?php $student->getAnswer(); ?>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                     </form>
-         </div>
-         
-         <div class = "modal-footer">
-            <button type = "button" class = "btn btn-danger" data-dismiss = "modal">
-               Close
-            </button>
-            
-            
-         </div>
-         
-      </div><!-- /.modal-content -->
-   </div><!-- /.modal-dialog -->
-  
-</div>
+                    <div class="card">
+                        <div class="card-header" id="headingTwo">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                    data-target="#postComment" aria-expanded="false" aria-controls="postComment">
+                                    List of question comments
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="postComment" class="collapse" aria-labelledby="headingTwo"
+                            data-parent="#accordionExample">
+                            <div class="card-body">
+
+                                <table class="table table-responsive">
+                                    <tr>
+                                        <th>comment</th>
+                                        <th>date</th>
+                                        <th>time</th>
+                                    </tr>
+                                    <td>
+                                        <h3><?php $student->getQComment(); ?></h3>
+                                    </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table table-responsive">
+                    <tr>
+                        <th>
+                            <h1>Question:</h1>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3><?php $student->getContent($id); ?></h3>
+                        </td>
+                        <td><button class="btn btn-primary" data-toggle="modal" style="width:7em;"
+                                data-target="#myModal">Edit</button></td>
+                        <table>
+                            <form id="answer" method="post">
+                                <div class="form-group">
+                                    <label>Answer:</label>
+                                    <textarea rows="5" cols="10" type="text" class="form-control"
+                                        name="ansQuestion"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary" name="ansPostbtn">Submit</button>
+                                </div>
+
+                            </form>
+
+                            <form id="comment" method="post">
+                                <div class="form-group">
+                                    <label>Comment:</label>
+                                    <textarea rows="5" cols="10" type="text" class="form-control"
+                                        name="comPost"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary" name="comPostbtn">Submit</button>
+                                </div>
+
+                            </form>
+
+                            <table>
+                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                                    aria-labelledby="myModalLabel" aria-hidden="true">
+
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+
+                                            <div class="modal-header">
+
+
+                                                <h4 class="modal-title" id="myModalLabel">
+                                                    Edit Question
+                                                </h4>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-hidden="true">
+                                                    &times;
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form id="updateQuestion" action="updateQuestion.php" method="post">
+                                                    <div class="form-group">
+                                                        <label>Question:</label>
+                                                        <textarea rows="10" cols="50" type="text" class="form-control"
+                                                            name="update"><?php $student->getContent($id); ?></textarea>
+                                                        <button type="button" class="btn btn-primary"
+                                                            name="updatebtn">Update</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                                    Close
+                                                </button>
+
+
+                                            </div>
+
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal-dialog -->
+
+                                </div>
+                            </table>
             </div>
         </div>
     </div>

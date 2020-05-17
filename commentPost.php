@@ -19,14 +19,14 @@ if (isset($_GET['q'])){ //get q variable to logout
  header("location:login.php");//redirect to login.php after logout
  }
  date_default_timezone_set("Asia/Singapore");
- if (isset($_POST["comPostbtn"])) {
-    $answer;
+ if (isset($_POST["comAnsbtn"])) {
+    $comment;
     require "db_connection.php";
-    $answer = mysqli_real_escape_string($conn, $_POST["ansQuestion"]);
+    $comment = mysqli_real_escape_string($conn, $_POST["comPost"]);
     $postDate = date("Y-m-d");
     $postTime = date("h:i a");
     require_once "classes\student.class.php";
-    $student->ansPost($answer,$postDate,$postTime);
+    $student->commAns($comment,$postDate,$postTime);
 }
 ?>
 <!DOCTYPE html>
@@ -44,19 +44,20 @@ if (isset($_GET['q'])){ //get q variable to logout
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-        
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+
     <title>View Post</title>
 </head>
+
 <body>
- <!--start of navbar-->
+    <!--start of navbar-->
     <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
             aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,7 +75,8 @@ if (isset($_GET['q'])){ //get q variable to logout
                     <a class="nav-link" href="#">Forums</a>
                 </li>
                 <li class="nav-item mx-3">
-                <a class="nav-link">Welcome, <?php $user->get_fullname($id); ?>!</a> <!--display's user fullname-->
+                    <a class="nav-link">Welcome, <?php $user->get_fullname($id); ?>!</a>
+                    <!--display's user fullname-->
                 </li>
             </ul>
             <ul class="navbar-nav">
@@ -93,72 +95,102 @@ if (isset($_GET['q'])){ //get q variable to logout
     <div class="container">
         <div class="row">
             <div class="col">
-            <table class="table table-responsive">
-                <tr>
-                    <th><h1>Question:</h1></th>
-                </tr>
-                <tr>
-            <td><h3><?php $student->getQContent(); ?></h3></td>
-            <td><button class = "btn btn-primary" data-toggle = "modal" style="width:7em;" data-target = "#myModal">Edit</button></td>
-            </tr>
-            <table>
-            <table class="table table-responsive">
-                <tr>
-                    <th><h2>Answers:</h2></th>
-                </tr>
-                <tr>
-                <td><h4><?php $student->getAnsContent(); ?><h4><td>
-                </tr>
-            <table>
-            <form id="answer" method="post">
-                    <div class="form-group">
-                        <label >Comment:</label>
-                        <textarea rows="10"  cols="50" type="text" class="form-control" name="comAns"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary" name="comPostbtn">Submit</button>
-                    </div>
-                   
-        </form>
-            <div class = "modal fade" id = "myModal" tabindex = "-1" role = "dialog" 
-   aria-labelledby = "myModalLabel" aria-hidden = "true">
-   
-   <div class = "modal-dialog">
-      <div class = "modal-content">
-         
-         <div class = "modal-header">
+                <table class="table table-responsive">
+                    <tr>
+                        <th>
+                            <h1>Question:</h1>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3><?php $student->getQContent(); ?></h3>
+                        </td>
+                        <td><button class="btn btn-primary" data-toggle="modal" style="width:7em;"
+                                data-target="#myModal">Edit</button></td>
+                    </tr>
+                    <table>
+                        <table class="table table-responsive">
+                            <tr>
+                                <th>
+                                    <h2>Answer</h2>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4><?php $student->getAnsContent(); ?><h4>
+                                <td>
+                            </tr>
+                            <table>
+                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                                    aria-labelledby="myModalLabel" aria-hidden="true">
 
-            
-            <h4 class = "modal-title" id = "myModalLabel">
-               Edit Question
-            </h4>
-            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true">
-                  &times;
-            </button>
-         </div>
-         <div class = "modal-body">
-         <form id="updateQuestion" action="updateQuestion.php" method="post">
-         <div class="form-group">
-                          <label>Question:</label>
-                          <textarea rows="10"  cols="50" type="text" class="form-control" name="update"><?php $student->getContent($id); ?></textarea> 
-                          <button type = "button" class = "btn btn-primary" name="updatebtn">Update</button>
-                    </div>
-                     </form>
-         </div>
-         
-         <div class = "modal-footer">
-            <button type = "button" class = "btn btn-danger" data-dismiss = "modal">
-               Close
-            </button>
-            
-            
-         </div>
-         
-      </div><!-- /.modal-content -->
-   </div><!-- /.modal-dialog -->
-  
-</div>
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+
+                                            <div class="modal-header">
+
+
+                                                <h4 class="modal-title" id="myModalLabel">
+                                                    Edit Question
+                                                </h4>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-hidden="true">
+                                                    &times;
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form id="updateQuestion" action="updateQuestion.php" method="post">
+                                                    <div class="form-group">
+                                                        <label>Question:</label>
+                                                        <textarea rows="10" cols="50" type="text" class="form-control"
+                                                            name="update"><?php $student->getContent($id); ?></textarea>
+                                                        <button type="button" class="btn btn-primary"
+                                                            name="updatebtn">Update</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                                    Close
+                                                </button>
+
+                                            </div>
+
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal-dialog -->
+
+                                </div>
+                                <!--end of modal div-->
+                                <form id="anscomment" method="post">
+                                    <div class="form-group">
+                                        <label>Comment:</label>
+                                        <textarea rows="5" cols="10" type="text" class="form-control"
+                                            name="comPost"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary" name="comAnsbtn">Submit</button>
+                                    </div>
+
+                                </form>
+
+                                <table class="table table-responsive">
+                                    <tr>
+                                        <th>id</th>
+                                        <th>comment</th>
+                                        <th>date</th>
+                                        <th>time</th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h3><?php $student->getAnsComment(); ?></h3>
+                                        </td>
+                                    </tr>
+                                    <table>
             </div>
+            <!--end of col div-->
         </div>
+        <!--end of row div-->
     </div>
+    <!--end of container div-->
 </body>
