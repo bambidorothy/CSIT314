@@ -20,25 +20,27 @@ class Student extends User
     //display all posts not relevant to current user (public)
     public function displayAllPosts($id)
     {
-        $sql="SELECT content, upvote, date, time, status FROM POST WHERE users_id != $id";
+        $sql="SELECT id, content, upvote, date, time, status FROM POST WHERE users_id != $id";
         $result=mysqli_query($this->db, $sql);
     
              
         if ($result) {
             while ($row = $result->fetch_assoc()) {
+                $post_id=$row['id'];
                 $content = $row["content"];
                 $upvote = $row["upvote"];
                 $date = $row["date"];
                 $time = $row["time"];
                 $status = $row["status"];
      
-                echo '<tr> 
+                echo '<tr>
+                      <td>'.$post_id.'</td>  
                       <td>'.$content.'</td> 
                       <td>'.$upvote.'</td> 
                       <td>'.$date.'</td> 
                       <td>'.$time.'</td>
                       <td>'.$status.'</td>
-                      <td><a type="submit" class="btn btn-success" style="width:7em;">View Post</a></td>
+                      <td><a href="detailPublicPost.php?post_id='.$post_id.'" class="btn btn-success" style="width:7em;">View Post</a></td>
                   </tr>';
             }
             //$result->free();
@@ -71,7 +73,7 @@ class Student extends User
                   <td>'.$date.'</td> 
                   <td>'.$time.'</td>
                   <td>'.$status.'</td>
-                  <td><a href="closePost.php?post_id='.$post_id.'" class="btn btn-danger" style="width:10em;">Mark as Closed</a></td>
+                  <td><div id="closepost"><a href="closePost.php?post_id='.$post_id.'" class="btn btn-danger" style="width:10em;">Mark as Closed</a></div></td>
                   <td><a href="detailPost.php?post_id='.$post_id.'" class="btn btn-success" style="width:7em;">View Post</a></td>
               </tr>';
             }
@@ -86,6 +88,7 @@ class Student extends User
         if ($result === true) {
             $message = "Post closed successfully!";
             echo "<script type='text/javascript'>alert('$message');</script>"; //do javascript alert upon successful suspension
+            echo "<div id="closepost" style="display:none;"></div>";
             echo "<script>window.open('student.php', '_self');</script>"; //redirect back to student.php
         } else {
             echo "Error updating record: " . $this->db->error;
@@ -94,7 +97,7 @@ class Student extends User
     public function getContent($id)
     {
         $postid = $_GET['post_id'];
-        $sql="SELECT content FROM POST WHERE users_id = '$id' AND id='$postid'";
+        $sql="SELECT content FROM POST WHERE id='$postid'";
         $result = mysqli_query($this->db, $sql);
         $user_data = mysqli_fetch_array($result);
         echo $user_data['content'];
