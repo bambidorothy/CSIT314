@@ -14,10 +14,10 @@ class Student extends User
                                     VALUES('$id','$question',0,'$postDate','$postTime',1)";
 
         $result=mysqli_query($this->db, $sql);
-        if($result){
-        echo "<script type='text/javascript'>alert('Question has been posted successfully');</script>;";
-        $updatesql="UPDATE USERS SET participation = participation + 1 WHERE id='$id'";
-        $resultupdate=mysqli_query($this->db, $updatesql);
+        if ($result) {
+            echo "<script type='text/javascript'>alert('Question has been posted successfully');</script>;";
+            $updatesql="UPDATE USERS SET participation = participation + 1 WHERE id='$id'";
+            $resultupdate=mysqli_query($this->db, $updatesql);
         }
     }
     //display all posts not relevant to current user (public)
@@ -159,10 +159,10 @@ class Student extends User
             VALUES('$post_id','$answer',0,'$postDate','$postTime')";
 
         $result=mysqli_query($this->db, $sql);
-        if($result){
-        echo "<script type='text/javascript'>alert('Answer has been posted successfully');</script>;";
-        $updatesql="UPDATE USERS SET participation = participation + 1 WHERE id='$id'";
-        $resultupdate=mysqli_query($this->db, $updatesql);
+        if ($result) {
+            echo "<script type='text/javascript'>alert('Answer has been posted successfully');</script>;";
+            $updatesql="UPDATE USERS SET participation = participation + 1 WHERE id='$id'";
+            $resultupdate=mysqli_query($this->db, $updatesql);
         }
     }
     /* post a comment on Post */
@@ -177,7 +177,7 @@ class Student extends User
             $message = "Your comment for post=$post_id has been posted succesfully!";
             echo "<script type='text/javascript'>alert('$message');</script>";
             $updatesql="UPDATE USERS SET participation = participation + 1 WHERE id='$id'";
-        $resultupdate=mysqli_query($this->db, $updatesql);
+            $resultupdate=mysqli_query($this->db, $updatesql);
         } else {
             $message = "Unable to post your comment!";
             echo "<script type='text/javascript'>alert('$message');</script>";
@@ -216,10 +216,13 @@ class Student extends User
         $post_id = $_GET['post_id'];
         $ans_id = $_GET['ans_id'];
         $sql="INSERT INTO COMMENTANS(ans_id,comment,date,time) VALUES('$ans_id','$comment','$postDate','$postTime')";
+        $id = $_SESSION['id']; //get session id which is user id
         $result= mysqli_query($this->db, $sql);
         /*          echo $sql;
                  echo $result; */
         if ($result === true) {
+            $updatesql="UPDATE USERS SET participation = participation + 1 WHERE id='$id'";
+            $resultupdate=mysqli_query($this->db, $updatesql);
             $message = "Your comment for answer=$ans_id has been posted succesfully!";
             echo "<script type='text/javascript'>alert('$message');</script>";
         } else {
