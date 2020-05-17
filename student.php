@@ -72,13 +72,7 @@ if (isset($_POST["createPostbtn"])) {
         <div class="collapse navbar-collapse" id="navbarToggler">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Topics</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Forums</a>
+                    <a class="nav-link" href="student.php">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item mx-3">
                 <a class="nav-link">Welcome, <?php $user->get_fullname($id); ?>!</a> <!--display's user fullname-->
