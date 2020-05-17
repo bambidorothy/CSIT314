@@ -211,7 +211,7 @@ class Student extends User
 
 
     /* post a comment on Answer */
-    public function commAns($comment, $postDate, $postTime)
+    public function commAns($id, $comment, $postDate, $postTime)
     {
         $post_id = $_GET['post_id'];
         $ans_id = $_GET['ans_id'];
@@ -225,6 +225,8 @@ class Student extends User
             $resultupdate=mysqli_query($this->db, $updatesql);
             $message = "Your comment for answer=$ans_id has been posted succesfully!";
             echo "<script type='text/javascript'>alert('$message');</script>";
+            $updatesql="UPDATE USERS SET participation = participation + 1 WHERE id='$id'";
+        $resultupdate=mysqli_query($this->db, $updatesql);
         } else {
             $message = "Unable to post your comment!";
             echo "<script type='text/javascript'>alert('$message');</script>";
