@@ -272,4 +272,16 @@ class Student extends User
         $user_data = mysqli_fetch_array($result);
         echo $user_data['content'];
     }
+
+    public function upvoteAns($ansid,$postid) {
+        $sql="UPDATE ANSWERS SET upvote = upvote + 1 WHERE id='$ansid'";
+        $result=mysqli_query($this->db, $sql);
+        if ($result === true) {
+            $message = "Upvoted successfully!";
+            echo "<script type='text/javascript'>alert('$message');</script>"; //do javascript alert upon successful suspension
+            echo "<script>window.open('detailPost.php?post_id=".$postid."', '_self');</script>";
+        } else {
+            echo "Error updating record: " . $this->db->error;
+        }
+    }
 }
