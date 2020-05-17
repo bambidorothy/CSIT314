@@ -5,7 +5,6 @@ create table ANSWERS (
 	upvote INT,
 	date DATE,
 	time VARCHAR(50),
-	comment VARCHAR(100),
     PRIMARY KEY (id),
 	FOREIGN KEY (post_id) REFERENCES POST(id)
 );
