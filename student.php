@@ -177,6 +177,7 @@ if (isset($_POST["createPostbtn"])) {
   <h1>Your Posts</h1>
   <table class="table table-responsive">
   <tr>
+    <th>ID</th>
     <th>Content</th>
     <th>Upvotes</th>
     <th>Date</th>
@@ -189,6 +190,7 @@ if (isset($_POST["createPostbtn"])) {
   <h1>Public Posts</h1>
   <table class="table table-responsive">
   <tr>
+    <th>ID</th>
     <th>Content</th>
     <th>Upvotes</th>
     <th>Date</th>
