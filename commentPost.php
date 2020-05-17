@@ -26,7 +26,7 @@ if (isset($_GET['q'])) { //get q variable to logout
      $postDate = date("Y-m-d");
      $postTime = date("h:i a");
      require_once "classes\student.class.php";
-     $student->commAns($comment, $postDate, $postTime);
+     $student->commAns($id, $comment, $postDate, $postTime);
  }
 ?>
 <!DOCTYPE html>
