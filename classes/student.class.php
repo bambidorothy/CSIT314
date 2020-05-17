@@ -43,6 +43,7 @@ class Student extends User
                       <td>'.$date.'</td> 
                       <td>'.$time.'</td>
                       <td>'.$status.'</td>
+                      <td><a href="upvotePost.php?post_id='.$post_id.'" class="btn btn-danger"">Upvote</a></td>
                       <td><a href="detailPublicPost.php?post_id='.$post_id.'" class="btn btn-success" style="width:7em;">View Post</a></td>
                   </tr>';
             }
@@ -76,8 +77,8 @@ class Student extends User
                   <td>'.$date.'</td> 
                   <td>'.$time.'</td>
                   <td>'.$status.'</td>
-                  <td><a href="closePost.php?post_id='.$post_id.'" class="btn btn-danger" style="width:10em;">Mark as Closed</a></td>
-                  <td><a href="detailPost.php?post_id='.$post_id.'" class="btn btn-success" style="width:7em;">View Post</a></td>
+                  <td><a href="closePost.php?post_id='.$post_id.'" class="btn btn-danger"">Close</a></td>
+                  <td><a href="detailPost.php?post_id='.$post_id.'" class="btn btn-primary" style="width:7em;">View Post</a></td>
               </tr>';
             }
         }
@@ -271,6 +272,25 @@ class Student extends User
         $result = mysqli_query($this->db, $sql);
         $user_data = mysqli_fetch_array($result);
         echo $user_data['content'];
+    }
+
+    public function upvotePost($id,$postid) {
+        $sql="UPDATE POST SET upvote = upvote + 1 WHERE id='$postid'";
+        $result=mysqli_query($this->db, $sql);
+        echo $sql;
+        echo $result;
+        if ($result === true) {
+
+            $updatesql="UPDATE USERS SET participation = participation + 1 WHERE id='$id'";
+            $resultupdate=mysqli_query($this->db, $updatesql);
+            echo $updatesql;
+            echo $resultupdate;
+            $message = "Upvoted successfully!";
+            echo "<script type='text/javascript'>alert('$message');</script>"; //do javascript alert upon successful suspension
+            echo "<script>window.open('student.php#nav-managepost', '_self');</script>";
+        } else {
+            echo "Error updating record: " . $this->db->error;
+        }
     }
 
     public function upvoteAns($ansid,$postid) {
