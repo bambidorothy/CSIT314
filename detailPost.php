@@ -26,7 +26,7 @@ if (isset($_GET['q'])) { //get q variable to logout
      $postDate = date("Y-m-d");
      $postTime = date("h:i a");
      require_once "classes\student.class.php";
-     $student->ansPost($answer, $postDate, $postTime);
+     $student->ansPost($id, $answer, $postDate, $postTime);
  }
  date_default_timezone_set("Asia/Singapore");
  if (isset($_POST["comPostbtn"])) {
@@ -36,7 +36,7 @@ if (isset($_GET['q'])) { //get q variable to logout
      $postDate = date("Y-m-d");
      $postTime = date("h:i a");
      require_once "classes\student.class.php";
-     $student->commPost($comment, $postDate, $postTime);
+     $student->commPost($id, $comment, $postDate, $postTime);
  }
 ?>
 <!DOCTYPE html>
@@ -126,6 +126,7 @@ if (isset($_GET['q'])) { //get q variable to logout
                                         <th>upvote</th>
                                         <th>date</th>
                                         <th>time</th>
+                                        <th>Upvote</th>
                                     </tr>
                                     <?php $student->getAnswer(); ?>
                                 </table>

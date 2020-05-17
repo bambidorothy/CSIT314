@@ -13,9 +13,12 @@ class Student extends User
         $sql="INSERT INTO post(users_id,content,upvote,date,time,status) 
                                     VALUES('$id','$question',0,'$postDate','$postTime',1)";
 
-        mysqli_query($this->db, $sql);
-
+        $result=mysqli_query($this->db, $sql);
+        if($result){
         echo "<script type='text/javascript'>alert('Question has been posted successfully');</script>;";
+        $updatesql="UPDATE USERS SET participation = participation + 1 WHERE id='$id'";
+        $resultupdate=mysqli_query($this->db, $updatesql);
+        }
     }
     //display all posts not relevant to current user (public)
     public function displayAllPosts($id)
@@ -43,7 +46,7 @@ class Student extends User
                       <td><a href="detailPublicPost.php?post_id='.$post_id.'" class="btn btn-success" style="width:7em;">View Post</a></td>
                   </tr>';
             }
-            //$result->free();
+            //$result->free()
         }
         //mark post as open
         //public function markPostOpen() {
@@ -73,7 +76,7 @@ class Student extends User
                   <td>'.$date.'</td> 
                   <td>'.$time.'</td>
                   <td>'.$status.'</td>
-                  <td><div id="closepost"><a href="closePost.php?post_id='.$post_id.'" class="btn btn-danger" style="width:10em;">Mark as Closed</a></div></td>
+                  <td><a href="closePost.php?post_id='.$post_id.'" class="btn btn-danger" style="width:10em;">Mark as Closed</a></td>
                   <td><a href="detailPost.php?post_id='.$post_id.'" class="btn btn-success" style="width:7em;">View Post</a></td>
               </tr>';
             }
@@ -88,8 +91,22 @@ class Student extends User
         if ($result === true) {
             $message = "Post closed successfully!";
             echo "<script type='text/javascript'>alert('$message');</script>"; //do javascript alert upon successful suspension
-            echo "<div id="closepost" style="display:none;"></div>";
             echo "<script>window.open('student.php', '_self');</script>"; //redirect back to student.php
+        } else {
+            echo "Error updating record: " . $this->db->error;
+        }
+    }
+    public function upvoteAns($id)
+    {
+        $postid = $_GET['post_id'];
+        $sql="UPDATE ANSWERS SET upvote = upvote + 1 WHERE post_id='$postid'";
+        $result=mysqli_query($this->db, $sql);
+        if ($result === true) {
+            //$updatesql="UPDATE USERS SET participation = participation + 1 WHERE id='$id'";
+            //$resultupdate=mysqli_query($this->db, $updatesql);
+            $message = "Upvoted successfully!";
+            echo "<script type='text/javascript'>alert('$message');</script>"; //do javascript alert upon successful suspension
+            echo "<script>window.open('detailPost.php?post_id=".$postid."', '_self');</script>"; //redirect back to student.php
         } else {
             echo "Error updating record: " . $this->db->error;
         }
@@ -127,8 +144,9 @@ class Student extends User
                   <td>'.$upvote.'</td> 
                   <td>'.$date.'</td> 
                   <td>'.$time.'</td>
-                  <td><a href="commentPost.php?ans_id='.$id.'&post_id='.$post_id.'" class="btn btn-success" style="width:7em;">Comment</a></td>
-              </tr>';
+                  <td><a href="commentPost.php?ans_id='.$id.'&post_id='.$post_id.'" class="btn btn-success" style="width:7em;">Comment</a></td>;
+                  <td><a href="upvote.php?post_id='.$post_id.'" class="btn btn-danger" style="width:5em;">Upvote</a></td>
+                  </tr>';
             }
         }
     }
@@ -148,18 +166,21 @@ class Student extends User
             }
         }
     }
-    public function ansPost($answer, $postDate, $postTime)
+    public function ansPost($id, $answer, $postDate, $postTime)
     {
         $post_id = $_GET['post_id'];
         $sql="INSERT INTO ANSWERS(post_id,content,upvote,date,time) 
             VALUES('$post_id','$answer',0,'$postDate','$postTime')";
 
-        mysqli_query($this->db, $sql);
-
+        $result=mysqli_query($this->db, $sql);
+        if($result){
         echo "<script type='text/javascript'>alert('Answer has been posted successfully');</script>;";
+        $updatesql="UPDATE USERS SET participation = participation + 1 WHERE id='$id'";
+        $resultupdate=mysqli_query($this->db, $updatesql);
+        }
     }
     /* post a comment on Post */
-    public function commPost($comment, $postDate, $postTime)
+    public function commPost($id, $comment, $postDate, $postTime)
     {
         $post_id = $_GET['post_id'];
         $sql="INSERT INTO COMMENTPOST(post_id,comment,date,time) VALUES('$post_id','$comment','$postDate','$postTime')";
@@ -169,6 +190,8 @@ class Student extends User
         if ($result === true) {
             $message = "Your comment for post=$post_id has been posted succesfully!";
             echo "<script type='text/javascript'>alert('$message');</script>";
+            $updatesql="UPDATE USERS SET participation = participation + 1 WHERE id='$id'";
+        $resultupdate=mysqli_query($this->db, $updatesql);
         } else {
             $message = "Unable to post your comment!";
             echo "<script type='text/javascript'>alert('$message');</script>";
