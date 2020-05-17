@@ -19,7 +19,7 @@ if (isset($_GET['q'])){ //get q variable to logout
  header("location:login.php");//redirect to login.php after logout
  }
  date_default_timezone_set("Asia/Singapore");
- if (isset($_POST["ansPostbtn"])) {
+ if (isset($_POST["comPostbtn"])) {
     $answer;
     require "db_connection.php";
     $answer = mysqli_real_escape_string($conn, $_POST["ansQuestion"]);
@@ -98,22 +98,25 @@ if (isset($_GET['q'])){ //get q variable to logout
                     <th><h1>Question:</h1></th>
                 </tr>
                 <tr>
-            <td><h3><?php $student->getContent($id); ?></h3></td>
+            <td><h3><?php $student->getQContent(); ?></h3></td>
             <td><button class = "btn btn-primary" data-toggle = "modal" style="width:7em;" data-target = "#myModal">Edit</button></td>
+            </tr>
             <table>
             <table class="table table-responsive">
                 <tr>
                     <th><h2>Answers:</h2></th>
                 </tr>
-                <?php $student->getAnsContent($id); ?>
+                <tr>
+                <td><h4><?php $student->getAnsContent(); ?><h4><td>
+                </tr>
             <table>
             <form id="answer" method="post">
                     <div class="form-group">
-                        <label >Answer:</label>
-                        <textarea rows="10"  cols="50" type="text" class="form-control" name="ansQuestion"></textarea>
+                        <label >Comment:</label>
+                        <textarea rows="10"  cols="50" type="text" class="form-control" name="comAns"></textarea>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary" name="ansPostbtn">Submit</button>
+                        <button type="submit" class="btn btn-primary" name="comPostbtn">Submit</button>
                     </div>
                    
         </form>

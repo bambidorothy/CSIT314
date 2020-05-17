@@ -125,7 +125,7 @@ class Student extends User
                   <td>'.$upvote.'</td> 
                   <td>'.$date.'</td> 
                   <td>'.$time.'</td>
-                  <td><a href="commentPost.php?post_id='.$post_id.'" class="btn btn-success" style="width:7em;">Comment</a></td>
+                  <td><a href="commentPost.php?ans_id='.$id.'&post_id='.$post_id.'" class="btn btn-success" style="width:7em;">Comment</a></td>
               </tr>';
             }
         }
@@ -157,10 +157,19 @@ class Student extends User
         echo "<script type='text/javascript'>alert('Answer has been posted successfully');</script>;";
 
     }
-    public function getAnsContent($id)
+    public function getAnsContent()
+    {
+        $ansid = $_GET['ans_id'];
+        $sql="SELECT content FROM ANSWERS WHERE id='$ansid'";
+        $result = mysqli_query($this->db, $sql);
+        $user_data = mysqli_fetch_array($result);
+        echo $user_data['content'];
+        
+    }
+    public function getQContent()
     {
         $postid = $_GET['post_id'];
-        $sql="SELECT content FROM ANSWERS WHERE users_id = '$id' AND id='$postid'";
+        $sql="SELECT content FROM POST WHERE id='$postid'";
         $result = mysqli_query($this->db, $sql);
         $user_data = mysqli_fetch_array($result);
         echo $user_data['content'];
