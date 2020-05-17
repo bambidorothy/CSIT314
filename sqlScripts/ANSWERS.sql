@@ -1,7 +1,7 @@
 create table ANSWERS (
 	id INT NOT NULL AUTO_INCREMENT,
 	post_id INT,
-	content VARCHAR(50),
+	content TEXT,
 	upvote INT,
 	date DATE,
 	time VARCHAR(50),

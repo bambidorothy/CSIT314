@@ -63,6 +63,15 @@ if (isset($_GET['q'])) { //get q variable to logout
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    <script>
+    function goBack() {
+        window.history.back();
+    }
+    </script>
+
     <title>View Post</title>
 </head>
 
@@ -77,12 +86,8 @@ if (isset($_GET['q'])) { //get q variable to logout
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
                     <a class="nav-link" href="student.php">Home <span class="sr-only">(current)</span></a>
-                </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Topics</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Forums</a>
+                    <a class="nav-link" onclick="goBack()">Back<i class="fas fa-arrow-left"></i></a>
                 </li>
                 <li class="nav-item mx-3">
                     <a class="nav-link">Welcome, <?php $user->get_fullname($id); ?>!</a>
