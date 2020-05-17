@@ -28,6 +28,15 @@ if (isset($_GET['q'])) { //get q variable to logout
      require_once "classes\student.class.php";
      $student->commAns($id, $comment, $postDate, $postTime);
  }
+ if (isset($_POST["updatebtn"])) {
+    $newcontent;
+    require "db_connection.php";
+    $newcontent = mysqli_real_escape_string($conn, $_POST["update"]);
+    $postDate = date("Y-m-d");
+    $postTime = date("h:i a");
+    require_once "classes\student.class.php";
+    $student->updatePost($id, $newcontent, $postDate, $postTime);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -146,12 +155,12 @@ if (isset($_GET['q'])) { //get q variable to logout
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form id="updateQuestion" action="updateQuestion.php" method="post">
+                                                <form id="updateQuestion" method="post">
                                                     <div class="form-group">
                                                         <label>Question:</label>
                                                         <textarea rows="10" cols="50" type="text" class="form-control"
                                                             name="update"><?php $student->getContent($id); ?></textarea>
-                                                        <button type="button" class="btn btn-primary"
+                                                        <button type="submit" class="btn btn-primary"
                                                             name="updatebtn">Update</button>
                                                     </div>
                                                 </form>
