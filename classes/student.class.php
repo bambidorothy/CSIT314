@@ -96,21 +96,6 @@ class Student extends User
             echo "Error updating record: " . $this->db->error;
         }
     }
-    public function upvoteAns($id)
-    {
-        $postid = $_GET['post_id'];
-        $sql="UPDATE ANSWERS SET upvote = upvote + 1 WHERE post_id='$postid'";
-        $result=mysqli_query($this->db, $sql);
-        if ($result === true) {
-            //$updatesql="UPDATE USERS SET participation = participation + 1 WHERE id='$id'";
-            //$resultupdate=mysqli_query($this->db, $updatesql);
-            $message = "Upvoted successfully!";
-            echo "<script type='text/javascript'>alert('$message');</script>"; //do javascript alert upon successful suspension
-            echo "<script>window.open('detailPost.php?post_id=".$postid."', '_self');</script>"; //redirect back to student.php
-        } else {
-            echo "Error updating record: " . $this->db->error;
-        }
-    }
     public function getContent($id)
     {
         $postid = $_GET['post_id'];
@@ -145,7 +130,7 @@ class Student extends User
                   <td>'.$date.'</td> 
                   <td>'.$time.'</td>
                   <td><a href="commentPost.php?ans_id='.$id.'&post_id='.$post_id.'" class="btn btn-success" style="width:7em;">Comment</a></td>;
-                  <td><a href="upvote.php?post_id='.$post_id.'" class="btn btn-danger" style="width:5em;">Upvote</a></td>
+                  <td><a href="upvote.php?post_id='.$post_id.'&ans_id='.$id.'" class="btn btn-danger" style="width:5em;">Upvote</a></td>
                   </tr>';
             }
         }
