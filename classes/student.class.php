@@ -130,7 +130,7 @@ class Student extends User
                   <td>'.$upvote.'</td> 
                   <td>'.$date.'</td> 
                   <td>'.$time.'</td>
-                  <td><a href="commentPost.php?ans_id='.$id.'&post_id='.$post_id.'" class="btn btn-success" style="width:7em;">Comment</a></td>;
+                  <td><a href="commentPost.php?ans_id='.$id.'&post_id='.$post_id.'" class="btn btn-success" style="width:7em;">Comment</a></td>
                   <td><a href="upvote.php?post_id='.$post_id.'&ans_id='.$id.'" class="btn btn-danger" style="width:5em;">Upvote</a></td>
                   </tr>';
             }
