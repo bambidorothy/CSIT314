@@ -132,7 +132,7 @@ class Student extends User
                   <td>'.$date.'</td> 
                   <td>'.$time.'</td>
                   <td><a href="commentPost.php?ans_id='.$id.'&post_id='.$post_id.'" class="btn btn-success" style="width:7em;">Comment</a></td>
-                  <td><a href="upvote.php?post_id='.$post_id.'&ans_id='.$id.'" class="btn btn-danger" style="width:5em;">Upvote</a></td>
+                  <td><a href="upvoteAns.php?post_id='.$post_id.'&ans_id='.$id.'" class="btn btn-danger" style="width:5em;">Upvote</a></td>
                   </tr>';
             }
         }
@@ -150,6 +150,10 @@ class Student extends User
                 echo "<script type='text/javascript'>alert('$message');</script>";
             }
     }
+    //public function updateAns($id, $newcontent, $postDate, $postTime)
+    //{
+
+    //}
     public function ansPost($id, $answer, $postDate, $postTime)
     {
         $post_id = $_GET['post_id'];
@@ -293,10 +297,12 @@ class Student extends User
         }
     }
 
-    public function upvoteAns($ansid,$postid) {
+    public function upvoteAns($id, $ansid, $postid) {
         $sql="UPDATE ANSWERS SET upvote = upvote + 1 WHERE id='$ansid'";
         $result=mysqli_query($this->db, $sql);
         if ($result === true) {
+            $updatesql="UPDATE USERS SET participation = participation + 1 WHERE id='$id'";
+            $resultupdate=mysqli_query($this->db, $updatesql);
             $message = "Upvoted successfully!";
             echo "<script type='text/javascript'>alert('$message');</script>"; //do javascript alert upon successful suspension
             echo "<script>window.open('detailPost.php?post_id=".$postid."', '_self');</script>";
