@@ -112,7 +112,7 @@ if(isset($_POST["searchButton"])){
             <ul class="navbar-nav">
                
                 <li class="nav-item">
-                    <a class="nav-link btn btn-outline-light" href="index.php?q=logout">Log Out</a>
+                    <a class="nav-link btn btn-outline-light" href="student.php?q=logout">Log Out</a>
                 </li>
             </ul>
         </div>

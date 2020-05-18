@@ -101,7 +101,7 @@ if (isset($_POST['registerbtn'])){
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link btn btn-outline-light" href="index.php?q=logout">Log Out</a>
+                    <a class="nav-link btn btn-outline-light" href="userAdmin.php?q=logout">Log Out</a>
                 </li>
             </ul>
         </div>

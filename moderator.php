@@ -87,7 +87,7 @@ if (isset($_GET['q'])) { //get q variable to logout
                     <button class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3" type="submit">Search</button>
                 </form>
                 <li class="nav-item">
-                    <a class="nav-link btn btn-outline-light" href="index.php?q=logout">Log Out</a>
+                    <a class="nav-link btn btn-outline-light" href="moderator.php?q=logout">Log Out</a>
                 </li>
             </ul>
         </div>
