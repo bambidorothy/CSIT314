@@ -28,14 +28,23 @@ if (isset($_GET['q'])) { //get q variable to logout
      require_once "classes\student.class.php";
      $student->commAns($id, $comment, $postDate, $postTime);
  }
- if (isset($_POST["updatebtn"])) {
+ if (isset($_POST["updateQbtn"])) {
     $newcontent;
     require "db_connection.php";
-    $newcontent = mysqli_real_escape_string($conn, $_POST["update"]);
+    $newcontent = mysqli_real_escape_string($conn, $_POST["updateQ"]);
     $postDate = date("Y-m-d");
     $postTime = date("h:i a");
     require_once "classes\student.class.php";
     $student->updatePost($id, $newcontent, $postDate, $postTime);
+}
+if (isset($_POST["updateAnsbtn"])) {
+    $newanscontent;
+    require "db_connection.php";
+    $newanscontent = mysqli_real_escape_string($conn, $_POST["updateAns"]);
+    $postDate = date("Y-m-d");
+    $postTime = date("h:i a");
+    require_once "classes\student.class.php";
+    $student->updateAns($newanscontent, $postDate, $postTime);
 }
 ?>
 <!DOCTYPE html>
@@ -130,7 +139,9 @@ if (isset($_GET['q'])) { //get q variable to logout
                             <tr>
                                 <td>
                                     <h4><?php $student->getAnsContent(); ?><h4>
-                                <td>
+                                </td>
+                                <td><button class="btn btn-primary" data-toggle="modal" style="width:7em;"
+                                data-target="#myModal1">Edit</button></td>
                             </tr>
                             <table>
                                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
@@ -155,9 +166,9 @@ if (isset($_GET['q'])) { //get q variable to logout
                                                     <div class="form-group">
                                                         <label>Question:</label>
                                                         <textarea rows="10" cols="50" type="text" class="form-control"
-                                                            name="update"><?php $student->getContent($id); ?></textarea>
+                                                            name="updateQ"><?php $student->getQuestionContent($id); ?></textarea>
                                                         <button type="submit" class="btn btn-primary"
-                                                            name="updatebtn">Update</button>
+                                                            name="updateQbtn">Update</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -171,8 +182,47 @@ if (isset($_GET['q'])) { //get q variable to logout
 
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
-
+                                    
                                 </div>
+                                <div class="modal fade" id="myModal1" tabindex="-1" role="dialog"
+                                    aria-labelledby="myModalLabel" aria-hidden="true">
+
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+
+                                            <div class="modal-header">
+
+
+                                                <h4 class="modal-title" id="myModalLabel">
+                                                    Edit Answer
+                                                </h4>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-hidden="true">
+                                                    &times;
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form id="updateQuestion" method="post">
+                                                    <div class="form-group">
+                                                        <label>Question:</label>
+                                                        <textarea rows="10" cols="50" type="text" class="form-control"
+                                                            name="updateAns"><?php $student->getAnswerContent($id); ?></textarea>
+                                                        <button type="submit" class="btn btn-primary"
+                                                            name="updateAnsbtn">Update</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                                    Close
+                                                </button>
+
+                                            </div>
+
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal-dialog -->
+                                    </div>
                                 <!--end of modal div-->
                                 <form id="anscomment" method="post">
                                     <div class="form-group">

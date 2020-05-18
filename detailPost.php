@@ -184,7 +184,7 @@ if (isset($_GET['q'])) { //get q variable to logout
                     </tr>
                     <tr>
                         <td>
-                            <h3><?php $student->getContent($id); ?></h3>
+                            <h3><?php $student->getQContent(); ?></h3>
                         </td>
                         <td><button class="btn btn-primary" data-toggle="modal" style="width:7em;"
                                 data-target="#myModal">Edit</button></td>
@@ -236,7 +236,7 @@ if (isset($_GET['q'])) { //get q variable to logout
                                                     <div class="form-group">
                                                         <label>Question:</label>
                                                         <textarea rows="10" cols="50" type="text" class="form-control"
-                                                            name="update"><?php $student->getContent($id); ?></textarea>
+                                                            name="update"><?php $student->getQuestionContent($id); ?></textarea>
                                                             <button type="submit" class="btn btn-primary" name="updatebtn">Update</button>
                                                     </div>
                                                 </form>

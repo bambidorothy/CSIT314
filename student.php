@@ -97,7 +97,13 @@ if(isset($_POST["searchButton"])){
         <div class="collapse navbar-collapse" id="navbarToggler">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
-                    <a class="nav-link" href="student.php">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Topics</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Forums</a>
                 </li>
                 <li class="nav-item mx-3">
                 <a class="nav-link">Welcome, <?php $user->get_fullname($id); ?>!</a> <!--display's user fullname-->
@@ -211,7 +217,6 @@ if(isset($_POST["searchButton"])){
   <h1>Your Posts</h1>
   <table class="table table-responsive">
   <tr>
-    <th>ID</th>
     <th>Content</th>
     <th>Upvotes</th>
     <th>Date</th>
@@ -224,7 +229,6 @@ if(isset($_POST["searchButton"])){
   <h1>Public Posts</h1>
   <table class="table table-responsive">
   <tr>
-    <th>ID</th>
     <th>Content</th>
     <th>Upvotes</th>
     <th>Date</th>
