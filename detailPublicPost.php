@@ -170,7 +170,7 @@ if (isset($_GET['q'])) { //get q variable to logout
                     </tr>
                     <tr>
                         <td>
-                            <h3><?php $student->getContent($id); ?></h3>
+                            <h3><?php $student->getQuestionContent($id); ?></h3>
                         </td>
                         <table>
                             <form id="answer" method="post">
