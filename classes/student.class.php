@@ -142,18 +142,50 @@ class Student extends User
             }
         }
     }
+
+    public function getPublicAnswer()
+    {
+        $postid = $_GET['post_id'];
+        $sql="SELECT id, post_id, content, upvote, date, time FROM ANSWERS WHERE post_id='$postid'";
+        $result = mysqli_query($this->db, $sql);
+        $row=$result->num_rows;
+        /*         echo $sql;
+                echo '<br>';
+                echo $row; */
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $id = $row["id"];
+                $post_id = $row["post_id"];
+                $content = $row["content"];
+                $upvote = $row["upvote"];
+                $date = $row["date"];
+                $time = $row["time"];
+
+                echo '<tr> 
+                  <td>'.$id.'</td>
+                  <td>'.$content.'</td> 
+                  <td>'.$upvote.'</td> 
+                  <td>'.$date.'</td> 
+                  <td>'.$time.'</td>
+                  <td><a href="commentPublicPost.php?ans_id='.$id.'&post_id='.$post_id.'" class="btn btn-success" style="width:7em;">Comment</a></td>
+                  <td><a href="upvoteAns.php?post_id='.$post_id.'&ans_id='.$id.'" class="btn btn-danger" style="width:5em;">Upvote</a></td>
+                  </tr>';
+            }
+        }
+    }
+
     public function updatePost($id, $newcontent, $postDate, $postTime)
     {
-            $post_id = $_GET['post_id'];
-            $newsql= "UPDATE POST SET content='$newcontent', date='$postDate', time='$postTime' WHERE users_id='$id' AND id='$post_id'";
-            $result=mysqli_query($this->db, $newsql);
-            if ($result === true) {
-                $message = "Updated successfully!";
-                echo "<script type='text/javascript'>alert('$message');</script>";
-            } else {
-                $message = "Nothing Happened";
-                echo "<script type='text/javascript'>alert('$message');</script>";
-            }
+        $post_id = $_GET['post_id'];
+        $newsql= "UPDATE POST SET content='$newcontent', date='$postDate', time='$postTime' WHERE users_id='$id' AND id='$post_id'";
+        $result=mysqli_query($this->db, $newsql);
+        if ($result === true) {
+            $message = "Updated successfully!";
+            echo "<script type='text/javascript'>alert('$message');</script>";
+        } else {
+            $message = "Nothing Happened";
+            echo "<script type='text/javascript'>alert('$message');</script>";
+        }
     }
     public function updateAns($newanscontent, $postDate, $postTime)
     {
@@ -243,7 +275,7 @@ class Student extends User
             $message = "Your comment for answer=$ans_id has been posted succesfully and you have earned 1 participation point!";
             echo "<script type='text/javascript'>alert('$message');</script>";
             $updatesql="UPDATE USERS SET participation = participation + 1 WHERE id='$id'";
-        $resultupdate=mysqli_query($this->db, $updatesql);
+            $resultupdate=mysqli_query($this->db, $updatesql);
         } else {
             $message = "Unable to post your comment!";
             echo "<script type='text/javascript'>alert('$message');</script>";
@@ -293,13 +325,13 @@ class Student extends User
         echo $user_data['content'];
     }
 
-    public function upvotePost($id,$postid) {
+    public function upvotePost($id, $postid)
+    {
         $sql="UPDATE POST SET upvote = upvote + 1 WHERE id='$postid'";
         $result=mysqli_query($this->db, $sql);
         echo $sql;
         echo $result;
         if ($result === true) {
-
             $updatesql="UPDATE USERS SET participation = participation + 1 WHERE id='$id'";
             $resultupdate=mysqli_query($this->db, $updatesql);
             //echo $updatesql;
@@ -312,7 +344,8 @@ class Student extends User
         }
     }
 
-    public function upvoteAns($id,$ansid,$postid) {
+    public function upvoteAns($id, $ansid, $postid)
+    {
         $sql="UPDATE ANSWERS SET upvote = upvote + 1 WHERE id='$ansid'";
         $result=mysqli_query($this->db, $sql);
         if ($result === true) {

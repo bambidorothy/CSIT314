@@ -128,7 +128,7 @@ if (isset($_GET['q'])) { //get q variable to logout
                                         <th>date</th>
                                         <th>time</th>
                                     </tr>
-                                    <?php $student->getAnswer(); ?>
+                                    <?php $student->getPublicAnswer(); ?>
                                 </table>
                             </div>
                         </div>
