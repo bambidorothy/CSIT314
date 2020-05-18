@@ -49,8 +49,6 @@ class Student extends User
             }
             //$result->free()
         }
-        //mark post as open
-        //public function markPostOpen() {
     }
 
     //display list of Posts by Student
