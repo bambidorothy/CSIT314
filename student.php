@@ -33,6 +33,31 @@ if (isset($_POST["createPostbtn"])) {
     require_once "classes\student.class.php";
     $student->createPost($id, $question, $postDate, $postTime);
 }
+//search 
+//=======================================================================================
+include_once 'db_connection.php';
+$connect = mysqli_connect("localhost","root","","csit314");
+$output ="";
+if(isset($_POST["searchButton"])){
+    $searchValue = $_POST["searchValue"];
+    $query = "SELECT * FROM post WHERE content LIKE '%".$searchValue."%'";
+    $filter_result = mysqli_query($connect, $query);
+    $count = mysqli_num_rows($filter_result);
+    //$serach_result = search($query);
+
+    if ($count == 0) {
+        $output = "No search result found!";
+    }
+    else{
+        while($row = mysqli_fetch_array($filter_result)){
+            $content = $row['content'];
+            $output .= '<div>'  .$content. '</div>';
+
+        }
+
+        }
+    }
+
 
 ?>
 
@@ -85,10 +110,7 @@ if (isset($_POST["createPostbtn"])) {
                 </li>
             </ul>
             <ul class="navbar-nav">
-                <form class="form-inline my-2 my-lg-0 ml-auto">
-                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3" type="submit">Search</button>
-                </form>
+               
                 <li class="nav-item">
                     <a class="nav-link btn btn-outline-light" href="index.php?q=logout">Log Out</a>
                 </li>
@@ -106,8 +128,10 @@ if (isset($_POST["createPostbtn"])) {
                 <a class="nav-item nav-link active" id="nav-createpost-tab" data-toggle="tab" href="#nav-createpost" role="tab" aria-controls="nav-createpost" aria-selected="true">Create Post</a>
                 <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
                 <a class="nav-item nav-link" id="nav-manage-post" data-toggle="tab" href="#nav-managepost" role="tab" aria-controls="nav-managepost" aria-selected="false">View/Manage Posts</a>
+                <a class="nav-item nav-link" id="nav-search-post" data-toggle="tab" href="#nav-searchpost" role="tab" aria-controls="nav-searchpost" aria-selected="false">Search Post</a>
             </div>
             </nav>
+
 <!--start of tab div contents-->          
 <div class="tab-content" id="nav-tabContent">
 <!--start of post create tab--> 
@@ -124,6 +148,22 @@ if (isset($_POST["createPostbtn"])) {
         </form>
   
   </div>
+  <div class="tab-pane fade" id="nav-searchpost" role="tabpanel" aria-labelledby="nav-search-post">
+            <form method="post">
+                    <div class="form-group">
+                        <label >Search question:</label>
+                        <textarea rows="5"  cols="5" type="text" class="form-control" name="searchValue"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" name="searchButton">submit</button>
+                    </div>
+                    <div>
+                    <?php print("$output"); ?>
+                    </div>
+                   
+        </form>
+  
+        </div>
   <!--start of profile tab--> 
   <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
   <form id="" action="">
@@ -204,7 +244,9 @@ if (isset($_POST["createPostbtn"])) {
             </div>
             </div> <!--end of col-->
         </div> <!--end of row-->
+
     </div>
+   
     <!--end of container-->
     <!--validatePassword() script-->
     <script>
@@ -252,6 +294,7 @@ if (isset($_POST["createPostbtn"])) {
         window.location.hash = e.target.hash;
     })
     </script>
+    
     <footer class="fixed-bottom">
         <div class="copyright">
             &copy 2020 -Team Bambi
