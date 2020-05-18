@@ -15,7 +15,7 @@ class Student extends User
 
         $result=mysqli_query($this->db, $sql);
         if ($result) {
-            echo "<script type='text/javascript'>alert('Question has been posted successfully');</script>;";
+            echo "<script type='text/javascript'>alert('Question has been posted successfully and you have earned 1 participation point!');</script>;";
             $updatesql="UPDATE USERS SET participation = participation + 1 WHERE id='$id'";
             $resultupdate=mysqli_query($this->db, $updatesql);
         }
@@ -157,7 +157,7 @@ class Student extends User
 
         $result=mysqli_query($this->db, $sql);
         if ($result) {
-            echo "<script type='text/javascript'>alert('Answer has been posted successfully');</script>;";
+            echo "<script type='text/javascript'>alert('Answer has been posted successfully and you have earned 1 participation point!');</script>;";
             $updatesql="UPDATE USERS SET participation = participation + 1 WHERE id='$id'";
             $resultupdate=mysqli_query($this->db, $updatesql);
         }
@@ -171,7 +171,7 @@ class Student extends User
         /*                 echo $sql;
                         echo $result; */
         if ($result === true) {
-            $message = "Your comment for post=$post_id has been posted succesfully!";
+            $message = "Your comment for post=$post_id has been posted succesfully and you have earned 1 participation point!!";
             echo "<script type='text/javascript'>alert('$message');</script>";
             $updatesql="UPDATE USERS SET participation = participation + 1 WHERE id='$id'";
             $resultupdate=mysqli_query($this->db, $updatesql);
@@ -220,7 +220,7 @@ class Student extends User
         if ($result === true) {
             $updatesql="UPDATE USERS SET participation = participation + 1 WHERE id='$id'";
             $resultupdate=mysqli_query($this->db, $updatesql);
-            $message = "Your comment for answer=$ans_id has been posted succesfully!";
+            $message = "Your comment for answer=$ans_id has been posted succesfully and you have earned 1 participation point!!";
             echo "<script type='text/javascript'>alert('$message');</script>";
             $updatesql="UPDATE USERS SET participation = participation + 1 WHERE id='$id'";
         $resultupdate=mysqli_query($this->db, $updatesql);
@@ -284,7 +284,7 @@ class Student extends User
             $resultupdate=mysqli_query($this->db, $updatesql);
             echo $updatesql;
             echo $resultupdate;
-            $message = "Upvoted successfully!";
+            $message = "Upvoted successfully and you have earned 1 participation point!!";
             echo "<script type='text/javascript'>alert('$message');</script>"; //do javascript alert upon successful suspension
             echo "<script>window.open('student.php#nav-managepost', '_self');</script>";
         } else {
