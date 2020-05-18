@@ -97,10 +97,18 @@ class Student extends User
             echo "Error updating record: " . $this->db->error;
         }
     }
-    public function getContent($id)
+    public function getQuestionContent($id)
     {
         $postid = $_GET['post_id'];
         $sql="SELECT content FROM POST WHERE id='$postid'";
+        $result = mysqli_query($this->db, $sql);
+        $user_data = mysqli_fetch_array($result);
+        echo $user_data['content'];
+    }
+    public function getAnswerContent($id)
+    {
+        $ansid = $_GET['ans_id'];
+        $sql="SELECT content FROM ANSWERS WHERE id='$ansid'";
         $result = mysqli_query($this->db, $sql);
         $user_data = mysqli_fetch_array($result);
         echo $user_data['content'];
@@ -149,10 +157,20 @@ class Student extends User
                 echo "<script type='text/javascript'>alert('$message');</script>";
             }
     }
-    //public function updateAns($id, $newcontent, $postDate, $postTime)
-    //{
-
-    //}
+    public function updateAns($newanscontent, $postDate, $postTime)
+    {
+        $ans_id = $_GET['ans_id'];
+        $post_id = $_GET['post_id'];
+        $newsql= "UPDATE ANSWERS SET content='$newanscontent', date='$postDate', time='$postTime' WHERE id='$ans_id' AND post_id='$post_id'";
+        $result=mysqli_query($this->db, $newsql);
+        if ($result === true) {
+            $message = "Updated successfully!";
+            echo "<script type='text/javascript'>alert('$message');</script>";
+        } else {
+            $message = "Nothing Happened";
+            echo "<script type='text/javascript'>alert('$message');</script>";
+        }
+    }
     public function ansPost($id, $answer, $postDate, $postTime)
     {
         $post_id = $_GET['post_id'];
