@@ -42,14 +42,14 @@ if (isset($_GET['q'])) { //get q variable to logout
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
     <script>
-        // Javascript to enable link to tab
+    // Javascript to enable link to tab
     var url = document.location.toString();
     if (url.match('#')) {
         $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
-    } 
+    }
 
     // Change hash for page-reload
-    $('.nav-tabs a').on('shown.bs.tab', function (e) {
+    $('.nav-tabs a').on('shown.bs.tab', function(e) {
         window.location.hash = e.target.hash;
     })
     </script>
@@ -99,12 +99,18 @@ if (isset($_GET['q'])) { //get q variable to logout
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
-                            role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
-                        <a class="nav-item nav-link active" id="nav-createpost-tab" data-toggle="tab"
-                            href="#nav-createpost" role="tab" aria-controls="nav-createpost" aria-selected="true">View
-                            Report1</a>
-                        <a class="nav-item nav-link" id="nav-manage-post" data-toggle="tab" href="#nav-managepost"
-                            role="tab" aria-controls="nav-managepost" aria-selected="false">View</a>
+                            role="tab" aria-controls="nav-profile" aria-selected="true">Profile</a>
+                        <a class="nav-item nav-link active" id="question1-tab" data-toggle="tab" href="#question1"
+                            role="tab" aria-controls="question1" aria-selected="false">Most
+                            Interesting Questions</a>
+                        <a class="nav-item nav-link" id="question2-tab" data-toggle="tab" href="#question2" role="tab"
+                            aria-controls="question2" aria-selected="false">Most Weekly Interesting
+                            Questions</a>
+                        <a class="nav-item nav-link" id="question3-tab" data-toggle="tab" href="#question3" role="tab"
+                            aria-controls="question3" aria-selected="false">Most Interesting Monthly
+                            Questions</a>
+                        <a class="nav-item nav-link" id="topStudent=tab" data-toggle="tab" href="#topStudent" role="tab"
+                            aria-controls="topStudent" aria-selected="false">Top Participating Students</a>
                     </div>
                 </nav>
                 <!--start of tab div contents-->
@@ -139,7 +145,8 @@ if (isset($_GET['q'])) { //get q variable to logout
                                 <label for="newemail">New Email</label>
                                 <input type="email" required class="form-control" name="newemail" id="newemail">
                             </div>
-                            <button type="submit" name="SubmitProfile" class="btn btn-danger">Update Profile Details</button>
+                            <button type="submit" name="SubmitProfile" class="btn btn-danger">Update Profile
+                                Details</button>
                         </form>
                         <hr>
                         <!--START OF CHANGE PASSWORD FORM-->
@@ -161,63 +168,78 @@ if (isset($_GET['q'])) { //get q variable to logout
                             <button type="submit" name="SubmitPwd" class="btn btn-danger">Update Password</button>
                         </form>
                     </div>
+                    <div class="tab-pane fade" id="question1" role="tabpanel" aria-labelledby="question1-tab">
+                        <p>question1</p>
+
+                    </div>
+                    <div class="tab-pane fade" id="question2" role="tabpanel" aria-labelledby="question2-tab">
+                        <p>question2</p>
+                    </div>
+                    <div class="tab-pane fade" id="question3" role="tabpanel" aria-labelledby="question3-tab">
+                        <p>question3</p>
+                    </div>
+                    <div class="tab-pane fade" id="topStudent" role="tabpanel" aria-labelledby="topStudent-tab">
+                        <p>topStudent</p>
+                    </div>
                 </div>
-                <!--end of col-->
             </div>
-            <!--end of row-->
+            <!--end of col-->
         </div>
-        <!--end of container-->
+        <!--end of row-->
+    </div>
+    <!--end of container-->
     <!--validatePassword() script-->
     <script>
     function validatePassword() {
-    currentpassword,password,confirmpassword,output = true;
+        currentpassword,
+        password,
+        confirmpassword,
+        output = true;
 
-    currentpassword = document.changePwd.currentpassword;
-    password = document.changePwd.password;
-    confirmpassword = document.changePwd.confirmpassword;
+        currentpassword = document.changePwd.currentpassword;
+        password = document.changePwd.password;
+        confirmpassword = document.changePwd.confirmpassword;
 
-    if(!currentpassword.value) {
-    alert("Please enter your current password");
-    currentpassword.focus();
-    output = false;
+        if (!currentpassword.value) {
+            alert("Please enter your current password");
+            currentpassword.focus();
+            output = false;
+        } else if (!password.value) {
+            alert("Please enter your new password");
+            password.focus();
+            output = false;
+        } else if (!confirmpassword.value) {
+            alert("Please confirm your new password");
+            confirmpassword.focus();
+            output = false;
+        }
+        if (password.value != confirmpassword.value) {
+            password.value = "";
+            confirmpassword.value = "";
+            alert("Field input in new password and confirm password do not match!");
+            password.focus();
+            output = false;
+        }
+        return output;
     }
-    else if(!password.value) {
-    alert("Please enter your new password");
-    password.focus();
-    output = false;
-    }
-    else if(!confirmpassword.value) {
-    alert("Please confirm your new password");
-    confirmpassword.focus();
-    output = false;
-    }
-    if(password.value != confirmpassword.value) {
-    password.value = "";
-    confirmpassword.value="";
-    alert("Field input in new password and confirm password do not match!");
-    password.focus();
-    output = false;
-    }
-    return output;
-    }
-</script>
-<script>
-        // Javascript to enable link to tab
+    </script>
+    <script>
+    // Javascript to enable link to tab
     var url = document.location.toString();
     if (url.match('#')) {
         $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
-    } 
+    }
 
     // Change hash for page-reload
-    $('.nav-tabs a').on('shown.bs.tab', function (e) {
+    $('.nav-tabs a').on('shown.bs.tab', function(e) {
         window.location.hash = e.target.hash;
     })
     </script>
-<!--         <footer class="fixed-bottom">
+    <!--         <footer class="fixed-bottom">
             <div class="copyright">
                 &copy 2020 -Team Bambi
             </div> -->
-        </footer>
+    </footer>
 </body>
 
 </html>
