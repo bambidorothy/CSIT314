@@ -1,8 +1,10 @@
 <?php
 include 'db_config.php'; //import db_config.php
 include_once 'classes/user.class.php'; //import /classes/user.class.php
+require_once 'classes/moderator.class.php'; //import /classes/moderator.class.php
 session_start();
 $user = new User();
+$moderator = new Moderator();
 $id = $_SESSION['id']; //store session id into $id
 if (!$user->get_session($id)) { //if user is not logged in
  header("location:login.php"); //redirect to login.php *this also disables access to index.php from browser url*
@@ -179,7 +181,14 @@ if (isset($_GET['q'])) { //get q variable to logout
                         <p>question3</p>
                     </div>
                     <div class="tab-pane fade" id="topStudent" role="tabpanel" aria-labelledby="topStudent-tab">
-                        <p>topStudent</p>
+                        <table class="table table-responsive">
+                        <tr>
+                            <th>Full Name</th>
+                            <th>Participation Rating</th>
+                            <th>Role</th>
+                        </tr>
+                        <?php $moderator->generateTopStudents();?>
+                        </table>
                     </div>
                 </div>
             </div>
