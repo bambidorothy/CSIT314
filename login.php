@@ -86,28 +86,12 @@ if (isset($_REQUEST['submit'])) {//get form values on form submission
         <div class="collapse navbar-collapse" id="navbarToggler">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Topics</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Forums</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link here</a>
+                    <a class="nav-link" href="login.php">Home <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
             <ul class="navbar-nav">
-                <form class="form-inline my-2 my-lg-0 ml-auto">
-                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3" type="submit">Search</button>
-                </form>
                 <li class="nav-item">
                     <a class="nav-link btn btn-outline-light" href="login.php">Log In</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link btn btn-outline-light ml-3" href="register.php">Sign Up</a>
                 </li>
             </ul>
         </div>
@@ -134,7 +118,8 @@ if (isset($_REQUEST['submit'])) {//get form values on form submission
     <script src="main.js"></script>
     <footer class="fixed-bottom">
         <div class="copyright">
-            &copy 2020 -Team Bambi
+            &copy 2020 -(Team Bambi)
+            Developed by: Zwe Htet Aung (6745556), Wang JingPeng (6272150), Bambi Dorothy B. De Leon (6650430)
         </div>
     </footer>
 </body>
