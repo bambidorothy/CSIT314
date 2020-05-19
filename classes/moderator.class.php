@@ -39,4 +39,12 @@ class Moderator extends User
             }
         }
     }
+
+    public function generateTopStudentsFile()
+    {
+        $sql= "SELECT fullname,participation,role FROM users WHERE role='student' ORDER BY participation DESC LIMIT 10 into outfile 'C:/xampp/htdocs/CSIT314/topstudents.txt'";
+        $result=mysqli_query($this->db, $sql);
+        //echo $sql;
+        //echo $result;
+    }
 }

@@ -189,6 +189,8 @@ if (isset($_GET['q'])) { //get q variable to logout
                         </tr>
                         <?php $moderator->generateTopStudents();?>
                         </table>
+                        <br>
+                        <a <?php $moderator->generateTopStudentsFile();?> href="topstudents.txt" download class="btn btn-danger">Generate this report</a>
                     </div>
                 </div>
             </div>
