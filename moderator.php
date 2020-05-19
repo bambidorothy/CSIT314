@@ -102,8 +102,8 @@ if (isset($_GET['q'])) { //get q variable to logout
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
                             role="tab" aria-controls="nav-profile" aria-selected="true">Profile</a>
-                        <a class="nav-item nav-link active" id="question1-tab" data-toggle="tab" href="#question1"
-                            role="tab" aria-controls="question1" aria-selected="false">Most
+                        <a class="nav-item nav-link active" id="question1-tab" data-toggle="tab" href="#topQuestion"
+                            role="tab" aria-controls="topQuestion" aria-selected="false">Most
                             Interesting Questions</a>
                         <a class="nav-item nav-link" id="question2-tab" data-toggle="tab" href="#question2" role="tab"
                             aria-controls="question2" aria-selected="false">Most Weekly Interesting
@@ -170,8 +170,18 @@ if (isset($_GET['q'])) { //get q variable to logout
                             <button type="submit" name="SubmitPwd" class="btn btn-danger">Update Password</button>
                         </form>
                     </div>
-                    <div class="tab-pane fade" id="question1" role="tabpanel" aria-labelledby="question1-tab">
-                        <p>question1</p>
+                    <div class="tab-pane fade" id="topQuestion" role="tabpanel" aria-labelledby="question1-tab">
+                    <table class="table table-responsive">
+                        <tr>
+                            <th>Top Question</th>
+                            <th>Upvote</th>
+                            <th>User ID</th>
+                            <th>Question ID</th>
+                        </tr>
+                        <?php $moderator->generateTopQns();?>
+                        </table>
+                        <br>
+                        <a <?php $moderator->generateTopQuestionsFile();?> href="topQuestions.txt" download class="btn btn-danger">Generate this report</a>
 
                     </div>
                     <div class="tab-pane fade" id="question2" role="tabpanel" aria-labelledby="question2-tab">
@@ -192,6 +202,7 @@ if (isset($_GET['q'])) { //get q variable to logout
                         <br>
                         <a <?php $moderator->generateTopStudentsFile();?> href="topstudents.txt" download class="btn btn-danger">Generate this report</a>
                     </div>
+                    
                 </div>
             </div>
             <!--end of col-->
