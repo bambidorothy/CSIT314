@@ -138,6 +138,8 @@ if (isset($_POST["updateAnsbtn"])) {
                                 <td>
                                     <h4><?php $student->getAnsContent(); ?><h4>
                                 </td>
+                                <td><button class="btn btn-primary" data-toggle="modal" style="width:7em;"
+                                        data-target="#myModal1">Edit</button></td>
                             </tr>
                             <table>
                                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
@@ -178,7 +180,7 @@ if (isset($_POST["updateAnsbtn"])) {
 
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
-                                    
+
                                 </div>
                                 <div class="modal fade" id="myModal1" tabindex="-1" role="dialog"
                                     aria-labelledby="myModalLabel" aria-hidden="true">
@@ -218,7 +220,7 @@ if (isset($_POST["updateAnsbtn"])) {
 
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
-                                    </div>
+                                </div>
                                 <!--end of modal div-->
                                 <form id="anscomment" method="post">
                                     <div class="form-group">
