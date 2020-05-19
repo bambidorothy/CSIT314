@@ -96,7 +96,7 @@ if (isset($_GET['q'])) { //get q variable to logout
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link btn btn-outline-light" href="index.php?q=logout">Log Out</a>
+                    <a class="nav-link btn btn-outline-light" href="detailPublicPost.php?q=logout">Log Out</a>
                 </li>
             </ul>
         </div>

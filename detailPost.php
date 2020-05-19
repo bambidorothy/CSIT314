@@ -109,7 +109,7 @@ if (isset($_GET['q'])) { //get q variable to logout
                 <form class="form-inline my-2 my-lg-0 ml-auto">
                 </form>
                 <li class="nav-item">
-                    <a class="nav-link btn btn-outline-light" href="index.php?q=logout">Log Out</a>
+                    <a class="nav-link btn btn-outline-light" href="detailPost.php?q=logout">Log Out</a>
                 </li>
             </ul>
         </div>

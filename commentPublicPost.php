@@ -106,7 +106,7 @@ if (isset($_POST["updateAnsbtn"])) {
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link btn btn-outline-light" href="index.php?q=logout">Log Out</a>
+                    <a class="nav-link btn btn-outline-light" href="commentPublicPost.php?q=logout">Log Out</a>
                 </li>
             </ul>
         </div>
