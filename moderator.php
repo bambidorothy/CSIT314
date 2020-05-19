@@ -173,10 +173,11 @@ if (isset($_GET['q'])) { //get q variable to logout
                     <div class="tab-pane fade" id="topQuestion" role="tabpanel" aria-labelledby="question1-tab">
                     <table class="table table-responsive">
                         <tr>
+                            <th>ID</th>
                             <th>Top Question</th>
                             <th>Upvote</th>
                             <th>User ID</th>
-                            <th>Question ID</th>
+                            
                         </tr>
                         <?php $moderator->generateTopQns();?>
                         </table>

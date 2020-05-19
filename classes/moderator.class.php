@@ -20,10 +20,11 @@ class Moderator extends User
                 
 
                 echo '<tr>
+                      <td>'.$questionId.'</td>
                       <td>'.$question.'</td>  
                       <td>'.$upvote.'</td> 
                       <td>'.$userId.'</td> 
-                      <td>'.$questionId.'</td> 
+                      
                       
                   </tr>';
             }
