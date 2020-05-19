@@ -11,12 +11,62 @@ class Moderator extends User
 
     public function generateTopWkQns()
     {
+        $sql="SELECT * FROM post GROUP BY week(date) ORDER BY week(date) ASC,upvote DESC LIMIT 10";
+        $result=mysqli_query($this->db, $sql);
+        $row=$result->num_rows;
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $id=$row['id'];
+                $content=$row["content"];
+                $upvote=$row["upvote"];
+                $date=$row["date"];
+                $time=$row["time"];
+
+                echo '<tr>
+                      <td>'.$id.'</td>  
+                      <td>'.$content.'</td> 
+                      <td>'.$upvote.'</td> 
+                      <td>'.$date.'</td> 
+                      <td>'.$time.'</td> 
+                  </tr>';
+            }
+        }
+        
+    }
+    public function generateTopWkQnsFile()
+    {
+        $sql= "SELECT * FROM post GROUP BY week(date) ORDER BY week(date) ASC,upvote DESC LIMIT 10 into outfile 'C:/xampp/htdocs/CSIT314/topweeklyquestions.txt'";
+        $result=mysqli_query($this->db, $sql);
     }
 
     public function generateTopMthQns()
     {
-    }
+        $sql="SELECT * FROM post GROUP BY month(date) ORDER BY month(date) ASC, upvote DESC LIMIT 10";
+        $result=mysqli_query($this->db, $sql);
+        $row=$result->num_rows;
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $id=$row['id'];
+                $content=$row["content"];
+                $upvote=$row["upvote"];
+                $date=$row["date"];
+                $time=$row["time"];
 
+                echo '<tr>
+                      <td>'.$id.'</td>  
+                      <td>'.$content.'</td> 
+                      <td>'.$upvote.'</td> 
+                      <td>'.$date.'</td> 
+                      <td>'.$time.'</td> 
+                  </tr>';
+            }
+        }
+    }
+    public function generateTopMthQnsFile()
+    {
+        $sql= "SELECT * FROM post GROUP BY month(date) ORDER BY month(date) ASC, upvote DESC LIMIT 10 into outfile 'C:/xampp/htdocs/CSIT314/topmonthlyquestions.txt'";
+        $result=mysqli_query($this->db, $sql);
+    }
     public function generateTopStudents()
     {
         $sql= "SELECT fullname,participation,role FROM users WHERE role='student' ORDER BY participation DESC LIMIT 10";

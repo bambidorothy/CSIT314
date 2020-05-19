@@ -105,11 +105,11 @@ if (isset($_GET['q'])) { //get q variable to logout
                         <a class="nav-item nav-link active" id="question1-tab" data-toggle="tab" href="#question1"
                             role="tab" aria-controls="question1" aria-selected="false">Most
                             Interesting Questions</a>
-                        <a class="nav-item nav-link" id="question2-tab" data-toggle="tab" href="#question2" role="tab"
-                            aria-controls="question2" aria-selected="false">Most Weekly Interesting
+                        <a class="nav-item nav-link" id="topWeeklyQ-tab" data-toggle="tab" href="#topWeeklyQ" role="tab"
+                            aria-controls="topWeeklyQ" aria-selected="false">Most Weekly Interesting
                             Questions</a>
-                        <a class="nav-item nav-link" id="question3-tab" data-toggle="tab" href="#question3" role="tab"
-                            aria-controls="question3" aria-selected="false">Most Interesting Monthly
+                        <a class="nav-item nav-link" id="topMontlyQ-tab" data-toggle="tab" href="#topMontlyQ" role="tab"
+                            aria-controls="topMontlyQ" aria-selected="false">Most Interesting Monthly
                             Questions</a>
                         <a class="nav-item nav-link" id="topStudent=tab" data-toggle="tab" href="#topStudent" role="tab"
                             aria-controls="topStudent" aria-selected="false">Top Participating Students</a>
@@ -174,11 +174,33 @@ if (isset($_GET['q'])) { //get q variable to logout
                         <p>question1</p>
 
                     </div>
-                    <div class="tab-pane fade" id="question2" role="tabpanel" aria-labelledby="question2-tab">
-                        <p>question2</p>
+                    <div class="tab-pane fade" id="topWeeklyQ" role="tabpanel" aria-labelledby="topWeeklyQ-tab">
+                    <table class="table table-responsive">
+                        <tr>
+                            <th>ID</th>
+                            <th>Questions</th>
+                            <th>Upvote</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                        </tr>
+                        <?php $moderator->generateTopWkQns();?>
+                        </table>
+                        <br>
+                        <a <?php $moderator->generateTopWkQnsFile();?> href="topweeklyquestions.txt" download class="btn btn-danger">Generate this report</a>
                     </div>
-                    <div class="tab-pane fade" id="question3" role="tabpanel" aria-labelledby="question3-tab">
-                        <p>question3</p>
+                    <div class="tab-pane fade" id="topMontlyQ" role="tabpanel" aria-labelledby="topMontlyQ-tab">
+                    <table class="table table-responsive">
+                        <tr>
+                            <th>ID</th>
+                            <th>Questions</th>
+                            <th>Upvote</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                        </tr>
+                        <?php $moderator->generateTopMthQns();?>
+                        </table>
+                        <br>
+                        <a <?php $moderator->generateTopMthQnsFile();?> href="topmonthlyquestions.txt" download class="btn btn-danger">Generate this report</a>
                     </div>
                     <div class="tab-pane fade" id="topStudent" role="tabpanel" aria-labelledby="topStudent-tab">
                         <table class="table table-responsive">
