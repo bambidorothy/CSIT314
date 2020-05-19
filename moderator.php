@@ -100,9 +100,9 @@ if (isset($_GET['q'])) { //get q variable to logout
                 <!--start of nav tablist-->
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
+                        <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
                             role="tab" aria-controls="nav-profile" aria-selected="true">Profile</a>
-                        <a class="nav-item nav-link active" id="question1-tab" data-toggle="tab" href="#topQuestion"
+                        <a class="nav-item nav-link" id="topQuestion-tab" data-toggle="tab" href="#topQuestion"
                             role="tab" aria-controls="topQuestion" aria-selected="false">Most
                             Interesting Questions</a>
                         <a class="nav-item nav-link" id="topWeeklyQ-tab" data-toggle="tab" href="#topWeeklyQ" role="tab"
@@ -111,14 +111,14 @@ if (isset($_GET['q'])) { //get q variable to logout
                         <a class="nav-item nav-link" id="topMontlyQ-tab" data-toggle="tab" href="#topMontlyQ" role="tab"
                             aria-controls="topMontlyQ" aria-selected="false">Most Interesting Monthly
                             Questions</a>
-                        <a class="nav-item nav-link" id="topStudent=tab" data-toggle="tab" href="#topStudent" role="tab"
+                        <a class="nav-item nav-link" id="topStudent-tab" data-toggle="tab" href="#topStudent" role="tab"
                             aria-controls="topStudent" aria-selected="false">Top Participating Students</a>
                     </div>
                 </nav>
                 <!--start of tab div contents-->
                 <div class="tab-content" id="nav-tabContent">
                     <!--start of profile tab-->
-                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                         <form id="" action="">
                             <div class="form-group">
                                 <label for="email">Full Name</label>
@@ -170,7 +170,7 @@ if (isset($_GET['q'])) { //get q variable to logout
                             <button type="submit" name="SubmitPwd" class="btn btn-danger">Update Password</button>
                         </form>
                     </div>
-                    <div class="tab-pane fade" id="topQuestion" role="tabpanel" aria-labelledby="question1-tab">
+                    <div class="tab-pane fade" id="topQuestion" role="tabpanel" aria-labelledby="topQuestion-tab">
                     <table class="table table-responsive">
                         <tr>
                             <th>ID</th>
