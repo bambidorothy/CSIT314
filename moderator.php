@@ -70,12 +70,6 @@ if (isset($_GET['q'])) { //get q variable to logout
                 <li class="nav-item active">
                     <a class="nav-link" href="moderator.php">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Topics</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Forums</a>
-                </li>
                 <li class="nav-item mx-3">
                     <a class="nav-link">Welcome, <?php $user->get_fullname($id); ?>!</a>
                     <!--display's user fullname-->
