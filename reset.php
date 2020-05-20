@@ -1,59 +1,11 @@
 <?php
 include 'db_config.php'; //import db_config.php
-include_once 'classes/user.class.php'; //import /classes/user.class.php
-session_start();
-
-$user = new User(); //create a User object (instantiation)
-if (isset($_REQUEST['submit'])) {//get form values on form submission
-    extract($_REQUEST);
-    $login = $user->validate_login($email, $password); //runs validate_login function from /classes/user.class.php
-    
-    if ($login) {//if login is valid
-        // Login Success
-        $id = $_SESSION['id'];
-        $role = $user->get_role($id);
-        $status = $user->get_status($id);
-        
-        
-
-        if ($status == 0) {//check if user account status is set to 0
-            $message = "Your account has been suspended, contact your user admin!";
-            echo "<script type='text/javascript'>alert('$message');</script>";
-        } else {
-            if ($role == "student") {
-                header("location:student.php");
-            } elseif ($role == "moderator") {
-                header("location:moderator.php");
-            } else {
-                header("location:userAdmin.php");
-                return false;
-            }
-        }
-    } else {
-        // Login Failed
-        $message = "Wrong email or password!";
-        echo "<script type='text/javascript'>alert('$message');</script>"; //echo failed login
-    }
-}
+include 'classes/user.class.php'; //import user class.php
+$user = new User();
 ?>
-<script type="text/javascript" language="javascript">
 
-            function submitlogin() {
-                var form = document.login;
-				if(form.email.value == ""){
-					alert( "Enter email or username." );
-					return false;
-				}
-				else if(form.password.value == ""){
-					alert( "Enter password." );
-					return false;
-				}
-			}
-
-</script>
 <!DOCTYPE html>
 <html>
-
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -74,7 +26,7 @@ if (isset($_REQUEST['submit'])) {//get form values on form submission
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-        <title>Log In Page</title>
+    <title>Rest Password Page</title>
 </head>
 
 <body>
@@ -90,11 +42,12 @@ if (isset($_REQUEST['submit'])) {//get form values on form submission
                 </li>
             </ul>
             <ul class="navbar-nav">
+                <form class="form-inline my-2 my-lg-0 ml-auto">
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3" type="submit">Search</button>
+                </form>
                 <li class="nav-item">
                     <a class="nav-link btn btn-outline-light" href="login.php">Log In</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link btn btn-outline-light" href="reset.php">Reset Password</a>
                 </li>
             </ul>
         </div>
@@ -103,28 +56,27 @@ if (isset($_REQUEST['submit'])) {//get form values on form submission
     <div class="container">
         <div class="row">
             <div class="col-md-6 mx-auto">
-                <form action="" method="post" name="login">
+                <form id="resetPwdform" onSubmit="return validatePassword()" action="resetPwd.php" method="post">
                     <div class="form-group">
                         <label for="email">Email address</label>
-                        <input type="email" name="email" class="form-control" id="email">
+                        <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp">
                     </div>
                     <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" name="password" class="form-control" id="password">
+                        <label for="newpassword">New Password</label>
+                        <input type="password" name="newpassword" class="form-control" id="newpassword">
                     </div>
-                    <button onclick="return(submitlogin());" type="submit" name="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" name="resetPwd" class="btn btn-primary">Reset Password</button>
                 </form>
             </div>
         </div>
     </div>
-    <!--link main.js-->
-    <script src="main.js"></script>
     <footer class="fixed-bottom">
         <div class="copyright">
-            &copy 2020 -(Team Bambi)
-            Developed by: Zwe Htet Aung (6745556), Wang JingPeng (6272150), Bambi Dorothy B. De Leon (6650430)
+            &copy 2020 -Team Radivz
         </div>
     </footer>
+    <!--link main.js-->
+    <script src="main.js"></script>
 </body>
 
 </html>

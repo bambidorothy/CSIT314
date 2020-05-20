@@ -120,6 +120,27 @@ class User
         }
     }
 
+    public function resetPwd()
+    {
+        if (isset($_POST['resetPwd'])) {
+            $email=$_POST['email'];
+            $newpassword=$_POST['newpassword'];
+            // echo $email;
+            //echo $newpassword;
+            $sql=mysqli_query($this->db, "SELECT email FROM USERS where email='$email'");
+            $num=mysqli_fetch_array($sql);
+            if ($num>0) {// if user email exists
+                $sql2="UPDATE USERS SET password='$newpassword' where email='$email'";
+            $result=mysqli_query($this->db,$sql2);
+            $message = "User password has been updated successfully! Please log in with your new password!";
+            echo "<script type='text/javascript'>alert('$message');window.open('login.php', '_self');</script>";
+            } else {
+                $message = "Such user email does not exist!";
+                echo "<script type='text/javascript'>alert('$message'); javascript:history.go(-1);</script>"; //echo error message and redirect to previous page
+            }
+        }
+    }
+
     /*** starting the session ***/
     public function get_session($id)
     {
