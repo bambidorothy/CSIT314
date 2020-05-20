@@ -136,12 +136,13 @@ if (isset($_POST['registerbtn'])){
                                 <th>Username</th>
                                 <th>Email</th>
                                 <th>Role</th>
+                                <th>Participation Points</th>
                                 <th>Status</th>
                                 <th></th>
                             </tr>
                             <?php 
         include("db_connection.php");
-        $sql=("SELECT id, fullname, username, email, role, status from users");
+        $sql=("SELECT id, fullname, username, email, role, participation, status from users");
         $result = mysqli_query($conn, $sql);
         if ($result-> num_rows > 0) {
             while ($row = $result-> fetch_assoc()) { 
@@ -152,6 +153,7 @@ if (isset($_POST['registerbtn'])){
                                 <td><?php echo $row['username'];?></td>
                                 <td><?php echo $row['email'];?></td>
                                 <td><?php echo $row['role'];?></td>
+                                <td><?php echo $row['participation'];?></td>
                                 <td><?php echo $row['status'];?></td>
                                 <td><a href="delete.php?id=<?php echo $row['id'];?>"><button type="submit"
                                             name="deletesubmit" style="margin- 

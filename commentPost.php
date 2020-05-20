@@ -237,6 +237,9 @@ if (isset($_POST["updateAnsbtn"])) {
                                 </form>
 
                                 <table class="table table-responsive">
+                                <th>
+                                    <h2>Comments:</h2>
+                                </th>
                                     <tr>
                                         <th>id</th>
                                         <th>comment</th>
