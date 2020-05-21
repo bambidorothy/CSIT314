@@ -230,7 +230,7 @@ if(isset($_POST["searchButton"])){
                                 <th>Upvotes</th>
                                 <th>Date</th>
                                 <th>Time</th>
-                                <!--<th>Status</th>-->
+                                <th>Status</th>
                             </tr>
                             <?php $student->displayPosts($id);?>
                             <!--calls the displayPosts function in student.class.php-->

@@ -74,7 +74,7 @@ class Student extends User
                   <td>'.$upvote.'</td> 
                   <td>'.$date.'</td> 
                   <td>'.$time.'</td>
-                  <!--<td>'.$status.'</td>-->
+                  <td>'.$status.'</td>
                   <!--<td><a href="closePost.php?post_id='.$post_id.'" class="btn btn-danger"">Close</a></td>-->
                   <td><a href="detailPost.php?post_id='.$post_id.'" class="btn btn-primary" style="width:7em;">View Post</a></td>
               </tr>';
