@@ -140,7 +140,7 @@ if(isset($_POST["searchButton"])){
                         <form id="post" method="post">
                             <div class="form-group">
                                 <label>My question:</label>
-                                <textarea rows="10" cols="50" type="text" class="form-control"
+                                <textarea required rows="10" cols="50" type="text" class="form-control"
                                     name="postQuestion"></textarea>
                             </div>
                             <div class="form-group">
